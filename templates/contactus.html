@@ -1,0 +1,56 @@
+<ion-view view-title="Contact Us" align-title="left">
+    <ion-content scroll="false">
+        <div class="list list-inset ll">
+            <label class="item item-input az">
+                <input type="text" placeholder="Name" ng-model="data.name">
+            </label>
+            <br />
+            <label class="item item-input az">
+                <input type="email" placeholder="Email" ng-model="data.email">
+            </label>
+            <br/>
+            <label class="item item-input az">
+                <input type="text" placeholder="Subject" ng-model="data.subject">
+            </label>
+            <br/>
+            <label class="item item-input ar">
+                <textarea placeholder="Comments" rows="4" col="12" ng-model="data.comments"></textarea>
+            </label>
+        </div>
+         <div class="padding">
+               <button class="button button-block button-outline button-calm" ng-click="PostComment(data)">Submit</button> 
+          </div>
+  
+    </ion-content>
+</ion-view>
+<style>
+ .ll{
+      margin-top: 50px!important;
+   border-left:none;
+ }
+  .ar{
+    border: 0px solid;
+    background-color: #ededed;
+     margin-top: 5px;
+    bottom: 0;
+    color: #000;
+    letter-spacing: .25rem;
+    padding: 20px 10px;
+    position: relative;
+    z-index: 1;
+    }
+   .az{  
+    
+    background-color:#ededed;
+    font: normal normal normal 16px/1.4em museo-slab-w01-100,serif;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: 0px solid;
+    color: #FFFFFF;
+    margin: 0 0 5px;
+    padding: 5px;
+    width: 100%;
+           /*background-color:rgba(61, 155, 233, 1);
+         border: 1px solid #000!important;*/
+  }
+</style>

@@ -1,0 +1,48 @@
+<ion-view>
+    <ion-content overflow-scroll="true">
+        <div class="no-header flat">
+            <div class="content ">
+                <div class="registration">
+                    <h3 class="text-center">WEL COME</h3>
+                    <h6 class="text-center">One last thing!</h6>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10"></div>
+            <div class="col-80">
+                <form name="myForm" novalidate>
+                    <div class="list">
+                        <label class="item item-input" style="border-bottom:1px solid #808080">
+                            <input type="text" placeholder="Name" name="name" ng-model="user.Name" required>
+                        </label>
+                        <span ng-show="myForm.name.$dirty && myForm.name.$invalid">
+                            &nbsp;  <span ng-show="myForm.name.$error.required" style="color:red">Name is required.</span>
+                        </span>
+                        <br />
+                        <label class="item item-input" style="border-bottom:1px solid #808080">
+                            <input type="text" placeholder="Company" name="company" ng-model="user.Company" required>
+                            <i class="icon ion-ok"></i>
+                        </label>
+                        <span ng-show="myForm.company.$dirty && myForm.company.$invalid">
+                            &nbsp;  <span ng-show="myForm.company.$error.required" style="color:red">Company name is required.</span>
+                        </span>
+                        <br />
+                        <label class="item item-input" style="border-bottom:1px solid #808080">
+                            <input type="number" placeholder="Phone" ng-model="user.Phone" name="phone" ng-pattern="/^\d{10}$/" ng-minlength="10" ng-maxlength="10" required>
+                            <i class="icon ion-ok"></i>
+                        </label>
+                        <span ng-show="myForm.phone.$dirty && myForm.phone.$invalid">
+                            &nbsp;  <span ng-show="myForm.phone.$error.required" style="color:red">Phone Number is required.</span>
+                            <span ng-show="myForm.phone.$error.minlength" class="help-block" style="color:red"> phone number should be 10 digits.</span>
+                        </span>
+                        <br /><br />
+                        <button class="button button-block button-outline button-calm" ng-click="RegisterDetail(user)" ng-disabled="!myForm.$valid">Done</button>
+                        <h6 class="text-center"><span class="skip">Skip</span></h6>
+                    </div>
+                </form>
+            </div>
+            <div class="col-10"></div>
+        </div>
+    </ion-content>
+</ion-view>

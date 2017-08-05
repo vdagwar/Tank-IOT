@@ -1,0 +1,488 @@
+/* global angular, document, window */
+'use strict';
+angular.module('starter.controllers', [])
+
+.controller('AppCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout) {
+    // Form data for the login modal
+    $scope.loginData = {};
+    $scope.isExpanded = false;
+    $scope.hasHeaderFabLeft = false;
+    $scope.hasHeaderFabRight = false;
+
+    var navIcons = document.getElementsByClassName('ion-navicon');
+    for (var i = 0; i < navIcons.length; i++) {
+        navIcons.addEventListener('click', function () {
+            this.classList.toggle('active');
+        });
+    }
+
+    ////////////////////////////////////////
+    // Layout Methods
+    ////////////////////////////////////////
+
+    $scope.hideNavBar = function () {
+        document.getElementsByTagName('ion-nav-bar')[0].style.display = 'none';
+    };
+
+    $scope.showNavBar = function () {
+        document.getElementsByTagName('ion-nav-bar')[0].style.display = 'block';
+    };
+
+    $scope.noHeader = function () {
+        var content = document.getElementsByTagName('ion-content');
+        for (var i = 0; i < content.length; i++) {
+            if (content[i].classList.contains('has-header')) {
+                content[i].classList.toggle('has-header');
+            }
+        }
+    };
+
+    $scope.setExpanded = function (bool) {
+        $scope.isExpanded = bool;
+    };
+
+    $scope.setHeaderFab = function (location) {
+        var hasHeaderFabLeft = false;
+        var hasHeaderFabRight = false;
+
+        switch (location) {
+            case 'left':
+                hasHeaderFabLeft = true;
+                break;
+            case 'right':
+                hasHeaderFabRight = true;
+                break;
+        }
+
+        $scope.hasHeaderFabLeft = hasHeaderFabLeft;
+        $scope.hasHeaderFabRight = hasHeaderFabRight;
+    };
+
+    $scope.hasHeader = function () {
+        var content = document.getElementsByTagName('ion-content');
+        for (var i = 0; i < content.length; i++) {
+            if (!content[i].classList.contains('has-header')) {
+                content[i].classList.toggle('has-header');
+            }
+        }
+
+    };
+
+    $scope.hideHeader = function () {
+        $scope.hideNavBar();
+        $scope.noHeader();
+    };
+
+    $scope.showHeader = function () {
+        $scope.showNavBar();
+        $scope.hasHeader();
+    };
+
+    $scope.clearFabs = function () {
+        var fabs = document.getElementsByClassName('button-fab');
+        if (fabs.length && fabs.length > 1) {
+            fabs[0].remove();
+        }
+    };
+})
+
+.controller('LoginCtrl', function ($scope, $timeout, $state, $stateParams, ionicMaterialInk) {
+    $(".Signin").click(function () {
+        $(".Signin").addClass("border-sc");
+        $(".Signup").removeClass("border-sc");
+    })
+
+    $(".Signup").click(function () {
+        $(".Signup").addClass("border-sc");
+        $(".Signin").removeClass("border-sc");
+    })
+
+    $scope.$parent.clearFabs();
+    $timeout(function () {
+        $scope.$parent.hideHeader();
+    }, 0);
+    ionicMaterialInk.displayEffect();
+    $scope.show = true;
+    $scope.hide = false;
+
+    $scope.Register = function () {
+      //  debugger;
+        $scope.show = false;
+        $scope.hide = true;
+        //$state.go('app.registration');
+    }
+
+    $scope.login = function (User) {
+        //debugger;
+        $scope.show = true;
+        $scope.hide = false;
+        //if (User != undefined) {
+        //    if (User.Password == undefined && User.UserName != undefined) {
+        //        $http.get('http://localhost:21266/api/Login?username=' + User.UserName + '&password=' + User.Password)
+        //                .success(function (results) {
+        //                    debugger;
+
+        //                    var data = results;
+
+        //                    $state.go('app.tanklist');
+        //                })
+        //            .error(function (results) {
+        //                debugger;
+        //                var alertPopup = $ionicPopup.alert({
+        //                    title: 'Error..!!!',
+        //                    template: 'Failed to register.'
+        //                });
+
+        //            });
+        //    }
+        //}
+        //else {
+        //    var alertPopup = $ionicPopup.alert({
+        //        title: 'Alert...!!!',
+        //        template: 'Please fill Correct information..!!!'
+        //    });
+        //}
+    }
+})
+
+    
+
+.controller('registrationCtrl', function ($scope, $ionicPopup, $state, $http, $timeout, $stateParams, ionicMaterialInk) {
+    $scope.$parent.clearFabs();
+    $timeout(function () {
+        $scope.$parent.hideHeader();
+    }, 0);
+
+    ionicMaterialInk.displayEffect();
+
+    $scope.RegisterNow = function (User) {
+        debugger;
+        if (User != undefined) {
+            if (User.Password != undefined && User.CPassword != undefined) {
+                if (User.Password == User.CPassword && User.Name != undefined && User.Email != undefined && User.Company != undefined) {
+
+                    $http.post('http://localhost:21266/api/Users/Post', User)
+                        .success(function (results) {
+                            debugger;
+
+                            var data = results;
+
+
+
+
+                            var alertPopup = $ionicPopup.alert({
+                                title: 'Succeed..!!!',
+                                template: 'You have Successfully Registered.'
+                            });
+                            alertPopup.then(function (res) {
+                                if (res) {
+                                    $state.go('app.tanklist');
+                                }
+                            });
+                        })
+
+                    .error(function (results) {
+                        debugger;
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Error..!!!',
+                            template: 'Failed to register.'
+                        });
+
+                    });
+
+
+
+
+                }
+            }
+        }
+        else {
+            var alertPopup = $ionicPopup.alert({
+                title: 'Alert...!!!',
+                template: 'Please fill Correct information..!!!'
+            });
+        }
+    }
+})
+
+.controller('configureCtrl', function ($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.$parent.setHeaderFab('left');
+
+    // Delay expansion
+    $timeout(function () {
+        $scope.isExpanded = true;
+        $scope.$parent.setExpanded(true);
+    }, 300);
+
+    // Set Motion
+    ionicMaterialMotion.fadeSlideInRight();
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+})
+.controller('tankCtrl', function ($scope) {
+    debugger;
+    $(document).ready(function () {
+        $(".item-hover").click(function () {
+            $(".item-hover").removeClass("item-blue");
+            $(this).addClass("item-blue");
+        });
+    })
+})
+    
+.controller('contactusCtrl', function ($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.$parent.setHeaderFab('left');
+
+    // Delay expansion
+    $timeout(function () {
+        $scope.isExpanded = true;
+        $scope.$parent.setExpanded(true);
+    }, 300);
+
+    // Set Motion
+    ionicMaterialMotion.fadeSlideInRight();
+
+
+
+    $scope.PostComment = function (data) {
+        debugger;
+
+        if (data != undefined) {
+
+            if (data.comment != undefined) {
+
+                $http.post('http://localhost:21266/api/Comment/Post', data)
+                 .success(function (results) {
+                     debugger;
+
+                     var data = results;
+
+                     $state.go('app.tanklist');
+                 })
+
+             .error(function (results) {
+                 debugger;
+                 var alertPopup = $ionicPopup.alert({
+                     title: 'Error..!!!',
+                     template: 'Failed to register.'
+                 });
+
+             });
+
+            }
+
+
+
+
+        }
+
+    }
+    $scope.data = {};
+
+    $scope.data.subject = 'SKdemoApp';
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+})
+
+.controller('settingsCtrl', function ($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.$parent.setHeaderFab('left');
+
+    // Delay expansion
+    $timeout(function () {
+        $scope.isExpanded = true;
+        $scope.$parent.setExpanded(true);
+    }, 300);
+
+    // Set Motion
+    ionicMaterialMotion.fadeSlideInRight();
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+})
+
+.controller('aboutCtrl', function ($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.$parent.setHeaderFab('left');
+
+    // Delay expansion
+    $timeout(function () {
+        $scope.isExpanded = true;
+        $scope.$parent.setExpanded(true);
+    }, 300);
+
+    // Set Motion
+    ionicMaterialMotion.fadeSlideInRight();
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+})
+
+.controller('tanklistCtrl', function ($scope, $state, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.$parent.setHeaderFab('left');
+
+    // Delay expansion
+    $timeout(function () {
+        $scope.isExpanded = true;
+        $scope.$parent.setExpanded(true);
+    }, 300);
+
+    // Set Motion
+    ionicMaterialMotion.fadeSlideInRight();
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+
+    $scope.tank = [{ "name": "SMOKTECH TFV4 Full Kit", "imagescr": "../img/Tank/images1.jpg" },
+                     { "name": "Uwell Crown", "imagescr": "../img/Tank/images2.jpg" },
+                     { "name": "Sense Herkles Hydra TC", "imagescr": "../img/Tank/images3.jpg" },
+                     { "name": "Eleaf Melo 2 Temperature Cont", "imagescr": "../img/Tank/images4.jpg" },
+                     { "name": "UD Zephyrus", "imagescr": "../img/Tank/images5.jpg" }]
+    console.log($scope.tank);
+
+    $scope.TankDetail = function () {
+        debugger;
+        $state.go('app.tankdetail');
+    }
+})
+
+.controller('tankdetailCtrl', function ($scope, $http, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.$parent.setHeaderFab('left');
+
+    // Delay expansion
+    $timeout(function () {
+        $scope.isExpanded = true;
+        $scope.$parent.setExpanded(true);
+    }, 300);
+
+    // Set Motion
+    ionicMaterialMotion.fadeSlideInRight();
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+    var token = "Bearer 9yocgSLLscgYfHc67lv6Ir9lZOjjZf3mn5EFOppBIH9dR3uSaM7RqGV3JTCqzBi9";
+    var deviceid ="2e205796-7da4-4c04-81cf-3f01e2460ed1";
+    $scope.TankDetail = function () {
+        debugger;
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://api.relayr.io/devices/" + deviceid + "/readings",
+            "method": "GET",
+            "headers": {
+                "authorization": token,
+                "accept": "application/json",
+                "content-type": "application/json",
+                "cache-control": "no-cache"
+            }
+        }
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+            debugger;
+            $scope.tankdata = response.readings;
+            for (var s = 0; s < $scope.tankdata.length; s++) {
+                if ($scope.tankdata[s].meaning == "door") {
+
+                    $scope.HatchDoorMeaning = "Hatch Door";
+                    $scope.HatchDoorDate = $scope.tankdata[s].received;
+                    $scope.HatchDoorVal = $scope.tankdata[s].value;
+                }
+                if ($scope.tankdata[s].meaning == "level") {
+                    $scope.level = "Lavel";
+                    $scope.levelval = $scope.tankdata[s].value;
+                }
+                if ($scope.tankdata[s].meaning == "temperature") {
+                    $scope.temperatureValue = $scope.tankdata[s].value;
+                    $scope.temperatureMeaning = "Temprature";
+                }
+            }
+        })
+        .error(function (errors) {
+            debugger;
+        });
+    }
+    $scope.TankDetail();
+
+    $scope.TankDetailPost = function () {
+        debugger;
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://api.relayr.io/devices/" + deviceid + "/readings",
+            "method": "POST",
+            "headers": {
+                "accept": "application/json",
+                "content-type": "application/json",
+                "cache-control": "no-cache",
+                "authorization": token
+            },
+            "processData": false,
+            "data": "{\r\n\"meaning\": \"Hatch Door\",\r\n\"value\": true\r\n}"
+        }
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+        });
+    }
+    //$scope.TankDetailPost();
+})
+
+.controller('temperatureCtrl', function ($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.$parent.setHeaderFab('left');
+
+    // Delay expansion
+    $timeout(function () {
+        $scope.isExpanded = true;
+        $scope.$parent.setExpanded(true);
+    }, 300);
+
+    // Set Motion
+    ionicMaterialMotion.fadeSlideInRight();
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+})
+
+.controller('ProfileCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+    // Set Motion
+    $timeout(function () {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function () {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+});

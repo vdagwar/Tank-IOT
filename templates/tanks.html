@@ -1,0 +1,15 @@
+﻿<ion-view view-title="Tank List" align-title="left">
+    <ion-content scroll="false">
+        <div>
+             <div class="content" ng-init="deviceList()">
+                <div class="tanks" >
+                    <div class="item item-divider"><h3><b>Select a tank</b></h3></div>
+                    <div class="item item-hover" ng-repeat="tank in TList"> 
+                        <h3 ng-click="TankDetail(tank)">{{tank.name}}</h3>
+                    </div>
+                  
+                </div>
+            </div>
+        </div>        
+    </ion-content>    
+</ion-view>

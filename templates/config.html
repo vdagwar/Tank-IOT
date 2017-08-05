@@ -1,0 +1,63 @@
+﻿<ion-view view-title="Config" align-title="left">
+    <ion-content can-swipe-back="false" overflow-scroll="true">
+        <div class="no-header flat">
+         <div class="content">
+                <div class="schedule">                    
+                    <ion-label>
+                        <h2 class="item" style="background:#bbc29a;">
+                            <i class="icon ion-"></i>&nbsp;Tank Name: <span class="col-offset-33">{{data.TankName}}</span>
+                        </h2>
+                        <h3 class="item" style="background:#d3d3d3;">
+                            <i class="icon ion-thermometer"></i>&nbsp;Temprature  &nbsp;&nbsp;&nbsp;&nbsp;<span class="col-offset-10">Min {{data.minTemp}}F - Max {{data.MaxTemp}}F</span><span class="col-offset-10" style="color:dodgerblue" ng-click="reset(data,1)">Reset</span>
+</h3>
+                        <div class="item" style="margin-top:-4px;">
+                            <div class="range range-positive">
+                                Min  0
+                                <input type="range" name="volume" min="0" max="100" value="{{data.minTemp}}" ng-model="data.minTemp" ng-change="setData(data)">
+                                100
+                            </div>
+                            <div class="range range-positive">
+                                Max  0
+                                <input type="range" name="volume" min="0" max="100" value="{{data.MaxTemp}}" ng-model="data.MaxTemp" ng-change="setData(data)">
+                                100
+                            </div>
+                        </div>
+                        <h3 class="item" style="background:#d3d3d3;">
+                            <i class="icon ion-more"></i>&nbsp;Level <span class="col-offset-33">Min {{data.minLevel}}%</span><span class="col-offset-20" style="color:dodgerblue" ng-click="reset(data,2)">Reset</span>
+                        </h3>
+                        <div class="item" style="margin-top:-4px;">
+                            <div class="range range-positive">
+                                0
+                                <input type="range" name="volume" min="0" max="100" value="{{data.minLevel}}" ng-model="data.minLevel" ng-change="setData(data)">
+                                100
+                            </div>
+                        </div>
+                        <h3 class="item" style="background:#d3d3d3">
+                            <i class="icon ion-clock"></i>&nbsp;<span  ui-sref="app.hatchshedule">Hatch Schedule</span><span class="col-offset-50" style="color:dodgerblue" ng-click="reset(data,3)">Reset</span>
+                        </h3>
+                        <ion-list>
+                            <h5 class="item">
+                                Operational hours
+                                &nbsp;&nbsp;&nbsp;<span ng-model="data.timeValue1">{{timeValue1|date: "H:mm:ss"}}-</span>
+                                <span ng-model="data.timeValue2">{{timeValue2|date: "H:mm:ss"}}</span>
+                            </h5>
+                        </ion-list>
+                        <div class="item">
+                            <span class="col-offset-10">
+                                <button class="button  button-outline button-calm col-offset-10">Cancel</button>
+                            </span>
+                            <span class="col-offset-10">
+                                <button class="button button-calm col-offset-20" ng-click="save(data)">Save</button>
+                            </span>
+                        </div>
+                    </ion-label>    
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+<style>
+    .schedule{
+    margin-top:10px;
+    }
+</style>

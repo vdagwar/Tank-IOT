@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)http://localhost:62347/index.html#/app/setuptank -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}</style>
+    
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>Set up Tank</title>
+    <link href="./Set up Tank_files/css" rel="stylesheet" type="text/css">
+    <link href="./Set up Tank_files/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="./Set up Tank_files/ionic.css" rel="stylesheet">
+    <link href="./Set up Tank_files/ion-md-input.min.css" rel="stylesheet">
+    <link href="./Set up Tank_files/ionic.material.min.css" rel="stylesheet">
+    <link href="./Set up Tank_files/style.css" rel="stylesheet">
+    <script src="./Set up Tank_files/ionic.bundle.js.download"></script>
+    <script src="./Set up Tank_files/ionic.material.min.js.download"></script>
+    <script src="./Set up Tank_files/ion-md-input.min.js.download"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="./Set up Tank_files/cordova.js.download"></script>
+    <!-- your app's js -->
+    <script src="./Set up Tank_files/jquery-1.11.0.min.js.download"></script>
+    <script src="./Set up Tank_files/app.js.download"></script>
+    <script src="./Set up Tank_files/controllers.js.download"></script>
+</head>
+<body ng-app="starter" class="grade-a platform-browser platform-android platform-android5 platform-android5_0 platform-ready">
+    <ion-nav-view class="view-container" nav-view-transition="android" nav-view-direction="none" nav-swipe=""><div class="pane" nav-view="active" style="transform: translate3d(0%, 0px, 0px);"><ion-side-menus enable-menu-with-back-views="true" class=" view">
+    <ion-side-menu-content class="menu-content pane">
+        <ion-nav-bar class="bar-assertive-900 nav-bar-container" ng-class="{expanded: isExpanded, &#39;has-header-fab-left&#39;: hasHeaderFabLeft, &#39;has-header-fab-right&#39;: hasHeaderFabRight}" align-title="left" nav-bar-transition="android" nav-bar-direction="none" nav-swipe="">
+            <ion-nav-back-button class="hide"></ion-nav-back-button>
+            <ion-nav-buttons side="right" class="hide"></ion-nav-buttons>
+        <div class="nav-bar-block" nav-bar="cached"><ion-header-bar class="bar-assertive-900 bar bar-header disable-user-behavior" align-title="left"><button class="button back-button hide buttons no-text button-clear header-item" ng-click="$ionicGoBack($event)"><i class="icon ion-android-arrow-back"></i> 
+            <span class="back-text"></span></button><div class="title title-left header-item"></div><div class="buttons buttons-right header-item"><span class="right-buttons">
+                <button class="button button-icon button-clear ion-android-more-vertical" menu-toggle="right"></button>
+            </span></div></ion-header-bar></div><div class="nav-bar-block" nav-bar="active"><ion-header-bar class="bar-assertive-900 bar bar-header disable-user-behavior" align-title="left"><button class="button back-button hide buttons no-text button-clear header-item" ng-click="$ionicGoBack($event)"><i class="icon ion-android-arrow-back"></i> 
+            <span class="back-text"></span></button><div class="title title-left header-item" style="right: 68px;">Set up Tank</div><div class="buttons buttons-right header-item"><span class="right-buttons">
+                <button class="button button-icon button-clear ion-android-more-vertical" menu-toggle="right"></button>
+            </span></div></ion-header-bar></div></ion-nav-bar>
+        <ion-nav-view name="fabContent" class="view-container" nav-view-transition="android" nav-view-direction="none" nav-swipe=""><div class="pane" nav-view="active" style="transform: translate3d(0%, 0px, 0px);"></div></ion-nav-view>
+        <ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}" class="view-container" nav-view-transition="android" nav-view-direction="none" nav-swipe=""><ion-view view-title="Set up Tank" align-title="left" class="pane" nav-view="active" style="transform: translate3d(0%, 0px, 0px);">
+    <ion-content class="scroll-content ionic-scroll  has-header"><div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+        <div class="no-header flat">
+            <div class="content">
+                <div class="setuptank">
+                    <h4>Setup tank parameters</h4>
+                    <div class="list">
+                        <div class="item item-divider" style="background-color:#efefef"><h3>Tank name</h3></div>
+                        <div class="item" style="height:60px;"><h2>Ramp Windel</h2></div>
+
+                        <div class="item item-divider" style="background-color:#efefef"><i class="icon ion-thermometer"></i>&nbsp; Temprature</div>
+                       
+                            <div class="item range">
+                                <input dualknobs="true" type="range" [(ngmodel)]="dualValue2" min="21" max="72" step="3" snaps="true">
+                              
+                              
+                            </div>
+                       
+                        <!--<ion-item>
+   <ion-range min="20" max="80" step="2" [(ngModel)]="brightness">
+     <ion-icon small range-left name="sunny"></ion-icon>
+     <ion-icon range-right name="sunny"></ion-icon>
+   </ion-range>
+ </ion-item>-->
+                       
+
+                        <div class="item item-divider" style="background-color:#efefef"><i class="icon ion-levels"></i>&nbsp;Level</div>
+                        <div class="item range"><input type="range" name="volume"></div>
+
+                        <div class="item item-divider" style="background-color:#efefef"><h3>Hatch schedule</h3></div>
+                        <div class="item"><h2>operational hours &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:lightgray;font-size:20px ">6:30 am - 7:30 pm</span></h2></div>
+                    </div>
+                    <button class="button  button-outline button-calm" ui-sref="">Cancel</button>
+                    <button class="button  button-outline button-calm" ui-sref="app.tankmanagment" href="#/app/tankmanagment">Save</button>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 560px;"></div></div></ion-content>
+
+</ion-view></ion-nav-view>
+    </ion-side-menu-content>
+    <ion-side-menu side="right" is-enabled="true" width="275" class="menu menu-right" style="width: 275px;">
+        <ion-header-bar class="dark-bg expanded bar bar-header disable-user-behavior">
+            <span class="avatar" style="background: url(&#39;img/RampDigitalLogo.jpg&#39;); background-size: cover;"></span>
+            <h2>Tank Monitoring</h2>
+        </ion-header-bar>
+
+        <ion-content class="stable-bg has-expanded-header scroll-content ionic-scroll  has-header"><div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+            <ion-list class="disable-user-behavior"><div class="list">
+                <ion-item nav-clear="" menu-close="" ui-sref="app.registration" class="item item-complex" href="#/app/registration"><a class="item-content" ng-href="#/app/registration" target="_self" href="http://localhost:62347/index.html#/app/registration">
+                    Registration
+                </a></ion-item>
+                <ion-item nav-clear="" menu-close="" ui-sref="app.tanklist" class="item item-complex" href="#/app/tanklist"><a class="item-content" ng-href="#/app/tanklist" target="_self" href="http://localhost:62347/index.html#/app/tanklist">
+                    Tank List
+                </a></ion-item>
+                <ion-item nav-clear="" menu-close="" ui-sref="app.settings" class="item item-complex" href="#/app/settings"><a class="item-content" ng-href="#/app/settings" target="_self" href="http://localhost:62347/index.html#/app/settings">
+                    Settings
+                </a></ion-item>
+                <ion-item nav-clear="" menu-close="" ui-sref="app.configure" class="item item-complex" href="#/app/configure"><a class="item-content" ng-href="#/app/configure" target="_self" href="http://localhost:62347/index.html#/app/configure">
+                    Configure
+                </a></ion-item>
+
+                <ion-item nav-clear="" menu-close="" ui-sref="app.temperature" class="item item-complex" href="#/app/temperature"><a class="item-content" ng-href="#/app/temperature" target="_self" href="http://localhost:62347/index.html#/app/temperature">
+                    Temperature
+                </a></ion-item>
+                <ion-item nav-clear="" menu-close="" ui-sref="app.contactus" class="item item-complex" href="#/app/contactus"><a class="item-content" ng-href="#/app/contactus" target="_self" href="http://localhost:62347/index.html#/app/contactus">
+                    Contact Us
+                </a></ion-item>
+                <ion-item nav-clear="" menu-close="" ui-sref="app.about" class="item item-complex" href="#/app/about"><a class="item-content" ng-href="#/app/about" target="_self" href="http://localhost:62347/index.html#/app/about">
+                    About
+                </a></ion-item>
+               
+            </div></ion-list>
+        </div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 491px;"></div></div></ion-content>
+    </ion-side-menu>
+</ion-side-menus>
+<style>
+    .item, .item-complex .item-content, .item-radio .item-content {
+        color: white;
+    }
+
+    .avatar {
+        height: 87px !important;
+        width: 250px !important;
+        border-radius: 0%;
+    }
+</style></div></ion-nav-view>
+
+
+<style>
+    h1 {
+        color: white;
+    }
+</style>
+<style>
+    .scroll {
+        background: #1552a2;
+        color: white !important;
+    }
+
+    p {
+        color: white !important;
+        font-size: 20px;
+    }
+
+    a {
+        color: #ccc;
+    }
+
+    .assertive-900-bg, .assertive-900-bg.activated, .assertive-900-bg:active, .assertive-900-bg:hover, .assertive-900-border, .assertive-900-border.activated, .assertive-900-border:active, .assertive-900-border:hover, .bar .button-assertive-900, .bar .button-assertive-900.activated, .bar .button-assertive-900:active, .bar .button-assertive-900:hover, .bar-assertive-900, .bar-assertive-900.activated, .bar-assertive-900:active, .bar-assertive-900:hover, .button-assertive-900, .button-assertive-900.activated, .button-assertive-900:active, .button-assertive-900:hover, .button-bar-assertive-900, .button-bar-assertive-900.activated, .button-bar-assertive-900:active, .button-bar-assertive-900:hover, .header-assertive-900, .header-assertive-900.activated, .header-assertive-900:active, .header-assertive-900:hover {
+        background-color: #7399d7;
+        color: #fff;
+    }
+
+    .item {
+        padding-right: 6% !important;
+    }
+</style></body></html>

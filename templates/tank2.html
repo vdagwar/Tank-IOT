@@ -1,0 +1,122 @@
+﻿<style>
+    h3 {
+        width: 100% !important;
+    }
+</style>
+<ion-view view-title="Santa Clara site" align-title="left">
+    <ion-content Scroll="true">
+        <div class="content tank2" ng-init="TankDetails()">
+            <div class="col-xs-12" style="margin-right:10px!important;">
+                <div class="row">
+                <div class="col-5"></div>
+                    <div class="col-90">
+                <h4>
+                    &nbsp;  {{deviceName}}
+                </h4>  <br />
+                        <div>
+                            <div class="col-5"></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="temprature1 col-xs-4">
+                        <div id="tank" class="water3">
+                            <span style="color:darkblue"><i class="ion ion-thermometer" aria-hidden="true"></i>&nbsp;{{tem1}} F </span>
+                        </div>
+                    </div>
+                </div>
+                      <div class="row">
+                            <div class="col-5"></div>
+                            <div class="col-80"><h5><b>Find overview</b></h5></div>
+                           
+                            <div class="col-10"><h6 style="color:dodgerblue">Setup</h6></div>
+                            <div class="col-5"></div>
+                        </div>
+                 <div class="row">
+                    <div class="col-5"></div>
+                    <div class="col=80">
+                        <h5>&nbsp; &nbsp;<i class="icon ion-thermometer"></i>&nbsp;&nbsp; &nbsp; &nbsp;<b>{{temperatureValue}}F</b>&nbsp;&nbsp;<i class="fa fa-bell-o" aria-hidden="true"></i></h5><h6>Standard 50F-70F</h6>
+
+                    </div>
+                    <div class="col-5"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-5"></div>
+                    <div class="col=80">
+                       <br/>&nbsp; &nbsp;<i class="fa fa-compass" aria-hidden="true">&nbsp;&nbsp; <b>Last &nbsp;&nbsp;{{HatchDoorVal }} at {{HatchDoorDate| date:"hh:mma"}}</b></i>&nbsp; &nbsp; &nbsp;{{HatchDoorMeaning}} &nbsp;{{HatchDoorVal}} <h6>Normal hrs 6am-6pm</h6>
+                       
+                    </div>
+                    <div class="col-5"></div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-5"></div>
+                    <div class="col=80">
+                         <h5> &nbsp; &nbsp;<i class="icon ion-levels"></i>&nbsp;<b> Above 20%</b></h5><h6>Standard above 20%</h6>
+                       
+
+                    </div>
+                    <div class="col-5"></div>
+                </div>
+                   <!--<div class="row">
+                    <div class="col-5"></div>
+                    <div class="col-90">
+                       
+
+                        <h5>&nbsp; &nbsp;<i class="icon ion-thermometer"></i>&nbsp;&nbsp; &nbsp; &nbsp;{{temperatureValue}}F&nbsp;&nbsp;<i class="fa fa-bell-o" aria-hidden="true"></i></h5>
+                        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;<span class="txtS">Standard 50F-70F</span>
+                        <h5>&nbsp; &nbsp;<i class="fa fa-compass" aria-hidden="true"></i>&nbsp; &nbsp; &nbsp;{{HatchDoorMeaning}} &nbsp;{{HatchDoorVal}}   <span class="txtS" style="float:right; "> Last {{HatchDoorVal }} at {{HatchDoorDate| date:"hh:mma"}}</span></h5>
+                        &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="txtS">Normal hrs 6am-6pm</span>
+                        <h5> &nbsp; &nbsp;<i class="icon ion-levels"></i>&nbsp; &nbsp; &nbsp;Level</h5>
+                        &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;<span class="txtS">{{levelval}}</span>
+
+                    </div>
+                    <div class="col-5"></div>
+                </div>-->
+                     
+                         
+                        
+                     
+                        
+                        <!--<h5>&nbsp; &nbsp;<i class="icon ion-thermometer"></i>&nbsp;&nbsp; &nbsp; &nbsp;{{temperatureValue}} F &nbsp;&nbsp;<i class="fa fa-bell-o" aria-hidden="true"></i></h5>
+                      
+                        <span class="txtS" align="left">Standard 50F-70F</span>
+                         
+                        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
+                        <h5>&nbsp; &nbsp;<i class="fa fa-compass" aria-hidden="true">&nbsp; &nbsp;Last open at 5:30</i>&nbsp; &nbsp;<span class="txtS" style="float:right; "> Last {{HatchDoorVal }} at {{HatchDoorDate| date:"hh:mma"}}</span></h5>
+                        &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="txtS">Normal hrs 6am-6pm</span>
+                        <h5> &nbsp; &nbsp;<i class="icon ion-levels"></i>&nbsp; &nbsp; &nbsp;Above 20%</h5>
+                        &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;<span class="txtS">{{levelval}}</span>-->
+
+                    </div>
+                    
+                </div>
+
+
+
+
+    </ion-content>
+</ion-view>
+<!--<style>
+        .txtS {
+            font-size: 10px;
+            margin-right: 10px;
+        }
+
+        .temprature1 {
+            position: relative;
+        }
+
+            .temprature p {
+                color: #000 !important;
+                /*text-align: center;*/
+                font-size: 15px;
+                position: absolute;
+                top: 165px;
+                left: 5px;
+                width: 100%;
+                margin: 0 auto;
+            }
+    </style>-->

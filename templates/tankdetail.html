@@ -1,0 +1,87 @@
+<ion-view view-title="Tank Detail" align-title="left">
+    <ion-content>
+        <!--<div style="margin-top:40%;">
+            <label class="lable-sc">Open at:&nbsp;{{HatchDoorDate | date:'HH:mm:ss Z'}}</label><br />
+            <label class="lable-sc">{{HatchDoorMeaning}}:&nbsp;{{HatchDoorVal}}</label>
+            <svg width="600" height="180">
+                <rect x="60" y="1" rx="20" ry="20" width="300" height="110"
+                      style="fill:white;stroke:black;stroke-width:5;opacity:0.9" />
+            </svg>
+        </div>
+        <div style="margin-top:-17.5%;">
+            <label class="lable-sc">{{LevelCritical}}</label><br />
+            <svg width="600" height="180">
+                <rect x="60" y="1" rx="20" ry="20" width="300" height="90"
+                      style="fill:#fafafa;stroke:black;stroke-width:5;opacity:0.5" />
+            </svg>
+        </div>
+        <div style="margin-top:-17.5%;">
+            <label class="lable-sc">{{temperatureMeaning}}:&nbsp;{{temperatureValue}}</label>
+            <svg width="600" height="180">
+                <rect x="60" y="1" rx="20" ry="20" width="300" height="110"
+                      style="fill:#a49bed;stroke:black;stroke-width:5;opacity:0.5" />
+            </svg>
+        </div>-->
+        <div class="box padBox">
+            <div class="box padBox1"><br />
+                <label class="lable-sc pad1">{{HatchDoorMeaning}} : &nbsp;{{HatchDoorVal}}</label><br />
+                <label class="lable-sc">Open at : &nbsp;{{HatchDoorDate | date:'h:mma'}}</label><br />
+            </div>
+            <div class="box padBox2"><br />
+                <label class="lable-sc pad1">{{level}} : &nbsp;{{levelval}}</label><br />
+            </div>
+            <div class="box padBox3"><br />
+                <label class="lable-sc pad1">{{temperatureMeaning}} : &nbsp;{{temperatureValue}} celsius</label><br />
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+<style>
+    .scroll {
+        background: rgba(10, 158, 199, 0.22);
+    }
+    .pad1{
+        top:30px!important;
+    }
+    .scroll-content ionic-scroll, .has-header {
+        background-color: #1552a2;
+    }
+    .lable-sc{
+        font-size: 14px;
+        font-weight:600;
+        margin-top: 20%;
+        margin-left:10%!important;
+        color:black}
+    .box{
+        border:solid!important;
+        border-radius:15px;
+    }
+    .padBox{       
+        width:70%!important;   
+        height:70%!important;      
+        margin:15%!important;
+        background:#ffffff;
+    }
+    .padBox1{  
+        width:94%!important;        
+        height:30%!important;      
+        margin-top:10%!important;
+        margin-left:3%!important;
+        margin-right:3%!important;
+        background:#dde2e4;
+    }
+    .padBox2{  
+        width:94%!important;        
+        height:30%!important;      
+        margin-left:3%!important;
+        margin-right:3%!important;
+        background:#d1c5c5;
+    }
+    .padBox3{  
+        width:94%!important;        
+        height:30%!important;      
+        margin-left:3%!important;
+        margin-right:3%!important;
+        background:#b0d6d9;
+    }
+</style>

@@ -1,0 +1,72 @@
+﻿<ion-view view-title="Set up Tank" align-title="left">
+    <ion-content>
+        <div class="no-header flat">
+            <div class="content">
+                <div class="setuptank">
+                    <h4>Setup tank parameters</h4>
+                    <div class="list" style="border-bottom:1px solid #efefef;">
+                        <div class="item item-divider" style="background-color:#efefef"><h3>Tank name</h3></div>
+                        <div class="item" style="height:60px;"><h2>Ramp Windel</h2></div>
+
+                        <div class="item item-divider" style="background-color:#efefef">
+                            <h3>
+                                <i class="icon ion-thermometer"></i>&nbsp; Temprature
+                                <span style="color:#808080; font-size:12px;float:right ">
+                                    Min 20F-Max 80F&nbsp;
+                                    <span style="color:#0094ff; font-size:12px;">Reset</span>
+                                </span>
+
+                            </h3>
+                        </div>
+
+                        <div class="item range" style="height:70px;">
+                            <input dualKnobs="true" type="range" [(ngModel)]="dualValue2" min="21" max="72" step="3" snaps="true">
+
+
+                        </div>
+
+                        <!--<ion-item>
+                          <ion-range min="20" max="80" step="2" [(ngModel)]="brightness">
+                            <ion-icon small range-left name="sunny"></ion-icon>
+                            <ion-icon range-right name="sunny"></ion-icon>
+                          </ion-range>
+                        </ion-item>-->
+
+
+                        <div class="item item-divider" style="background-color:#efefef">
+                            <h3>
+                                <i class="ion-ios-drag"></i>&nbsp;Level
+                                <span style="color:#808080; font-size:12px; float:right">
+                                    Min 20%
+                                  &nbsp;<span style="color:#0094ff; font-size:12px;">Reset</span>
+                                </span>
+                            </h3>
+                        </div>
+                        <div class="item range" style="height:70px;"><input type="range" name="volume"></div>
+
+                        <div class="item item-divider" style="background-color:#efefef">
+                            <h3>
+                                <i class="icon ion-clock"></i>&nbsp;Hatch schedule
+                                <span style="color:#0094ff; font-size:12px; float:right">Reset</span>
+                            </h3>
+                        </div>
+                        <div class="item" style="height:60px;"><h2>Operational hours &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:lightgray;font-size:20px ">6:30 am - 7:30 pm</span></h2></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-10"></div>
+                        <div class="col-80">
+                            <button class="button  button-outline button-calm" ui-sref="">Cancel</button>
+                            <button class="button  button-outline button-calm" ui-sref="">Save</button>
+                        </div>
+                        <div class="col-10"></div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+
+</ion-view>

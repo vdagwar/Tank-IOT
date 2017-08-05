@@ -1,0 +1,31 @@
+<ion-view view-title="Settings" align-title="left">
+    <ion-content>
+        <div class="hero no-header flat">
+            <div class="content">
+                <div class="app-icon"></div>
+                <h1>Relayr Account Setting</h1>
+            </div>
+        </div>
+        <div class="row login">
+            <div class="col-10"></div>
+            <div class="col-80">
+                <div class="list">
+                    <label class="item item-input" style="border-bottom:1px solid #808080">
+                        <input type="text" class="item-input" placeholder="Relayr Client Id" name="relayrId" ng-model="relayr.relayrId" required>
+                    </label>
+                    <br />
+                    <label class="item item-input" style="border-bottom:1px solid #808080">
+                        <input type="text" class="item-input" placeholder="Relayr Access Token" name="accessToken" ng-model="relayr.accessToken" required>
+                    </label>
+                    <br />
+                    <div class="padding">
+                        <button class="button button-block button-outline button-calm" ng-click="AccessToken(relayr)">Done</button>
+                        <h6 class="text-center"><span class="skip">Skip</span></h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10">
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

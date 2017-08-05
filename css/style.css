@@ -1,0 +1,435 @@
+h1 h2 h3 h4 h5{
+    color:#000!important;
+}
+
+.scroll {
+    background-color:#ffffff!important;
+    color:#000000!important;
+    height: 100%;
+   
+}/* Login
+==================================*/
+
+.row{
+    
+    color:#000000;
+}
+.border-sc{
+    border-bottom:2px solid #0ff
+
+}
+
+
+.app-icon {
+    background-color: #fff;
+    background: url('../img/Signup.png') center;
+    background-size: contain;
+    /*border-radius: 50%;*/
+    height: 240px;
+    margin: 0 auto;
+    /*width: 125px;*/
+}
+.button.button-calm.button-outline {
+    border-color: #11c1f3!important;
+}
+.button.button-positive {
+    border-color: #0c63ee!important;
+    
+}
+.forgot{
+   color:#0094ff;
+   font-size:12px;
+}
+.skip{
+    color:#0094ff;
+    font-size:12px;
+   
+}
+.button {
+    border-radius: 30px;
+}
+/*registration detail*/
+.registration{
+margin-top: 50px;
+}
+ /*tanks*/
+.tanks{
+   margin-top:20px;
+}
+.item-blue{
+    background-color: #09cece;
+}
+
+/*tank 1*/
+.tank1{
+ margin-top:20px;
+
+}
+.tank1 h3{
+     margin-left:20px;
+}
+.tank1 span{
+    color:gray;
+}
+
+  .blanktank1{
+            background:rgba(212, 206, 206, 0.34)!important;
+            height:270px;
+            width:100%;
+        }
+         .t1{
+    float:left;
+    margin:30px 120px;
+    height: 200px;
+    width:100px;
+    position: relative;
+    border-style: solid solid solid solid;
+    border-width: 2px;
+    border-color: #FF0000;
+    border-top-left-radius:2.5em;
+    border-top-right-radius: 2.5em;
+     border-bottom-left-radius:1em;
+    border-bottom-right-radius: 1em;
+
+
+}
+     .w1{
+          width: 100%;
+          height: 65%;
+          margin-top:69px;
+          color:#000000;
+          background-color:#ff0000;
+          text-align:center;
+         }
+     
+
+
+
+     /*tank 2*/
+    .tank2{
+ margin-top:20px;
+
+}
+.tank2 h3{
+     margin-left:20px;
+}
+.tank2 span{
+    color:#0094ff;
+     float:right;
+     font-size:14px!important; 
+     margin-right:13px;
+}
+
+.blanktank{
+ background:rgba(212, 206, 206, 0.34)!important;
+ height:380px;
+ width:100%;
+}
+
+.tank2 .temprature1{
+    float:left;
+    margin-top:60px;
+    margin-left:34%;
+    height: 280px;
+    width: 34%;
+    position: relative;
+    border-style:  dotted dotted dotted dotted;
+    border-width: 1px;
+    border-color: #000;
+    border-top-left-radius:2.5em;
+    border-top-right-radius: 2.5em;
+    border-bottom-left-radius:1em;
+    border-bottom-right-radius: 1em;
+
+
+}
+.tank2 .water3 {
+    width: 100%;
+    height: 80%;
+    background-color: #e2858a;
+    position: absolute;
+    bottom: 0;
+}
+.tank2 span {
+    color: #0094ff;
+    float: right;
+    font-size: 14px!important;
+    margin-right: 40px;
+    margin-top: 80px;
+}
+
+
+/*tank 3*/
+ .blanktank3{
+            background:rgba(212, 206, 206, 0.34)!important;
+            height:350px;
+            width:100%;
+            color:#000;
+        }
+.tempt2{
+   float:left;
+    margin:60px 10px;
+    height: 220px;
+    width:100px;
+    position: relative;
+    border-style:solid solid solid solid;
+    border-width: 2px;
+    border-color: rgb(26, 144, 255);
+    border-top-left-radius:2.5em;
+    border-top-right-radius: 2.5em;
+     border-bottom-left-radius:1em;
+    border-bottom-right-radius: 1em;
+
+
+}
+ .waterlevel1 {
+    width: 100%;
+    height: 80%;
+    background-color:rgb(153, 206, 255);
+    position: absolute;
+    bottom: 0;
+     text-align:center;
+}
+.waterlevel2 {
+    width: 100%;
+    height: 75%;
+    background-color:rgb(26, 144, 255);
+    position: absolute;
+    bottom: 0;
+    text-align:center;
+
+}
+.waterlevel3 {
+    width: 100%;
+    height: 20%;
+    background-color:rgb(153, 206, 255);
+    position: absolute;
+    text-align:center;
+    bottom: 0;
+}
+
+/*verifyemail*/
+.verifyemail{
+ margin-top:30px;
+}
+.ion-ios-email-outline {
+    color: black;
+    font-size: 40px;
+    
+}
+
+/*setup tank*/ 
+.setuptank{
+    margin-top:20px;
+}
+.setuptank h4{
+    margin-left:12px!important;
+}
+.setuptank .item item-divider{
+    color:black;
+    background-color:darkgrey;
+}
+
+.icon ion-thermometer{
+ color: black!important;
+ font-size: 20px;
+}
+.icon ion-levels {
+    color: black !important;
+    font-size: 20px;
+}
+/*tank managment*/
+.tankmanagement{
+ margin-top:20px;
+
+}
+.tankmanagement h3{
+     margin-left:20px;
+}
+.tankmanagement span{
+    color:#0094ff;
+     float:right;
+     font-size:14px!important; 
+     margin-right:13px;
+}
+
+.blanktank{
+ background:rgba(212, 206, 206, 0.34)!important;
+ height:380px;
+ width:100%;
+}
+
+.tankmanagement .temprature1{
+    float:left;
+    margin-top:100px;
+    margin-left:20px;
+    height: 240px;
+    width: 25%;
+    position: relative;
+    border-style:  dotted dotted dotted dotted;
+    border-width: 1px;
+    border-color: #000;
+    border-top-left-radius:2.5em;
+    border-top-right-radius: 2.5em;
+    border-bottom-left-radius:1em;
+    border-bottom-right-radius: 1em;
+
+
+}
+.tankmanagement .temprature2{
+   float:left;
+    margin:60px 10px;
+    height: 280px;
+    width: 30%;
+    position: relative;
+    border-style: dotted dotted dotted dotted;
+    border-width: 1px;
+    border-color: #000;
+    border-top-left-radius:2.5em;
+    border-top-right-radius: 2.5em;
+    border-bottom-left-radius:1em;
+    border-bottom-right-radius: 1em;
+
+
+}
+ .tankmanagement .temprature3{
+   float:left;
+    margin-top:100px;
+    height: 240px;
+    width: 25%;
+    position: relative;
+    border-style: dotted dotted dotted dotted;
+    border-width: 1px;
+    border-color: #000;
+    border-top-left-radius:2.5em;
+    border-top-right-radius: 2.5em;
+     border-bottom-left-radius:1em;
+    border-bottom-right-radius: 1em;
+
+
+}
+ .tankmanagement .water1 {
+    width: 100%;
+    height: 60%;
+    background-color: rgba(207, 201, 201, 0.34);
+    position: absolute;
+    bottom: 0;
+}
+ .tankmanagement .water2 {
+    width: 100%;
+    height: 85%;
+    background-color: #585896;
+    position: absolute;
+    bottom: 0;
+}
+.tankmanagement .water3 {
+    width: 100%;
+    height: 60%;
+    background-color: rgba(207, 201, 201, 0.34);
+    position: absolute;
+    bottom: 0;
+}
+/*tank 4*/
+.tank4{
+ margin-top:20px;
+
+}
+.tank4 h3{
+     margin-left:20px;
+}
+.tank4 span{
+    color:#0094ff;
+     float:right;
+     font-size:14px!important; 
+     margin-right:13px;
+}
+
+.blanktank{
+ background:rgba(212, 206, 206, 0.34)!important;
+ height:380px;
+ width:100%;
+}
+
+.tank4 .temprature1{
+    float:left;
+    margin-top:127px;
+    margin-left:4%;
+    height: 240px;
+    width: 27%;
+    position: relative;
+    border-style:  dotted dotted dotted dotted;
+    border-width: 1px;
+    border-color: #000;
+    border-top-left-radius:2.5em;
+    border-top-right-radius: 2.5em;
+    border-bottom-left-radius:1em;
+    border-bottom-right-radius: 1em;
+
+
+}
+.tank4 .temprature2{
+   float:left;
+    margin:50px 4%;
+    height: 280px;
+    width: 30%;
+    position: relative;
+    border-style: dotted dotted dotted dotted;
+    border-width: 1px;
+    border-color: #000;
+    border-top-left-radius:2.5em;
+    border-top-right-radius: 2.5em;
+    border-bottom-left-radius:1em;
+    border-bottom-right-radius: 1em;
+
+
+}
+/*.tank4 .temprature2 {
+    border-top-style: hidden;
+    
+}*/
+ .tank4 .temprature3{
+   float:left;
+    margin-top:90px;
+    height: 240px;
+    width: 27%;
+    position: relative;
+    border-style: dotted dotted dotted dotted;
+    border-width: 1px;
+    border-color: #000;
+    border-top-left-radius:2.5em;
+    border-top-right-radius: 2.5em;
+     border-bottom-left-radius:1em;
+    border-bottom-right-radius: 1em;
+
+
+}
+ .tank4 .water1 {
+    width: 100%;
+    /*height: 25%;
+    background-color: rgba(100, 194, 223, 0.34);*/
+    position: absolute;
+    bottom: 0;
+}
+ .tank4 .water2 {
+    width: 100%;
+    /*height: 85%;*/
+    /*background-color: #e2858a;*/
+    position: absolute;
+    bottom: 0;
+}
+ 
+.tank4 .water3 {
+    width: 100%;
+    /*height: 80%;
+    background-color: rgba(100, 194, 223, 0.34);*/
+    position: absolute;
+    bottom: 0;
+}
+.tank4 span {
+    color: #0094ff;
+    float: right;
+    font-size: 14px!important;
+    margin-right: 40px;
+    margin-top: 80px;
+}
+

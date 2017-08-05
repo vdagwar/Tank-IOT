@@ -1,0 +1,81 @@
+﻿<style>
+    .slider {
+        width:100%!important;
+  height: 100%!important;
+}
+    .slider-pager{
+        width:50% !important;
+    }
+.box {
+  padding: 1em;
+}
+@media (min-width: 271px)(max-width: 420px) {
+    .slider-pager {
+         position: absolute;
+    bottom: 20px;
+    z-index: 1;
+    width: 60%;
+    height: 15px;
+    text-align: center;
+        padding-right: 45%;
+    }
+}
+
+@media(min-width: 481px) (max-width: 690px) {
+    .slider-pager {
+         position: absolute;
+    bottom: 20px;
+    z-index: 1;
+    width: 60%;
+    height: 15px;
+    text-align: center;
+        padding-right: 50%;
+    }
+}
+@media(min-width: 3020px) (max-width: 3740px) {
+    .slider-pager {
+         position: absolute;
+    bottom: 20px;
+    z-index: 1;
+    width: 60%;
+    height: 15px;
+    text-align: center;
+        padding-right: 58%;
+    }
+}
+
+
+
+</style>
+
+<ion-view view-title="Tank Management" align-title="left">
+    <ion-content Scroll="false">
+        <div class="no-header flat">
+            <div class="content tankmanagement">
+                <h3>Welcome! <span>view demo</span></h3>
+
+              
+                <div>
+                    <div class="temprature1 col-sm-4">
+                        <div class="water3"></div>
+                    </div>
+
+                    <div class="temprature2 col-sm-4">
+                        <div class="water2"></div>
+
+                    </div><div class="temprature3 col-sm-4">
+                        <div class="water1"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-10"></div>
+                    <div class="col-80">
+                        <button class="button button-block button-outline button-calm" ng-click="nextSlide()">Add a Tank</button>
+                    </div>
+                    <div class="col-10"></div>
+                </div>
+
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

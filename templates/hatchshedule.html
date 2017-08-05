@@ -1,0 +1,78 @@
+﻿<ion-view view-title="Hatch Schedule" align-title="left">
+    <ion-content can-swipe-back="false" overflow-scroll="true">
+        <div class="no-header flat">
+
+            <div class="content">
+                <div class="hatchschedule">
+                    <ion-label>
+                        <i class="icon ion-clock"></i>&nbsp;<span ui-sref="app.config">Hatch Schedule</span>
+                        <ion-list>
+                            <h5 class="item">
+                                <span ion-datetime-picker ng-model="data.timeValue1"><i class="icon ion-clock"></i>&nbsp;From : &nbsp;{{data.timeValue1| date: " H:mm:ss"}}</span>
+
+                                <span ion-datetime-picker ng-model="data.timeValue2" class="col-offset-10"><i class="icon ion-clock"></i>&nbsp;to : &nbsp;{{data.timeValue2| date: " H:mm:ss"}}</span>
+                            </h5>
+                        </ion-list>
+                        <br/>
+                        <br/>
+                        <div class="row item">
+                            <div class="col-8"></div>
+                            <div class="col-90">
+                                <ion-list>
+                                    <label class="checkbox">
+                                        Sun<input type="checkbox" placeholder="S" value="Sun" ng-model="data.Sun">
+                                    </label>
+                                    <label class="checkbox">
+                                        Mon<input type="checkbox" placeholder="M"  value="Mon" ng-model="data.Mon">
+                                    </label>
+                                    <label class="checkbox">
+                                        Tue <input type="checkbox" placeholder="T"  value="Tue" ng-model="data.Tue">
+                                    </label>
+                                    <label class="checkbox">
+                                        Wed <input type="checkbox" placeholder="W"  value="Wed" ng-model="data.Wed">
+                                    </label>
+                                    <label class="checkbox">
+                                        Thu<input type="checkbox" placeholder="T"  value="Thu" ng-model="data.Thu">
+                                    </label>
+                                    <label class="checkbox">
+                                        Fri <input type="checkbox" placeholder="F"  value="Fri" ng-model="data.Fri">
+                                    </label>
+                                    <label class="checkbox">
+                                        Sat <input type="checkbox" placeholder="S"  value="Sat" ng-model="data.Sat">
+                                    </label>
+
+                                </ion-list>
+                            </div>
+                            <div class="col-2"></div>
+                        </div>
+                      
+                                <div class="m">
+                                    <span class="col-offset-10">
+                                        <button class="button  button-outline button-calm col-offset-10" ui-sref="app.config">Cancel</button>
+                                    </span>
+                                    <span class="col-offset-10">
+                                        <button class="button button-calm col-offset-20" ng-click="save(data)">Save</button>
+                                    </span>
+
+                                </div>
+</ion-label>
+</div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+<style>
+    .hatchschedule {
+        margin-top: 10px;
+    }
+    .m{
+           margin-top: 60%;
+    }
+    ion-list{
+        margin-left:10px;
+    }
+    label{
+        color:#000;
+    }
+   
+</style>

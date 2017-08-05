@@ -1,0 +1,30 @@
+<ion-view view-title="Tank List" align-title="left">
+    <ion-content>
+        <ion-card ng-repeat="t in tank">            
+            <ion-card-content>
+                <img src="{{t.imagescr}}" class="imgS" ng-click="TankDetail()" />
+                <p class="pCss" ng-click="TankDetail()">
+                    {{t.name}}
+                </p>
+            </ion-card-content>
+        </ion-card>
+    </ion-content>
+</ion-view>
+<style>
+    .scroll {
+        background: rgba(10, 158, 199, 0.22);
+    }
+    .scroll-content ionic-scroll, .has-header {
+        background-color: #1552a2;
+    }
+    .imgS{
+        background-size: cover;
+        cursor: pointer;
+        height: 25%;
+        width: 100%;
+    }
+    .pCss{
+        cursor: pointer;
+        margin-top: -45px;
+    }
+</style>
