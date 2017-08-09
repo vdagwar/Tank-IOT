@@ -1,6 +1,6 @@
-<ion-view view-title="Login" align-title="left">
-    <ion-content overflow-scroll="true">
-        <div class="hero no-header flat">
+<ion-view view-title="Login" align-title="left" ion-side-menu-content drag-content="false">
+    <ion-content has-header="false" Scroll="false">
+        <div>
             <div class="content">
                 <div class="app-icon"></div>
             </div>
@@ -50,7 +50,7 @@
 
                         <label class="item item-input">
                             <input type="password" placeholder="Password" name="password" ng-model="user.Password" style="border-bottom:1px solid #808080" ng-minlength="6" required>
-                            <i class="icon ion-checkmark-round"></i>
+                            <!--<i class="icon ion-checkmark-round"></i>-->
                         </label>
                         <span ng-show="myForm.password.$dirty && myForm.password.$invalid">
                             &nbsp;  &nbsp;   <span ng-show="myForm.password.$error.minlength" class="help-block" style="color:red">Password atleast 6 character.</span>

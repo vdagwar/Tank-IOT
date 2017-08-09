@@ -43,7 +43,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 
 })
 
-.controller('AppCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout) {
+.controller('AppCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout,$state, $window, localStorageService) {
     // Form data for the login modal
     $scope.loginData = {};
     $scope.isExpanded = false;
@@ -60,6 +60,14 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 
     ////////////////////////////////////////
     // Layout Methods
+    $scope.logout = function () {
+        var logUser = localStorageService.get('UserData');
+        $window.localStorage.clear(logUser);
+        $state.go('app.login');
+    }
+      
+   
+   
     ////////////////////////////////////////
 
     $scope.hideNavBar = function () {
@@ -129,7 +137,70 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 })
 
 .controller('LoginCtrl', function ($scope, $ionicLoading, $timeout, $http, $state, $stateParams, ionicMaterialInk, $ionicPopup, StoreService, localStorageService) {
-    $scope.$parent.clearFabs();
+    $scope.hideNavBar = function () {
+        document.getElementsByTagName('ion-nav-bar')[0].style.display = 'none';
+    };
+
+    $scope.showNavBar = function () {
+        document.getElementsByTagName('ion-nav-bar')[0].style.display = 'block';
+    };
+
+    $scope.noHeader = function () {
+        var content = document.getElementsByTagName('ion-content');
+        for (var i = 0; i < content.length; i++) {
+            if (content[i].classList.contains('has-header')) {
+                content[i].classList.toggle('has-header');
+            }
+        }
+    };
+
+    $scope.setExpanded = function (bool) {
+        $scope.isExpanded = bool;
+    };
+
+    $scope.setHeaderFab = function (location) {
+        var hasHeaderFabLeft = false;
+        var hasHeaderFabRight = false;
+
+        switch (location) {
+            case 'left':
+                hasHeaderFabLeft = true;
+                break;
+            case 'right':
+                hasHeaderFabRight = true;
+                break;
+        }
+
+        $scope.hasHeaderFabLeft = hasHeaderFabLeft;
+        $scope.hasHeaderFabRight = hasHeaderFabRight;
+    };
+
+    $scope.hasHeader = function () {
+        var content = document.getElementsByTagName('ion-content');
+        for (var i = 0; i < content.length; i++) {
+            if (!content[i].classList.contains('has-header')) {
+                content[i].classList.toggle('has-header');
+            }
+        }
+
+    };
+
+    $scope.hideHeader = function () {
+        $scope.hideNavBar();
+        $scope.noHeader();
+    };
+
+    $scope.showHeader = function () {
+        $scope.showNavBar();
+        $scope.hasHeader();
+    };
+
+    $scope.clearFabs = function () {
+        var fabs = document.getElementsByClassName('button-fab');
+        if (fabs.length && fabs.length > 1) {
+            fabs[0].remove();
+        }
+    };
     $timeout(function () {
         $scope.$parent.hideHeader();
     }, 0);
@@ -151,8 +222,9 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     }
 
     $scope.Register = function () {
-        $scope.show = false;
         $scope.hide = true;
+        $scope.show = false;
+       
     };
     $scope.Signin = function () {
         $scope.show = true;
@@ -170,6 +242,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 
     $scope.Login = function (User) {
         var user = localStorageService.get('UserData');
+      //  console.log("user", user);
         $ionicLoading.show({
             template: '<ion-spinner></ion-spinner>'
         });
@@ -190,9 +263,9 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                                     });
                                 }
                                 else {
-                                    var alertPopup = $ionicPopup.alert({
-                                        title: 'Well-Come...!!!',
-                                        template: User.Email + ' have been successfully logged in.!!!'
+                                  var alertPopup = $ionicPopup.alert({
+                                        title: 'Wel-Come...!!!',
+                                        template: user.Email + ' have been successfully logged in.!!!'
                                     });
                                     alertPopup.then(function (res) {
                                         if (res) {
@@ -281,11 +354,14 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     $scope.RegisterNow = function (User) {
         var userEmail = null;
         var user = localStorageService.get('UserData');
+        console.log("user", User)
         if (!user) {
             user = {
                 "Email": null,
                 "Phone": null,
-                "Password": null
+                "Password": null,
+                "Company": null,
+                "Name": null
             }
         }
         else
@@ -380,11 +456,13 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     $scope.RegisterDetail = function (User) {
         if (User != undefined) {
             var UserData = localStorageService.get('UserData');
+           // console.log("getUserData", UserData);
             UserData.Name = User.Name;
             UserData.Phone = User.Phone;
             UserData.Company = User.Company;
             localStorageService.set('UserData', UserData);
-            $state.go('app.emailverification');
+           // console.log("setUserData", UserData);
+         $state.go('app.emailverification');
         }
         else {
             var alertPopup = $ionicPopup.alert({
@@ -405,9 +483,10 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 
     $scope.EmailConfirm = function () {
         var UserData = localStorageService.get('UserData');
+        //console.log("EmailConfirm", UserData)
         UserData.EmailConfirm = true;
         localStorageService.set('UserData', UserData);
-
+       // console.log("setEmailConfirm", UserData)
         var alertPopup = $ionicPopup.alert({
             title: 'Succeed..!!!',
             template: 'You have Successfully verified.'
@@ -749,8 +828,8 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                 $scope.tem1 = 65;
                 $("#tank").height(($scope.tem1 * 2.4));
                 $(".water1").css("background-color", "rgba(100, 194, 223, 0.34)");
-                $scope.temperatureValue = 0;
-                $("#temp").height(($scope.tem2 * 2.2));
+                $scope.tem2 = 0;
+                $("#temp").height(($scope.tem2 * 2.8));
                 $(".water2").css("background-color", "#e2858a");
                 $scope.tem3 = 80;
                 $("#water").height(($scope.tem3 * 1.8));
@@ -788,15 +867,23 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                     }
                     if ($scope.tankdata[s].meaning == "Temperature") {
 
-                        $scope.temperatureValue = $scope.tankdata[s].value;
+                        
                         $scope.temperatureMeaning = "Temprature";
 
                         $scope.tem1 = 65;
                         $("#tank").height(($scope.tem1 * 2.4));
                         $("#tank").css("background-color", "rgba(100, 194, 223, 0.34)");
-
-                        $("#temp").height(($scope.temperatureValue * 2.2));
+                        $scope.temperatureValue = $scope.tankdata[s].value;
+                        $scope.temperatureValue = Math.round($scope.temperatureValue);
+                        //console.log("TempValue", $scope.temperatureValue);
+                        if ($scope.temperatureValue * 2.8 >= 280)
+                            $("#temp").height(260);
+                        else if ($scope.temperatureValue * 2.8 <= 0)
+                            $("#temp").height(0);
+                        else
+                            $("#temp").height($scope.temperatureValue * 2.8);
                         $("#temp").css("background-color", "#e2858a");
+                       
                         $scope.tem3 = 80;
                         $("#water").height(($scope.tem3 * 1.8));
                         $("#water").css("background-color", "rgba(100, 194, 223, 0.34)");
@@ -910,7 +997,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     })
 })
 
-.controller('tank1Ctrl', function ($scope, $ionicLoading, DeviceService) {
+.controller('tank1Ctrl', function ($scope, $ionicLoading, DeviceService, localStorageService) {
     $scope.show = function () {
         $ionicLoading.show({
             template: '<ion-spinner></ion-spinner>'
@@ -926,9 +1013,10 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         $scope.deviceName = $scope.deviceData.name;
         $scope.HatchDoorMeaning = "";
         $scope.HatchDoorDate = "";
-        
+        $scope.levelTimeval = '';
         $scope.HatchDoorValue = '';
         $scope.temperatureValue = "";
+        $scope.levelTimeval1 = "";
         $scope.level = "";
         $scope.levelval = "";
         var settings = {
@@ -969,14 +1057,27 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                 }
                 if ($scope.tankdata[s].meaning == "Level Within Threshold") {
                     $scope.levelval = "Level Within Threshold";
-                  //  $scope.levelval = $scope.tankdata[s].value;
+                    $scope.levelTimeval = $scope.tankdata[s].received;
+                }
+                if ($scope.tankdata[s].meaning == "Level Below Threshold") {
+                    $scope.levelval = "Level Below Threshold";
+                    $scope.levelTimeval1 = $scope.tankdata[s].received;
                 }
                 if ($scope.tankdata[s].meaning == "Temperature") {
 
                     $scope.temperatureValue = $scope.tankdata[s].value;
-                    $scope.temperatureMeaning = "Temprature";
-                    $("#tank").height(($scope.temperatureValue * 2.2));
-                    $("#tank").css("background-color", "#e2858a");
+                    $scope.temperatureValue = Math.round($scope.temperatureValue);
+                    var TankTemprature = $scope.temperatureValue;
+                    localStorageService.set("TankTemprature", TankTemprature);
+
+                    if ($scope.temperatureValue * 2.8 >= 280) 
+                        $("#temp").height(280);                    
+                    else if ($scope.temperatureValue * 2.8 <= 0) 
+                        $("#temp").height(0);
+                    else
+                           $("#temp").height($scope.temperatureValue*2.8);    
+                            $("#temp").css("background-color", "#e2858a");
+               
                 }
             }
             $scope.hide($ionicLoading);
@@ -1000,42 +1101,38 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         
         //$ionicSlideBoxDelegate.next();
     }
-    //$scope.graph = function () {
-    //    Highcharts.chart('container', {
+    $scope.graph = function () {
+        $scope.TankTemprature = localStorageService.get('TankTemprature');
+    Highcharts.chart('container', {
+        title: {
+            text: 'Temprarure'
+        },
+       
+        yAxis: {
+            title: {
+                text: 'Level'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
 
-    //        title: {
-    //            text: ''
-    //        },
+        plotOptions: {
+            series: {
+                pointStart: 0
+            }
+        },
 
-    //        //subtitle: {
-    //        //    text: 'Source: thesolarfoundation.com'
-    //        //},
+        series: [{
+            name: 'Level',
+            data: [56, 65, 40, 30, 55, 75, $scope.TankTemprature]
+        
+        }]
 
-    //        yAxis: {
-    //            title: {
-    //                text: ''
-    //            }
-    //        },
-    //        legend: {
-    //            layout: 'vertical',
-    //            align: 'right',
-    //            verticalAlign: 'middle'
-    //        },
-
-    //        plotOptions: {
-    //            series: {
-    //                pointStart:[0]
-    //            }
-    //        },
-
-    //        series: [{
-    //            name: '',
-    //            data: [0,72]
-    //        }]
-
-    //    });
-
-    //}
+    });
+    }
    
    
 })
