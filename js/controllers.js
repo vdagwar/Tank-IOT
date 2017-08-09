@@ -854,7 +854,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 
                             $(".tank4 .temprature2").css("border-top-style", "hidden");
 
-                            $("#Bell").addClass("fa fa-bell-o").addText("Open");
+                            $("#Bell").addClass("fa fa-bell-o").text("Open");
                         }
                         if ($scope.HatchDoorVal == "false") {
                             $scope.HatchDoorValue = 'Close';
@@ -877,7 +877,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                         $scope.temperatureValue = Math.round($scope.temperatureValue);
                         //console.log("TempValue", $scope.temperatureValue);
                         if ($scope.temperatureValue * 2.8 >= 280)
-                            $("#temp").height(260);
+                            $("#temp").height(250);
                         else if ($scope.temperatureValue * 2.8 <= 0)
                             $("#temp").height(0);
                         else
