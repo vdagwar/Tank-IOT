@@ -61,8 +61,8 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     ////////////////////////////////////////
     // Layout Methods
     $scope.logout = function () {
-        var logUser = localStorageService.get('UserData');
-        $window.localStorage.clear(logUser);
+        //var logUser = localStorageService.get('UserData');
+        //$window.localStorage.clear(logUser);
         $state.go('app.login');
     }
       
@@ -279,7 +279,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                                                     if (res) {
                                                         user.LoginCount += 1;
                                                         localStorageService.set('UserData', user);
-                                                        $state.go('app.tankmanagment')
+                                                        $state.go('app.settingRelayr')
                                                         window.location.reload();
                                                     }
                                                 });
@@ -287,7 +287,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                                             else {
                                                 user.LoginCount += 1;
                                                 localStorageService.set('UserData', user);
-                                                $state.go('app.tankmanagment')
+                                                $state.go('app.settingRelayr')
                                                 window.location.reload();
                                             }
                                         }
@@ -553,6 +553,10 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         localStorageService.set("ConfigData", data);
        
     };
+    $scope.Cancel = function () {
+        $state.go("app.Home");
+
+    };
 
     $scope.reset = function (data, value) {
        
@@ -584,7 +588,8 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         $scope.data = localStorageService.get("ConfigData");
        
         $scope.save = function (data) {
-           // debugger;
+            console.log("data", data);
+           debugger;
             if (data.Sun == true) {
                 $scope.data.timeValue.sunday = {
                     timeValue1: data.timeValue1,
@@ -637,23 +642,11 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 .controller('settingsCtrl', function ($scope, $ionicPopup, $ionicLoading, $state, $http, $stateParams, $timeout,ionicMaterialInk,ionicMaterialMotion, localStorageService) {
     // Set Header
     $scope.$parent.showHeader();
-
-    //$scope.$parent.clearFabs();
-    //$scope.$parent.setHeaderFab('left');
-    // Delay expansion
-    //$timeout(function () {
-    //    $scope.isExpanded = true;
-    //    $scope.$parent.setExpanded(true);
-    //}, 300);
-    // Set Motion
-    //ionicMaterialMotion.fadeSlideInRight();
-    // Set Ink
-    //ionicMaterialInk.displayEffect();
-
     $scope.AccessToken = function (relayrData) {
         debugger;
         //id = "29204e93-3c0e-414a-a8ef-efc6632c486e";
         localStorageService.set("relayrData", relayrData);
+        console.log("relayrData", relayrData);
         $state.go('app.tanks');
     }
 })
@@ -675,27 +668,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     };
     $scope.TList = localStorageService.get("TankList");
     console.log("TankList", $scope.TList);
-    //
-    //$scope.deviceList = function () {
-    //    debugger;
-    //    $scope.show($ionicLoading);
-    //    var settings = {
-    //        "async": true,
-    //        "crossDomain": true,
-    //        "url": "https://api.relayr.io/users/cf1cf510-a383-413b-ad53-258aaf34a18a/devices",
-    //        "method": "GET",
-    //        "headers": {
-    //            "authorization": "Bearer vwuSvJN2utdMnoPaXdAM7GeaVSSHnYWWSX8sFF7GF3nPoXijJNfML92khi5O70FY"
-
-    //        }
-    //    }
-    //    $.ajax(settings).done(function (response) {
-    //        console.log("response", response);
-    //        $scope.TankList = response;
-    //        $scope.TList = filterFilter($scope.TankList, { name: 'Tank' });
-    //        $scope.hide($ionicLoading);
-    //    });
-    //}
+   
     $scope.$on('$ionicView.enter', function () {
         // Code you want executed every time view is opened
         //$scope.deviceList();
@@ -706,6 +679,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         var tankdetail = tank;
         DeviceService.set(tankdetail);
         console.log("tankdetail", tankdetail);
+        debugger;
         $state.go('app.tank1');
         // window.location.reload();
     }
@@ -746,7 +720,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     //    $ionicSlideBoxDelegate.next();
     //}
 })
-.controller('tank4Ctrl', function ($scope, $state, $ionicLoading, filterFilter, localStorageService) {
+.controller('HomeCtrl', function ($scope, $state, $ionicLoading, filterFilter, localStorageService) {
    
     $scope.show = function () {
         $ionicLoading.show({
@@ -758,19 +732,38 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     };
     $scope.deviceID = "";
     $scope.TankList = '';
+    $scope.relayrdata = localStorageService.get("relayrData");
+    $scope.relayrId = $scope.relayrdata.relayrId;
+    $scope.accessToken = $scope.relayrdata.accessToken;
+    console.log("relayrdata", $scope.relayrdata);
     $scope.deviceList = function () {
         //debugger;
         $scope.show($ionicLoading);
-        var settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": "https://api.relayr.io/users/cf1cf510-a383-413b-ad53-258aaf34a18a/devices",
-            "method": "GET",
-            "headers": {
-                "authorization": "Bearer vwuSvJN2utdMnoPaXdAM7GeaVSSHnYWWSX8sFF7GF3nPoXijJNfML92khi5O70FY"
+        if ($scope.relayrdata !=null  && $scope.relayrdata !=undefined && !$scope.relayrdata){
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://api.relayr.io/users/" + $scope.relayrId + "/devices",
+                "method": "GET",
+                "headers": {
+                    "authorization": $scope.accessToken
 
+                }
             }
         }
+        else {
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://api.relayr.io/users/" + $scope.relayrId + "/devices",
+                "method": "GET",
+                "headers": {
+                    "authorization": $scope.accessToken
+
+                }
+            }
+        }
+        
         $.ajax(settings).done(function (response) {
             
             $scope.TankList = response;
@@ -806,7 +799,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
             "url": "https://api.relayr.io/devices/" + $scope.deviceID + "/readings",
             "method": "GET",
             "headers": {
-                "authorization": "Bearer vwuSvJN2utdMnoPaXdAM7GeaVSSHnYWWSX8sFF7GF3nPoXijJNfML92khi5O70FY",
+                "authorization": $scope.accessToken,
                 "cache-control": "no-cache"
             }
         }
@@ -828,8 +821,8 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                 $scope.tem1 = 65;
                 $("#tank").height(($scope.tem1 * 2.4));
                 $(".water1").css("background-color", "rgba(100, 194, 223, 0.34)");
-                $scope.tem2 = 0;
-                $("#temp").height(($scope.tem2 * 2.8));
+                $scope.temperatureValue = 0;
+                $("#temp").height(($scope.temperatureValue * 2.8));
                 $(".water2").css("background-color", "#e2858a");
                 $scope.tem3 = 80;
                 $("#water").height(($scope.tem3 * 1.8));
@@ -924,78 +917,6 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         //$ionicSlideBoxDelegate.next();
     }
 })
-.controller('tank2Ctrl', function ($scope, $state, $ionicLoading, filterFilter) {
-    
-    $scope.show = function () {
-        $ionicLoading.show({
-            template: '<ion-spinner></ion-spinner>'
-        });
-    };
-    $scope.hide = function () {
-        $ionicLoading.hide();
-    };
-    $scope.TankDetails = function () {
-       // debugger;
-        $scope.show($ionicLoading);
-        $scope.deviceData = DeviceService.getData();
-        $scope.deviceID = $scope.deviceData.id;
-        $scope.deviceName = $scope.deviceData.name;
-        $scope.HatchDoorMeaning = "";
-        $scope.HatchDoorDate = "";
-        $scope.HatchDoorVal = "";
-        $scope.temperatureValue = "";
-        $scope.levelval = "";
-        var settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": "https://api.relayr.io/devices/" + $scope.deviceID + "/readings",
-            "method": "GET",
-            "headers": {
-                "authorization": "Bearer vwuSvJN2utdMnoPaXdAM7GeaVSSHnYWWSX8sFF7GF3nPoXijJNfML92khi5O70FY",
-                "cache-control": "no-cache"
-            }
-        }
-
-        $.ajax(settings).done(function (response) {
-            console.log(response);
-            
-
-            //
-            $scope.tankdata = response.readings;
-            for (var s = 0; s < $scope.tankdata.length; s++) {
-                if ($scope.tankdata[s].meaning == "door") {
-
-                    $scope.HatchDoorMeaning = "Hatch Door";
-                    $scope.HatchDoorDate = $scope.tankdata[s].received;
-                    $scope.HatchDoorVal = $scope.tankdata[s].value;
-                    console.log("Loop:" + $scope.HatchDoorDate);
-                }
-                if ($scope.tankdata[s].meaning == "level") {
-                    $scope.level = "Lavel";
-                    $scope.levelval = $scope.tankdata[s].value;
-                }
-                if ($scope.tankdata[s].meaning == "temperature") {
-
-                    $scope.temperatureValue = $scope.tankdata[s].value;
-                    $scope.temperatureMeaning = "Temprature";
-                }
-            }
-            $scope.hide($ionicLoading);
-
-        })
-        .error(function (errors) {
-            //  
-        })
-
-    }
-    $scope.TankDetails();
-    $scope.$on('$ionicView.enter', function () {
-        $scope.tem1 = 85;
-        $("#tank").height(($scope.tem1 * 2.2));
-        $("#tank").css("background-color", "#e2858a");
-
-    })
-})
 
 .controller('tank1Ctrl', function ($scope, $ionicLoading, DeviceService, localStorageService) {
     $scope.show = function () {
@@ -1006,15 +927,18 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     $scope.hide = function () {
         $ionicLoading.hide();
     };
+    $scope.relayrdata = localStorageService.get("relayrData");
+    $scope.relayrId = $scope.relayrdata.relayrId;
+    $scope.accessToken = $scope.relayrdata.accessToken;
     $scope.TankDetails = function () {
         $scope.show($ionicLoading);
         $scope.deviceData = DeviceService.getData();
         $scope.deviceID = $scope.deviceData.id;
         $scope.deviceName = $scope.deviceData.name;
+        $scope.HatchDoorValue = "";
         $scope.HatchDoorMeaning = "";
         $scope.HatchDoorDate = "";
         $scope.levelTimeval = '';
-        $scope.HatchDoorValue = '';
         $scope.temperatureValue = "";
         $scope.levelTimeval1 = "";
         $scope.level = "";
@@ -1025,7 +949,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
             "url": "https://api.relayr.io/devices/" + $scope.deviceID + "/readings",
             "method": "GET",
             "headers": {
-                "authorization": "Bearer vwuSvJN2utdMnoPaXdAM7GeaVSSHnYWWSX8sFF7GF3nPoXijJNfML92khi5O70FY",
+                "authorization":$scope.accessToken,
                 "cache-control": "no-cache"
             }
         }
@@ -1040,20 +964,35 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 
             for (var s = 0; s < $scope.tankdata.length; s++) {
                 if ($scope.tankdata[s].meaning == "Hatch Open") {
-
                     $scope.HatchDoorMeaning = "Hatch Door";
                     $scope.HatchDoorDate = $scope.tankdata[s].received;
                     $scope.HatchDoorVal = $scope.tankdata[s].value;
-                
                     if ($scope.HatchDoorVal == "true") {
-                        $scope.HatchDoorValue = 'Open';
-                        console.log("HatchDoorVal", $scope.HatchDoorValue);
+                        $scope.HatchDoorValue ='Open';
+                        console.log("HatchDoorVal Open:", $scope.HatchDoorValue);
                     }
                  //   debugger;
                     if ($scope.HatchDoorVal == "false") {
                         $scope.HatchDoorValue = 'Close';
+                        console.log("HatchDoorValue Close:" + $scope.HatchDoorValue);
                     }
-                    console.log("HatchDoorValue:" + $scope.HatchDoorValue);
+                   //hatchdoor values for store
+                    var existingEntries = localStorageService.get("allEntries");
+                    if (existingEntries == null) existingEntries = [];
+                   
+                    var hatch = {
+                        "HatchDoorDate": $scope.HatchDoorDate,
+                        "HatchDoorVal": $scope.HatchDoorVal
+                    };
+                    localStorageService.set("hatch", hatch);
+                    // Save allEntries back to local storage
+                    existingEntries.push(hatch);
+                    localStorageService.set("allEntries", existingEntries);
+                    var Hatchvalues = localStorageService.get("allEntries");
+                    console.log("Hatchvalues", Hatchvalues);
+
+
+                    ///end hatchdoor values
                 }
                 if ($scope.tankdata[s].meaning == "Level Within Threshold") {
                     $scope.levelval = "Level Within Threshold";
@@ -1105,7 +1044,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         $scope.TankTemprature = localStorageService.get('TankTemprature');
     Highcharts.chart('container', {
         title: {
-            text: 'Temprarure'
+            text: 'Temprature'
         },
        
         yAxis: {
@@ -1171,37 +1110,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 
 })
 
-//.controller('tanklistCtrl', function ($scope, $state, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
-//    // Set Header
-//    $scope.$parent.showHeader();
-//    $scope.$parent.clearFabs();
-//    $scope.$parent.setHeaderFab('left');
 
-//    // Delay expansion
-//    $timeout(function () {
-//        $scope.isExpanded = true;
-//        $scope.$parent.setExpanded(true);
-//    }, 300);
-
-//    // Set Motion
-//    ionicMaterialMotion.fadeSlideInRight();
-
-//    // Set Ink
-//    ionicMaterialInk.displayEffect();
-
-//    $scope.tank = [{ "name": "SMOKTECH TFV4 Full Kit", "imagescr": "../img/Tank/images1.jpg" },
-//                     { "name": "Uwell Crown", "imagescr": "../img/Tank/images2.jpg" },
-//                     { "name": "Sense Herkles Hydra TC", "imagescr": "../img/Tank/images3.jpg" },
-//                     { "name": "Eleaf Melo 2 Temperature Cont", "imagescr": "../img/Tank/images4.jpg" },
-//                     { "name": "UD Zephyrus", "imagescr": "../img/Tank/images5.jpg" }]
-//    console.log($scope.tank);
-
-//    $scope.TankDetail = function () {
-
-//        $state.go('app.tankdetail');
-//    }
-//})
-//angular.module('ionicApp', ['ionic'])
 
 .controller('SlideController', function ($scope) {
 
@@ -1311,6 +1220,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     // Set Ink
     ionicMaterialInk.displayEffect();
 })
+
 
 .controller('ProfileCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
     // Set Header

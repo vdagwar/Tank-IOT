@@ -34,7 +34,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
         templateUrl: 'templates/menu.html',
         controller: 'AppCtrl'
     })
-    .state('app.login', {
+ .state('app.Home', {
+               url: '/Home',
+               views: {
+                   'menuContent': {
+                       templateUrl: 'templates/Home.html',
+                       controller: 'HomeCtrl'
+                   },
+                   'fabContent': {
+                       template: ''
+                   }
+               }
+           })
+.state('app.login', {
         url: '/login',
         views: {
             'menuContent': {
@@ -99,18 +111,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
              }
          })
 
-   //.state('app.configure', {
-   //    url: '/configure',
-   //    views: {
-   //        'menuContent': {
-   //            templateUrl: 'templates/configure.html',
-   //            controller: 'configureCtrl'
-   //        },
-   //        'fabContent': {
-   //            template: ''
-   //        }
-   //    }
-   //})
+ 
 
    .state('app.tanks', {
             url: '/tanks',
@@ -164,26 +165,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             }
    })
 
-   .state('app.tank2', {
-             url: '/tank2',
-             views: {
-                 'menuContent': {
-                     templateUrl: 'templates/tank2.html',
-                     controller: 'tank2Ctrl'
-                 },
-                 'fabContent': {
-                     template: ''
-                 }
-             }
-   })
-
-  
-
-  
-
-  
-
-  .state('app.about', {
+ .state('app.about', {
       url: '/about',
       views: {
           'menuContent': {
@@ -246,18 +228,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
         }
     }
 })
-        .state('app.tank4', {
-            url: '/tank4',
-            views: {
-                'menuContent': {
-                    templateUrl: 'templates/tank4.html',
-                    controller: 'tank4Ctrl'
-                },
-                'fabContent': {
-                    template: ''
-                }
-            }
-        })
+     
   .state('app.profile', {
       url: '/profile',
       views: {

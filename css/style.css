@@ -425,11 +425,12 @@ margin-top: 50px;
     position: absolute;
     bottom: 0;
 }
-.tank4 span {
+/*.tank4 .icon .ion-record {
     color: #0094ff;
     float: right;
     font-size: 14px!important;
     margin-right: 40px;
     margin-top: 80px;
-}
+   margin-left : 50px!important;
+}*/
 

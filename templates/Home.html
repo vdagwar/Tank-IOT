@@ -1,0 +1,116 @@
+﻿<style>
+    .slider {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    .slider-pager {
+        width: 50% !important;
+    }
+    .slider-pager {
+    position: absolute;
+
+    z-index: 1;
+    width: 55%;
+    height: 15px;
+    text-align: center;
+}
+
+
+    .box {
+        padding: 1em;
+    }
+
+    @media (min-width: 271px)(max-width: 420px) {
+        .slider-pager {
+            position: absolute;
+            bottom: 20px;
+            z-index: 1;
+            width: 60%;
+            height: 15px;
+            text-align: center;
+            padding-right: 45%;
+        }
+    }
+
+    @media(min-width: 481px) (max-width: 690px) {
+        .slider-pager {
+            position: absolute;
+            bottom: 20px;
+            z-index: 1;
+            width: 60%;
+            height: 15px;
+            text-align: center;
+            padding-right: 50%;
+        }
+    }
+
+    @media(min-width: 3020px) (max-width: 3740px) {
+        .slider-pager {
+            position: absolute;
+            bottom: 20px;
+            z-index: 1;
+            width: 60%;
+            height: 15px;
+            text-align: center;
+            padding-right: 58%;
+        }
+    }
+   .PFix{
+       margin-bottom:10px;
+   }
+  .slider-pager-page i {
+       font-size : 20px;
+       margin-left : 40px;
+   }
+ 
+</style>
+
+<ion-view view-title="" align-title="left">
+    <ion-content Scroll="false">
+        <div class="content tank4" ng-init="deviceList()">
+            
+            <div class="col-xs-12" style="margin-right:10px!important;">
+
+                <div class="row">
+                    <div class="col-5"></div>
+                    <div class="col-80">
+                        <h4>
+                            &nbsp;&nbsp;{{deviceName}}
+                        </h4>
+                    </div>
+                    <div class="col-25"><h5 style="color:dodgerblue" ui-sref="app.tanks">List View <i class="fa fa-bookmark-o" aria-hidden="true"></i></h5></div>
+                    <!--<div>
+                        <div class="col-5"></div>
+                    </div>-->
+                </div>
+            </div>
+            
+            
+            <div>
+                <ion-slide-box show-pager="true" on-slide-changed="onSlideChanged($index)" align="center">
+                    <ion-slide ng-repeat="item in items" style="float:left">
+                        <div class="temprature1 col-xs-4">
+                            <div id="tank" class="water1">
+                                <span style="color:darkblue"><i class="ion ion-thermometer" aria-hidden="true"></i>&nbsp;{{tem1}} F </span>
+                            </div>
+                        </div>
+                        <h5 style="color:black;margin-right:45%"> &nbsp;<b id="Bell"></b></h5>
+                        <div class="temprature2 col-xs-4">
+                            <div id="temp" class="water2">
+                                <span style="color:darkblue" class="PFix"><i class="ion ion-thermometer" aria-hidden="true"></i>&nbsp;{{temperatureValue}} F </span>
+                            </div>
+                        </div>
+                        <div class="temprature3 col-xs-4">
+                            <div id="water" class="water3">
+                                <span style="color:darkblue"><i class="ion ion-thermometer" aria-hidden="true"></i>&nbsp;{{tem3}} F </span>
+                            </div>
+                        </div>
+                    </ion-slide>
+                </ion-slide-box>
+
+            </div>
+                    </div>
+            
+    </ion-content>  
+</ion-view>

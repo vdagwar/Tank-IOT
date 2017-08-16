@@ -1,42 +1,42 @@
 ﻿<style>
     h3 {
         width: 100% !important;
-
     }
+
     .slider {
-  height: 100%;
-}
-.slider-slide {
-  padding-top: 0px;
-  color: #000;
-  background-color: #fff;
-  
-}
-.slider-pager {
-    position: absolute;
-   
-    z-index: 1;
-    width: 55%;
-    height: 15px;
-    text-align: center;
-}
-#container {
-	min-width: 310px;
-	max-width: 800px;
-	height: 200px!important;
-}
-   
+        height: 100%;
+    }
+
+    .slider-slide {
+        padding-top: 0px;
+        color: #000;
+        background-color: #fff;
+    }
+
+    .slider-pager {
+        position: absolute;
+        z-index: 1;
+        width: 55%;
+        height: 15px;
+        text-align: center;
+    }
+
+    #container {
+        min-width: 310px;
+        max-width: 800px;
+        height: 200px !important;
+    }
 </style>
 <ion-view view-title="Santa Clara site" align-title="left">
-    <ion-content Scroll="false">
+    <ion-content Scroll="true">
         <div class="content tank2" ng-init="TankDetails()">
             <div class="col-xs-12">
-                <div >
+                <div>
                     <div class="col-10"></div>
-                    <div class="col-90 m">  
+                    <div class="col-90 m">
                         <h4>
                             &nbsp;{{deviceName}}
-                        </h4>  
+                        </h4>
                     </div>
                 </div>
                 <div class="row c">
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-              
+
                 <div>
                     <ion-slide-box show-pager="true" on-slide-changed="onSlideChanged($index)">
                         <ion-slide>
@@ -63,26 +63,28 @@
                                     <div class="col=95">
                                         <h5>&nbsp; &nbsp;<i class="icon ion-thermometer"></i>&nbsp;&nbsp;&nbsp;<b>{{temperatureValue}}F</b>&nbsp;&nbsp;<i class="fa fa-bell-o" aria-hidden="true"></i></h5>
                                         <h6 class="margin">Standard 50F-70F</h6>
-                                        <h5>&nbsp;&nbsp;<i class="fa fa-compass" aria-hidden="true">&nbsp;&nbsp; <b>Last &nbsp;{{HatchDoorValue }} at {{HatchDoorDate| date:"hh:mma"}}</b></i></h5>
+                                        <h5>&nbsp;&nbsp;<i class="fa fa-compass" aria-hidden="true">&nbsp;&nbsp; <b>Last &nbsp;{{HatchDoorValue}} at {{HatchDoorDate| date:"hh:mma"}}</b></i></h5>
                                         <h6 class="margin">Normal hrs 6am-6pm</h6>
                                         <h5> &nbsp;&nbsp;<i class="icon ion-levels"></i>&nbsp;&nbsp;<b>Level &nbsp;&nbsp;{{levelval}}</b></h5>
                                     </div>
                                 </div>
                             </div>
-                            </ion-slide>
+                        </ion-slide>
                         <ion-slide>
                             <div ng-init="graph()">
-                                
-                                    <!--<h5 class="margin"><b>Temperature</b></h5><br/>
+
+                                <!--<h5 class="margin"><b>Temperature</b></h5><br/>
                                 <b class="margin"> Today :</b> &nbsp;{{temperatureValue}}F-->
-                                    <div id="container"></div>
-                              
+                                <div id="container"></div>
+
+                                v>
+
                             </div>
                         </ion-slide>
                         <ion-slide>
                             <div>
                                 <h5 class="margin"><b>Hatch</b></h5>
-                                <h6 class="margin">Normal hrs 6am-6pm</h6><br/>
+                                <h6 class="margin">Normal hrs 6am-6pm</h6><br />
                                 <b class="margin"> Today</b> &nbsp;{{HatchDoorDate| date:"hh:mma"}}
 
                             </div>
@@ -90,16 +92,16 @@
                         <ion-slide>
                             <div>
                                 <h5 class="margin"><b>Level &nbsp;{{levelTimeval | date:"hh:mma"}}</b></h5>
-                              
+
                                 <b class="margin"> Today :</b> &nbsp;{{levelval}}
 
                             </div>
                         </ion-slide>
                     </ion-slide-box>
                 </div>
-             
-               
-           </div>
+
+
+            </div>
         </div>
 
 
@@ -108,18 +110,20 @@
     </ion-content>
 </ion-view>
 <style>
-    .c{
-        background-color:#eee;
+    .c {
+        background-color: #eee;
     }
-    .margin{
-        margin-left:13%;
-    }
-    .m{
-        margin-top:5%;
-    }
-   
 
-      /*.txtS {
+    .margin {
+        margin-left: 13%;
+    }
+
+    .m {
+        margin-top: 5%;
+    }
+
+
+    /*.txtS {
             font-size: 10px;
             margin-right: 10px;
         }
@@ -131,11 +135,11 @@
             .temprature p {
                 color: #000 !important;
                 /*text-align: center;*/
-                /*font-size: 15px;
+    /*font-size: 15px;
                 position: absolute;
                 top: 165px;
                 left: 5px;
                 width: 100%;
                 margin: 0 auto;
             }*/
-    </style>
+</style>
