@@ -57,6 +57,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
             .then(function (result) {
                 var address = result.data.results[2].formatted_address;
                 $scope.address = address;
+                localStorageService.set("Address", $scope.address);
                 console.log("address", address);
             });
     }
@@ -796,7 +797,8 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     //}
 })
 .controller('HomeCtrl', function ($scope, $state, $ionicLoading, filterFilter, localStorageService, DeviceService) {
-
+    $scope.Adress = localStorageService.get("Address");
+   
     $scope.show = function () {
         $ionicLoading.show({
             template: '<ion-spinner></ion-spinner>'
@@ -992,6 +994,9 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 })
 
 .controller('tank1Ctrl', function ($scope, $ionicLoading, DeviceService, localStorageService) {
+    $scope.config = localStorageService.get("ConfigData");
+    $scope.MinLevel = $scope.config.minLevel;
+    $scope.Adress = localStorageService.get("Address");
     $scope.show = function () {
         $ionicLoading.show({
             template: '<ion-spinner></ion-spinner>'

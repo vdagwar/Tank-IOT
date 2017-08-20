@@ -26,8 +26,26 @@
         max-width: 800px;
         height: 200px !important;
     }
+    .Lvl{
+        margin-top:80%;
+        margin-left:10%;
+        font-size: 15px;
+      
+    }
+       .c {
+        background-color: #eee;
+    }
+
+    .margin {
+        margin-left: 10%;
+    }
+
+    .m {
+        margin-top: 5%;
+    }
+
 </style>
-<ion-view view-title="Santa Clara site" align-title="left">
+<ion-view view-title="{{Adress}}" align-title="left">
     <ion-content Scroll="true">
         <div class="content tank2">
             <div class="col-xs-12">
@@ -45,7 +63,7 @@
                             <span style="color:darkblue"><i class="ion ion-thermometer" aria-hidden="true"></i>&nbsp;{{temperatureValue}} F </span>
                         </div>
                     </div>
-                    <span class="pos">  <i class="icon ion-levels"></i> {{MinLevel}}%</span>
+           <i class="icon ion-levels Lvl"> &nbsp;{{MinLevel}}%</i>
 
                 </div>
 
@@ -84,7 +102,7 @@
                             <div>
                                 <h5 class="margin"><i class="fa fa-compass" aria-hidden="true"></i>&nbsp;&nbsp;<b> Hatch</b></h5>
                                 <h6 class="margin">Normal hrs 6am-6pm</h6><br />
-                                <b class="margin"> Today</b> &nbsp;{{HatchDoorDate| date:"hh:mma"}} {{HatchDoorValue}}
+                                <b class="margin"> Today</b> &nbsp; {{HatchDoorValue}} at {{HatchDoorDate| date:"hh:mma"}}
 
                             </div>
                         </ion-slide>
@@ -104,17 +122,3 @@
         </div>
     </ion-content>
 </ion-view>
-<style>
-    .c {
-        background-color: #eee;
-    }
-
-    .margin {
-        margin-left: 10%;
-    }
-
-    .m {
-        margin-top: 5%;
-    }
-
-</style>
