@@ -1,5 +1,5 @@
 <ion-view view-title="Login" align-title="left" ion-side-menu-content drag-content="false">
-    <ion-content has-header="false" Scroll="false">
+    <ion-content has-header="false" Scroll="true">
         <div>
             <div class="content">
                 <div class="app-icon"></div>
@@ -13,23 +13,35 @@
         <div class="row login" ng-if="show">
             <div class="col-10"></div>
             <div class="col-80">
-                <div class="list">
-                    <label class="item item-input" style="border-bottom:1px solid #808080">
-                        <input type="email" placeholder="Enter your email id" name="email" ng-model="user.Email" ng-keyup="CheckMail(user.Email)" required>
-                    </label>
-                    <br />
-                    <label class="item item-input" style="border-bottom:1px solid #808080">
-                        <input type="password" placeholder="Password" ng-model="user.Password" required>
-                        <span class="forgot">Forgot?</span>
-                    </label>
-                    <br />
-                    <div class="padding">
-                        <button class="button button-block button-outline button-calm" ng-click="Login(user)" ng-disabled="mailDomain">SIGN IN</button><br />
-                        <button class="button button-block  button-outline button-positive">LINKEDIN</button>
-                    </div>
+                <form name="myForm" novalidate>
+                    <div class="list">
+                        <label class="item item-input" style="border-bottom:1px solid #808080">
+                            <input type="email" placeholder="Enter your email id" name="email" ng-model="user.Email" ng-keyup="CheckMail(user.Email)" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" required>
+                        </label>
+                        <span ng-show="myForm.password.$dirty && myForm.password.$invalid">
+                            &nbsp;  <span ng-show="myForm.email.$error.required" style="color:red">Email is required.</span>
+                            &nbsp;  <span ng-show="myForm.email.$error" style="color:red">Please enter a valid email address!</span>
+                            &nbsp; <span ng-show="myForm.email.$error.email" style="color:red">Invalid email address.</span>
+                        </span>
+                        <br />
+                        <label class="item item-input" style="border-bottom:1px solid #808080">
+                            <input type="password" placeholder="Password" ng-model="user.Password" required>
+                            <span class="forgot">Forgot?</span>
+                        </label>
+                        <span ng-show="myForm.password.$dirty && myForm.password.$invalid">
+                            &nbsp;  <span ng-show="myForm.password.$error.required" style="color:red">Password is required.</span>
+                           
+                            &nbsp;  <span ng-show="myForm.password.$error.minlength" class="help-block" style="color:red">Password atleast 6 character.</span>
+                            </span>
+                            <br />
+        <div class="padding">
+            <button class="button button-block button-outline button-calm" ng-click="Login(user)" ng-disabled="myForm.$invalid || mailDomain">SIGN IN</button><br />
+            <!--<button class="button button-block  button-outline button-positive">LINKEDIN</button>-->
+        </div>
 
-                </div>
-            </div>
+</div>
+                    </form>
+</div>
             <div class="col-10">
             </div>
         </div>
@@ -40,11 +52,12 @@
                 <form name="myForm" novalidate>
                     <div class="list">
                         <label class="item item-input">
-                            <input type="email" placeholder="Company email id" name="email" ng-model="user.Email" style="border-bottom:1px solid #808080" ng-keyup="CheckMail(user.Email)" required>
+                            <input type="email" placeholder="Company email id" name="email" ng-model="user.Email" style="border-bottom:1px solid #808080" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" ng-keyup="CheckMail(user.Email)" required>
                         </label>
                         <span ng-show="myForm.email.$dirty && myForm.email.$invalid">
                             &nbsp;  <span ng-show="myForm.email.$error.required" style="color:red">Email is required.</span>
                             &nbsp; <span ng-show="myForm.email.$error.email" style="color:red">Invalid email address.</span>
+                            &nbsp;  <span ng-show="myForm.email.$error" style="color:red">Please enter a valid email address!</span>
                         </span>
                         <br />
 
@@ -53,11 +66,13 @@
                             <!--<i class="icon ion-checkmark-round"></i>-->
                         </label>
                         <span ng-show="myForm.password.$dirty && myForm.password.$invalid">
-                            &nbsp;  &nbsp;   <span ng-show="myForm.password.$error.minlength" class="help-block" style="color:red">Password atleast 6 character.</span>
+                            &nbsp;  <span ng-show="myForm.password.$error.required" style="color:red">Password is required.</span>
+                           
+                            &nbsp;  <span ng-show="myForm.password.$error.minlength" class="help-block" style="color:red">Password atleast 6 character.</span>
 
                         </span>
                         <br />
-                        <button class="button button-block button-outline button-calm" ng-click="RegisterNow(user)" ng-disabled="mailDomain">SIGN UP</button>
+                        <button class="button button-block button-outline button-calm" ng-click="RegisterNow(user)" ng-disabled="mailDomain || myForm.$invalid">SIGN UP</button>
 
                     </div>
                 </form>

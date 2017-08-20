@@ -146,7 +146,6 @@ margin-top: 50px;
 .tank2 .water3 {
     width: 100%;
     height: 80%;
-    background-color: #e2858a;
     position: absolute;
     bottom: 0;
 }
@@ -308,27 +307,8 @@ margin-top: 50px;
 
 
 }
- .tankmanagement .water1 {
-    width: 100%;
-    height: 60%;
-    background-color: rgba(207, 201, 201, 0.34);
-    position: absolute;
-    bottom: 0;
-}
- .tankmanagement .water2 {
-    width: 100%;
-    height: 85%;
-    background-color: #585896;
-    position: absolute;
-    bottom: 0;
-}
-.tankmanagement .water3 {
-    width: 100%;
-    height: 60%;
-    background-color: rgba(207, 201, 201, 0.34);
-    position: absolute;
-    bottom: 0;
-}
+
+
 /*tank 4*/
 .tank4{
  margin-top:20px;

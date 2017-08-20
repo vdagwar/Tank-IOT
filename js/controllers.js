@@ -43,7 +43,63 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 
 })
 
-.controller('AppCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout,$state, $window, localStorageService) {
+.controller('AppCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout, $state, $window, localStorageService, $http) {
+    var logUser = localStorageService.get('UserData');
+    console.log("logUser", logUser);
+    if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
+
+    function onPositionUpdate(position) {
+        var lat = position.coords.latitude;
+        var lng = position.coords.longitude;
+      
+        var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&sensor=true";
+        $http.get(url)
+            .then(function (result) {
+                var address = result.data.results[2].formatted_address;
+                $scope.address = address;
+                console.log("address", address);
+            });
+    }
+    
+    
+    $scope.Name = logUser.Name;
+    $scope.Edit = function () {
+        debugger;
+        $(".file-upload").click();
+    }
+    if (localStorageService.get('profilePic'))
+        $scope.UserPhoto = localStorageService.get('profilePic');
+    else
+        $scope.UserPhoto = "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";
+    
+    $(document).ready(function () {
+        var readURL = function (input) {
+            if (input.files && input.files[0]) {
+                //debugger;
+                var reader = new FileReader();
+                reader.onload = function (e) {
+
+                    //Sets the Old Image to new New Image
+                    $('#photo-id').attr('src', e.target.result);
+                    $scope.UserPhoto = e.target.result;
+                    console.log($scope.UserPhoto);
+                    localStorageService.set('profilePic', e.target.result)
+                }
+                //Renders Image on Page
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+        $(".file-upload").on('change', function () {
+            readURL(this);
+        });
+
+        $(".upload-button").on('click', function () {
+            
+        });
+    });
+   
     // Form data for the login modal
     $scope.loginData = {};
     $scope.isExpanded = false;
@@ -64,10 +120,11 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         //var logUser = localStorageService.get('UserData');
         //$window.localStorage.clear(logUser);
         $state.go('app.login');
+        $window.location.reload(true);
     }
-      
-   
-   
+
+
+
     ////////////////////////////////////////
 
     $scope.hideNavBar = function () {
@@ -137,6 +194,10 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 })
 
 .controller('LoginCtrl', function ($scope, $ionicLoading, $timeout, $http, $state, $stateParams, ionicMaterialInk, $ionicPopup, StoreService, localStorageService) {
+
+
+    
+
     $scope.hideNavBar = function () {
         document.getElementsByTagName('ion-nav-bar')[0].style.display = 'none';
     };
@@ -224,7 +285,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     $scope.Register = function () {
         $scope.hide = true;
         $scope.show = false;
-       
+
     };
     $scope.Signin = function () {
         $scope.show = true;
@@ -242,7 +303,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 
     $scope.Login = function (User) {
         var user = localStorageService.get('UserData');
-      //  console.log("user", user);
+        //  console.log("user", user);
         $ionicLoading.show({
             template: '<ion-spinner></ion-spinner>'
         });
@@ -263,7 +324,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                                     });
                                 }
                                 else {
-                                  var alertPopup = $ionicPopup.alert({
+                                    var alertPopup = $ionicPopup.alert({
                                         title: 'Wel-Come...!!!',
                                         template: user.Email + ' have been successfully logged in.!!!'
                                     });
@@ -349,9 +410,10 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         }
         $ionicLoading.hide();
     };
-    
-    
+
+
     $scope.RegisterNow = function (User) {
+     
         var userEmail = null;
         var user = localStorageService.get('UserData');
         console.log("user", User)
@@ -359,13 +421,12 @@ angular.module('starter.controllers', ['LocalStorageModule'])
             user = {
                 "Email": null,
                 "Phone": null,
-                "Password": null,
-                "Company": null,
-                "Name": null
+                "Password": null
+               
             }
         }
         else
-        userEmail = user.Email;
+            userEmail = user.Email;
 
         console.log("registration", User)
         if (User != undefined) {
@@ -401,9 +462,9 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                     });
                 }
             }
-            else  if (User.Email == userEmail &&  user.Phone == null) {               
-                    $state.go('app.registration');
-                }
+            else if (User.Email == userEmail && user.Phone == null) {
+                $state.go('app.registration');
+            }
             else if (User.Email == userEmail && user.Phone && user.EmailConfirm == false) {
                 $state.go('app.emailverification');
             }
@@ -433,7 +494,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         try {
             $scope.mailDomain = false;
             var idx = emailAddress.lastIndexOf('@');
-            if (idx > -1 && (emailAddress.slice(idx + 1) === 'gmail.com' || emailAddress.slice(idx + 1) === 'yahoo.com' || emailAddress.slice(idx + 1) === 'hotmail.com' || emailAddress.slice(idx + 1) === 'outlook.com')) {
+            if (idx > -1 && (emailAddress.slice(idx + 1) === 'gmail.com' || emailAddress.slice(idx + 1) === 'gmail.in' || emailAddress.slice(idx + 1) === 'yahoo.com' || emailAddress.slice(idx + 1) === 'yahoo.in' || emailAddress.slice(idx + 1) === 'hotmail.com' || emailAddress.slice(idx + 1) === 'outlook.com')) {
 
                 $scope.mailDomain = true;
                 var alertPopup = $ionicPopup.alert({
@@ -456,13 +517,18 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     $scope.RegisterDetail = function (User) {
         if (User != undefined) {
             var UserData = localStorageService.get('UserData');
-           // console.log("getUserData", UserData);
+            debugger;
+             console.log("getUserData", UserData);
             UserData.Name = User.Name;
             UserData.Phone = User.Phone;
             UserData.Company = User.Company;
             localStorageService.set('UserData', UserData);
-           // console.log("setUserData", UserData);
-         $state.go('app.emailverification');
+            var alertPopup = $ionicPopup.alert({
+                title: 'Alert...!!!',
+                template: 'Registration Successfully..!!!'
+            });
+            // console.log("setUserData", UserData);
+            $state.go('app.emailverification');
         }
         else {
             var alertPopup = $ionicPopup.alert({
@@ -486,7 +552,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         //console.log("EmailConfirm", UserData)
         UserData.EmailConfirm = true;
         localStorageService.set('UserData', UserData);
-       // console.log("setEmailConfirm", UserData)
+        // console.log("setEmailConfirm", UserData)
         var alertPopup = $ionicPopup.alert({
             title: 'Succeed..!!!',
             template: 'You have Successfully verified.'
@@ -509,16 +575,19 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     var tank = localStorageService.get("tank");
     //if (tank) {
     $scope.data = localStorageService.get("ConfigData");
+    console.log("data", $scope.data);
+    var today = new Date().getDay();
     if ($scope.data == null) {
         $scope.data = {
             minTemp: 20,
             MaxTemp: 80,
             minLevel: 20,
-            timeValue: {}
+            timeValue: { }
+ 
         }
     }
     else {
-        //debugger;
+      //  debugger;
         var today = new Date().getDay();
         if (today == 0) {
             $scope.timeValue1 = $scope.data.timeValue.sunday.timeValue1;
@@ -551,7 +620,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     }
     $scope.save = function (data) {
         localStorageService.set("ConfigData", data);
-       
+        $state.go("app.Home");
     };
     $scope.Cancel = function () {
         $state.go("app.Home");
@@ -559,8 +628,6 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     };
 
     $scope.reset = function (data, value) {
-       
-      
         if (value == 1) {
             $scope.data.minTemp = '';
             $scope.data.MaxTemp = '';
@@ -573,73 +640,77 @@ angular.module('starter.controllers', ['LocalStorageModule'])
             $scope.data.timeValue2 = '';
             $state.go('app.hatchshedule');
         }
-       
+
     }
 })
 .controller('hatchsheduleCtrl', function ($scope, $ionicPopup, $state, $http, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, localStorageService) {
 
-        template: '<input type = "text" ng-model = "data.model">',
-        // Set Header
-        $scope.$parent.showHeader();
-        $scope.$parent.clearFabs();
+    template: '<input type = "text" ng-model = "data.model">',
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
 
-        var tank = localStorageService.get("tank");
-        //if (tank) {
-        $scope.data = localStorageService.get("ConfigData");
-       
-        $scope.save = function (data) {
-            console.log("data", data);
-           debugger;
-            if (data.Sun == true) {
-                $scope.data.timeValue.sunday = {
-                    timeValue1: data.timeValue1,
-                    timeValue2: data.timeValue2,
-                    }
-            }
-            if (data.Mon == true) {
-                $scope.data.timeValue.monday = {
-                    timeValue1: data.timeValue1,
-                    timeValue2: data.timeValue2,
-                }
-            }
-            if (data.Tue == true) {
-                $scope.data.timeValue.tuesday = {
-                    timeValue1: data.timeValue1,
-                    timeValue2: data.timeValue2,
-                }
-            }
-            if (data.Wed == true) {
-                $scope.data.timeValue.wednesday = {
-                    timeValue1: data.timeValue1,
-                    timeValue2: data.timeValue2,
-                }
-            }
-            if (data.Thu == true) {
-                $scope.data.timeValue.thusday = {
-                    timeValue1: data.timeValue1,
-                    timeValue2: data.timeValue2,
-                }
-            }
-            if (data.Fri == true) {
-                $scope.data.timeValue.friday = {
-                    timeValue1: data.timeValue1,
-                    timeValue2: data.timeValue2,
-                }
-            }
-            if (data.Sat == true) {
-                $scope.data.timeValue.saturday = {
-                    timeValue1: data.timeValue1,
-                    timeValue2: data.timeValue2,
-                }
-            }
-            console.log("data inside Hatch", $scope.data);
-            localStorageService.set("ConfigData", $scope.data);
-            console.log("data", $scope.data);
-            $state.go('app.config');
-        };
-    })
+    var tank = localStorageService.get("tank");
+    //if (tank) {
+    $scope.data = localStorageService.get("ConfigData");
 
-.controller('settingsCtrl', function ($scope, $ionicPopup, $ionicLoading, $state, $http, $stateParams, $timeout,ionicMaterialInk,ionicMaterialMotion, localStorageService) {
+    $scope.save = function (data) {
+        console.log("data", data);
+        debugger;
+        if (data.Sun == true) {
+            $scope.data.timeValue.sunday = {
+                timeValue1: data.timeValue1,
+                timeValue2: data.timeValue2,
+            }
+        }
+        if (data.Mon == true) {
+            $scope.data.timeValue.monday = {
+                timeValue1: data.timeValue1,
+                timeValue2: data.timeValue2,
+            }
+        }
+        if (data.Tue == true) {
+            $scope.data.timeValue.tuesday = {
+                timeValue1: data.timeValue1,
+                timeValue2: data.timeValue2,
+            }
+        }
+        if (data.Wed == true) {
+            $scope.data.timeValue.wednesday = {
+                timeValue1: data.timeValue1,
+                timeValue2: data.timeValue2,
+            }
+        }
+        if (data.Thu == true) {
+            $scope.data.timeValue.thusday = {
+                timeValue1: data.timeValue1,
+                timeValue2: data.timeValue2,
+            }
+        }
+        if (data.Fri == true) {
+            $scope.data.timeValue.friday = {
+                timeValue1: data.timeValue1,
+                timeValue2: data.timeValue2,
+            }
+        }
+        if (data.Sat == true) {
+            $scope.data.timeValue.saturday = {
+                timeValue1: data.timeValue1,
+                timeValue2: data.timeValue2,
+            }
+        }
+        console.log("data inside Hatch", $scope.data);
+        localStorageService.set("ConfigData", $scope.data);
+       // console.log("data", $scope.data);
+        $state.go('app.config');
+    };
+
+    $scope.Cancel = function() {
+        $state.go("app.config");
+    }
+})
+
+.controller('settingsCtrl', function ($scope, $ionicPopup, $ionicLoading, $state, $http, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, localStorageService) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.AccessToken = function (relayrData) {
@@ -648,6 +719,10 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         localStorageService.set("relayrData", relayrData);
         console.log("relayrData", relayrData);
         $state.go('app.tanks');
+    }
+
+    $scope.skip = function(){
+        $state.go("app.Home");
     }
 })
 
@@ -667,8 +742,8 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         $ionicLoading.hide();
     };
     $scope.TList = localStorageService.get("TankList");
-    console.log("TankList", $scope.TList);
-   
+    //console.log("TankList", $scope.TList);
+
     $scope.$on('$ionicView.enter', function () {
         // Code you want executed every time view is opened
         //$scope.deviceList();
@@ -678,8 +753,8 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     $scope.TankDetail = function (tank) {
         var tankdetail = tank;
         DeviceService.set(tankdetail);
-        console.log("tankdetail", tankdetail);
-        debugger;
+        //console.log("tankdetail", tankdetail);
+        //debugger;
         $state.go('app.tank1');
         // window.location.reload();
     }
@@ -701,9 +776,9 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     $scope.hide = function () {
         $ionicLoading.hide();
     };
-    
+
     $scope.$on('$ionicView.enter', function () {
-        
+
     })
 
 
@@ -720,8 +795,8 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     //    $ionicSlideBoxDelegate.next();
     //}
 })
-.controller('HomeCtrl', function ($scope, $state, $ionicLoading, filterFilter, localStorageService) {
-   
+.controller('HomeCtrl', function ($scope, $state, $ionicLoading, filterFilter, localStorageService, DeviceService) {
+
     $scope.show = function () {
         $ionicLoading.show({
             template: '<ion-spinner></ion-spinner>'
@@ -733,54 +808,64 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     $scope.deviceID = "";
     $scope.TankList = '';
     $scope.relayrdata = localStorageService.get("relayrData");
-    $scope.relayrId = $scope.relayrdata.relayrId;
+    var relayrId = $scope.relayrdata.relayrId;
     $scope.accessToken = $scope.relayrdata.accessToken;
     console.log("relayrdata", $scope.relayrdata);
+
+   
     $scope.deviceList = function () {
-        //debugger;
+        $scope.ConfifDetail = localStorageService.get("ConfigData");
+        $scope.MinLevel = $scope.ConfifDetail.minLevel;
+        console.log("MinLevel", $scope.MinLevel);
         $scope.show($ionicLoading);
-        if ($scope.relayrdata !=null  && $scope.relayrdata !=undefined && !$scope.relayrdata){
-            var settings = {
-                "async": true,
-                "crossDomain": true,
-                "url": "https://api.relayr.io/users/" + $scope.relayrId + "/devices",
-                "method": "GET",
-                "headers": {
-                    "authorization": $scope.accessToken
+        // if ($scope.relayrdata != null && $scope.relayrdata != undefined && !$scope.relayrdata) {
+        //debugger;
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://api.relayr.io/users/" + relayrId + "/devices",
+            "method": "GET",
+            "headers": {
+                "authorization": $scope.accessToken
 
-                }
             }
         }
-        else {
-            var settings = {
-                "async": true,
-                "crossDomain": true,
-                "url": "https://api.relayr.io/users/" + $scope.relayrId + "/devices",
-                "method": "GET",
-                "headers": {
-                    "authorization": $scope.accessToken
+        //  }
+        //  else {
+        //      debugger;
+        //  var settings = {
+        //          "async": true,
+        //          "crossDomain": true,
+        //          "url": "https://api.relayr.io/users/cf1cf510-a383-413b-ad53-258aaf34a18a/devices",
+        //          "method": "GET",
+        //          "headers": {
+        //              "authorization": "Bearer gdrlGsuEw3L7HWD8bwtbEWCOJlxDgx5vmTUM0XFFCrG90n9KyUqaZxZWv5xWfCQq"
 
-                }
-            }
-        }
-        
+        //          }
+        //      }
+        //}
+
         $.ajax(settings).done(function (response) {
-            
+
             $scope.TankList = response;
             $scope.TList = filterFilter($scope.TankList, { name: 'Tank' });
             localStorageService.set("TankList", $scope.TList);
             var tankDetails = localStorageService.get("TankDetail[0]");
-            if (!tankDetails) {               
+            if (!tankDetails) {
                 tankDetails = $scope.TList[0];
                 $scope.deviceID = tankDetails.id;
-            }            
+            }
             $scope.TankDetails(tankDetails);
             $scope.hide($ionicLoading);
         });
     }
 
     $scope.TankDetails = function (tankDetails) {
-       // debugger;
+        // debugger;
+        localStorageService.set("DetailForTank", tankDetails);
+        $scope.ConfifDetail = localStorageService.get("ConfigData");
+        //$scope.MinLevel = $scope.ConfifDetail.minLevel;
+        console.log("ConfifDetail", $scope.ConfifDetail);
         $scope.show($ionicLoading);
         $scope.deviceID = tankDetails.id;
         $scope.deviceName = tankDetails.name;
@@ -805,19 +890,10 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         }
 
         $.ajax(settings).done(function (response) {
-            console.log("response of tank detail", response);
-            //if (response) {
-            //}
-            //else{
-
-            
-            //}
-            //debugger;
-            //
+           // console.log("response of tank detail", response);
             $scope.tankdata = response.readings;
-            console.log("tankdata", $scope.tankdata);
+           // console.log("tankdata", $scope.tankdata);
             if ($scope.tankdata.length == 0) {
-                
                 $scope.tem1 = 65;
                 $("#tank").height(($scope.tem1 * 2.4));
                 $(".water1").css("background-color", "rgba(100, 194, 223, 0.34)");
@@ -827,12 +903,8 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                 $scope.tem3 = 80;
                 $("#water").height(($scope.tem3 * 1.8));
                 $(".water3").css("background-color", "rgba(100, 194, 223, 0.34)");
-
                 $scope.hide($ionicLoading);
-
-
-
-            }
+                  }
             else {
                 for (var s = 0; s < $scope.tankdata.length; s++) {
                     if ($scope.tankdata[s].meaning == "Hatch Open") {
@@ -859,10 +931,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                         $scope.levelval = $scope.tankdata[s].value;
                     }
                     if ($scope.tankdata[s].meaning == "Temperature") {
-
-                        
                         $scope.temperatureMeaning = "Temprature";
-
                         $scope.tem1 = 65;
                         $("#tank").height(($scope.tem1 * 2.4));
                         $("#tank").css("background-color", "rgba(100, 194, 223, 0.34)");
@@ -874,10 +943,13 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                         else if ($scope.temperatureValue * 2.8 <= 0)
                             $("#temp").height(0);
                         else
-                            $("#temp").height($scope.temperatureValue * 2.8);
-                        $("#temp").css("background-color", "#e2858a");
-                       
-                        $scope.tem3 = 80;
+                        $("#temp").height($scope.temperatureValue * 2.8);
+                        if ($scope.temperatureValue >= $scope.ConfifDetail.minTemp && $scope.temperatureValue <= $scope.ConfifDetail.MaxTemp) {
+                            $("#temp").css("background-color", "#41a6f4");
+                        }
+                        else
+                            $("#temp").css("background-color", "#e2858a");
+                        $scope.tem3 = 55;
                         $("#water").height(($scope.tem3 * 1.8));
                         $("#water").css("background-color", "rgba(100, 194, 223, 0.34)");
                     }
@@ -885,31 +957,32 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                 $scope.hide($ionicLoading);
             }
 
-           
+
         })
         .error(function (errors) {
-            //  
+          
         })
-       
+
     }
 
-    //$scope.TankDetails();
+    $scope.TankDetail = function () {
+        $scope.DetailForTank = localStorageService.get("DetailForTank");
+        console.log("deviceID", $scope.DetailForTank);
+        DeviceService.set($scope.DetailForTank);
+        $state.go('app.tank1');
+    }
 
 
-   
-    
     $scope.items = [
     { title: 'Item 1', desc: 'This is item 1' },
-    { title: 'Item 1', desc: 'This is item 1'}, 
+    { title: 'Item 1', desc: 'This is item 1' },
     { title: 'Item 1', desc: 'This is item 1' },
     { title: 'Item 1', desc: 'This is item 1' },
     { title: 'Item 1', desc: 'This is item 1' }
-   
- ];
 
-    
+    ];
     $scope.onSlideChanged = function (index) {
-       // debugger;
+        
         var TankList = localStorageService.get("TankList");
         var tankDetails = TankList[index];
         console.log("tank slider", tankDetails);
@@ -933,6 +1006,8 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     $scope.TankDetails = function () {
         $scope.show($ionicLoading);
         $scope.deviceData = DeviceService.getData();
+        console.log("deviceData", $scope.deviceData);
+        $scope.deviceID = $scope.deviceData;
         $scope.deviceID = $scope.deviceData.id;
         $scope.deviceName = $scope.deviceData.name;
         $scope.HatchDoorValue = "";
@@ -949,81 +1024,115 @@ angular.module('starter.controllers', ['LocalStorageModule'])
             "url": "https://api.relayr.io/devices/" + $scope.deviceID + "/readings",
             "method": "GET",
             "headers": {
-                "authorization":$scope.accessToken,
+                "authorization": $scope.accessToken,
                 "cache-control": "no-cache"
             }
         }
 
         $.ajax(settings).done(function (response) {
-            console.log(response);
-            
-            //debugger;
-            //
             $scope.tankdata = response.readings;
-            console.log("tankdata", $scope.tankdata);
-
+            var TempArray = localStorageService.get("TemperatureArray");
+            if (TempArray == null)
+                TempArray = [];
             for (var s = 0; s < $scope.tankdata.length; s++) {
                 if ($scope.tankdata[s].meaning == "Hatch Open") {
                     $scope.HatchDoorMeaning = "Hatch Door";
                     $scope.HatchDoorDate = $scope.tankdata[s].received;
                     $scope.HatchDoorVal = $scope.tankdata[s].value;
-                    if ($scope.HatchDoorVal == "true") {
-                        $scope.HatchDoorValue ='Open';
+                    if ($scope.HatchDoorVal == true) {
+                        $scope.HatchDoorValue = 'Open';
                         console.log("HatchDoorVal Open:", $scope.HatchDoorValue);
                     }
-                 //   debugger;
-                    if ($scope.HatchDoorVal == "false") {
+                    if ($scope.HatchDoorVal == false) {
                         $scope.HatchDoorValue = 'Close';
                         console.log("HatchDoorValue Close:" + $scope.HatchDoorValue);
                     }
-                   //hatchdoor values for store
-                    var existingEntries = localStorageService.get("allEntries");
-                    if (existingEntries == null) existingEntries = [];
-                   
+                    var HatchArray = [];
                     var hatch = {
-                        "HatchDoorDate": $scope.HatchDoorDate,
+                        "HatchDoorDate":new Date( $scope.HatchDoorDate),
                         "HatchDoorVal": $scope.HatchDoorVal
                     };
-                    localStorageService.set("hatch", hatch);
-                    // Save allEntries back to local storage
-                    existingEntries.push(hatch);
-                    localStorageService.set("allEntries", existingEntries);
-                    var Hatchvalues = localStorageService.get("allEntries");
-                    console.log("Hatchvalues", Hatchvalues);
-
-
-                    ///end hatchdoor values
+                    HatchArray.push(hatch);
+                    localStorageService.set("HatchDoor", HatchArray);
+                    var HatchArrayvalues = localStorageService.get("HatchDoor");
+                    var arrayOfHatchDoor = _.map(
+                _.uniq(
+                   _.map(HatchArrayvalues, function (obj) {
+                       return JSON.stringify(obj);
+                   })
+                     ), function (obj) {
+                         return JSON.parse(obj);
+                     }
+                   );
+                    localStorageService.set("arrayOfHatchDoor", arrayOfHatchDoor);
+                    var HacthArray = [];
+                     var ArrayOfHatch = localStorageService.get("arrayOfHatchDoor");
+                     for (var i = 0; i < ArrayOfHatch[i].length; i++) {
+                         if (ArrayOfHatch.HatchDoorVal == true) {
+                             HacthArray.push(ArrayOfHatch[i]);
+                         }
+                     }
                 }
-                if ($scope.tankdata[s].meaning == "Level Within Threshold") {
+                else if ($scope.tankdata[s].meaning == "Level Within Threshold") {
                     $scope.levelval = "Level Within Threshold";
                     $scope.levelTimeval = $scope.tankdata[s].received;
                 }
-                if ($scope.tankdata[s].meaning == "Level Below Threshold") {
+                else if ($scope.tankdata[s].meaning == "Level Below Threshold") {
                     $scope.levelval = "Level Below Threshold";
                     $scope.levelTimeval1 = $scope.tankdata[s].received;
                 }
-                if ($scope.tankdata[s].meaning == "Temperature") {
-
+                else if ($scope.tankdata[s].meaning == "Temperature") {
+                    $scope.temperatureTime = $scope.tankdata[s].received;
+                  
+                    var TempDate = new Date($scope.temperatureTime);
+                  
                     $scope.temperatureValue = $scope.tankdata[s].value;
                     $scope.temperatureValue = Math.round($scope.temperatureValue);
+                    console.log("temperatureValue y", TempDate);
+
+                    var temp = {
+                        "temperatureTime": new Date(TempDate),
+                        "temperatureValue": $scope.temperatureValue
+                    }
+                           TempArray.push(temp);
+                            localStorageService.set("TemperatureArray", TempArray);
+                            var TemperatureArrayvalues = localStorageService.get("TemperatureArray");
+                          
+                            var arrayOfObjAfter = _.map(
+                        _.uniq(
+                           _.map(TempArray, function (obj) {
+                            return JSON.stringify(obj);
+                             })
+                             ), function (obj) {
+                           return JSON.parse(obj);
+                           }
+                           );
+                            console.log("arrayOfObjAfter", arrayOfObjAfter);
+                            localStorageService.set("TankTempratureArray", arrayOfObjAfter);
                     var TankTemprature = $scope.temperatureValue;
                     localStorageService.set("TankTemprature", TankTemprature);
-
-                    if ($scope.temperatureValue * 2.8 >= 280) 
-                        $("#temp").height(280);                    
-                    else if ($scope.temperatureValue * 2.8 <= 0) 
+                    $scope.ConfifDetail = localStorageService.get("ConfigData");
+                    if ($scope.temperatureValue * 2.8 >= 280)
+                        $("#temp").height(280);
+                    else if ($scope.temperatureValue * 2.8 <= 0)
                         $("#temp").height(0);
                     else
-                           $("#temp").height($scope.temperatureValue*2.8);    
-                            $("#temp").css("background-color", "#e2858a");
-               
+                      
+                        $("#temp").height($scope.temperatureValue * 2.8);
+                    if ($scope.temperatureValue >= $scope.ConfifDetail.minTemp && $scope.temperatureValue <= $scope.ConfifDetail.MaxTemp) {
+                        $("#tank").css("background-color", "rgb(65, 166, 244)");
+                        $("#AlarmBell").removeClass("fa fa-bell-o");
+                    }
+                    else
+                        $("#tank").css("background-color","#e2858a");
+                         $("#AlarmBell").addClass("fa fa-bell-o");
                 }
             }
             $scope.hide($ionicLoading);
 
         })
         .error(function (errors) {
-            //  
+         
         })
 
     }
@@ -1035,53 +1144,68 @@ angular.module('starter.controllers', ['LocalStorageModule'])
  { title: 'Item 2', desc: 'This is item 2' },
  { title: 'Item 3', desc: 'This is item 3' },
  { title: 'Item 4', desc: 'This is item 4' }];
+
     $scope.onSlideChanged = function (index) {
-        //debugger;
-        
-        //$ionicSlideBoxDelegate.next();
+      //$ionicSlideBoxDelegate.next();
     }
     $scope.graph = function () {
-        $scope.TankTemprature = localStorageService.get('TankTemprature');
-    Highcharts.chart('container', {
-        title: {
-            text: 'Temprature'
-        },
-       
-        yAxis: {
+       var TankTemprature = localStorageService.get('TankTempratureArray');
+       var ArrayOfTemp = [];
+       for (var i = 0; i < TankTemprature.length; i++) {
+           var Today = new Date();
+           Today.setHours(0, 0, 0, 0);
+           var CDate = new Date(TankTemprature[i].temperatureTime);
+           CDate.setHours(0, 0, 0, 0);
+           if (CDate >= Today) {
+               ArrayOfTemp.push(TankTemprature[i]);
+           }
+         
+       }
+       console.log("TempratureArray inside", ArrayOfTemp);
+       var TempArrayValue = [];
+       _.map(ArrayOfTemp, function (obj) {
+           TempArrayValue.push({ "label": obj.temperatureTime, "y": obj.temperatureValue });
+        })
+       console.log("date should be greater ", TempArrayValue);
+        Highcharts.chart('container', {
             title: {
-                text: 'Level'
-            }
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle'
-        },
+                text: 'Temprature'
+            },
+            
+            yAxis: {
+                title: {
+                    text: ''
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle'
+            },
 
-        plotOptions: {
-            series: {
-                pointStart: 0
-            }
-        },
+            plotOptions: {
+                series: {
+                    pointStart: 0
+                },
+                line: {
+            dataLabels: {
+                    enabled: true
+            },   
+            enableMouseTracking: false
+        }
+            },
 
-        series: [{
-            name: 'Level',
-            data: [56, 65, 40, 30, 55, 75, $scope.TankTemprature]
-        
-        }]
+            series: [{
+                name: 'Temprature',
+                data: TempArrayValue,
+                
 
-    });
+            }]
+
+        });
     }
-   
-   
-})
 
-.controller('configureCtrl', function ($scope, $state, localStorageService) {
-    $scope.$on('$ionicView.enter', function () {
-        var relayrData = localStorageService.get("RelayeClientId");
-        $scope.relayrLogUrl = "https://api.relayr.io/oauth2/auth?redirect_uri=http://localhost:57205/&response_type=token&client_id=" + relayrData.relayrId + "&scope=admin-user-info,admin-device-info,configure-devices";
-        $('#Relayr').attr('src', $scope.relayrLogUrl);
-    });
+
 })
 
 .controller('contactusCtrl', function ($scope, localStorageService, $timeout, $state) {
@@ -1091,9 +1215,8 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     $scope.PostComment = function (data) {
         var ContactData = data;
         // console.log("ContactData", ContactData);
-
         localStorageService.set('key', ContactData);
-        $state.go('app.siteselection');
+        $state.go('app.Home');
     }
     $scope.data = {};
     $scope.data.subject = 'SKdemoApp';
@@ -1110,139 +1233,3 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 
 })
 
-
-
-.controller('SlideController', function ($scope) {
-
-    $scope.myActiveSlide = 3;
-
-})
-
-.controller('tankdetailCtrl', function ($scope, $http, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
-    // Set Header
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
-    $scope.$parent.setHeaderFab('left');
-
-    // Delay expansion
-    $timeout(function () {
-        $scope.isExpanded = true;
-        $scope.$parent.setExpanded(true);
-    }, 300);
-
-    // Set Motion
-    ionicMaterialMotion.fadeSlideInRight();
-
-    // Set Ink
-    ionicMaterialInk.displayEffect();
-    var token = "Bearer 9yocgSLLscgYfHc67lv6Ir9lZOjjZf3mn5EFOppBIH9dR3uSaM7RqGV3JTCqzBi9";
-    var deviceid = "2e205796-7da4-4c04-81cf-3f01e2460ed1";
-    $scope.TankDetail = function () {
-
-        var settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": "https://api.relayr.io/devices/" + deviceid + "/readings",
-            "method": "GET",
-            "headers": {
-                "authorization": token,
-                "accept": "application/json",
-                "content-type": "application/json",
-                "cache-control": "no-cache"
-            }
-        }
-        $.ajax(settings).done(function (response) {
-            console.log(response);
-
-            $scope.tankdata = response.readings;
-            for (var s = 0; s < $scope.tankdata.length; s++) {
-                if ($scope.tankdata[s].meaning == "door") {
-
-                    $scope.HatchDoorMeaning = "Hatch Door";
-                    $scope.HatchDoorDate = $scope.tankdata[s].received;
-                    $scope.HatchDoorVal = $scope.tankdata[s].value;
-                }
-                if ($scope.tankdata[s].meaning == "level") {
-                    $scope.level = "Lavel";
-                    $scope.levelval = $scope.tankdata[s].value;
-                }
-                if ($scope.tankdata[s].meaning == "temperature") {
-                    $scope.temperatureValue = $scope.tankdata[s].value;
-                    $scope.temperatureMeaning = "Temprature";
-                }
-            }
-        })
-        .error(function (errors) {
-
-        });
-    }
-    $scope.TankDetail();
-
-    $scope.TankDetailPost = function () {
-
-        var settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": "https://api.relayr.io/devices/" + deviceid + "/readings",
-            "method": "POST",
-            "headers": {
-                "accept": "application/json",
-                "content-type": "application/json",
-                "cache-control": "no-cache",
-                "authorization": token
-            },
-            "processData": false,
-            "data": "{\r\n\"meaning\": \"Hatch Door\",\r\n\"value\": true\r\n}"
-        }
-
-        $.ajax(settings).done(function (response) {
-            console.log(response);
-        });
-    }
-    //$scope.TankDetailPost();
-})
-
-.controller('temperatureCtrl', function ($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
-    // Set Header
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
-    $scope.$parent.setHeaderFab('left');
-
-    // Delay expansion
-    $timeout(function () {
-        $scope.isExpanded = true;
-        $scope.$parent.setExpanded(true);
-    }, 300);
-
-    // Set Motion
-    ionicMaterialMotion.fadeSlideInRight();
-
-    // Set Ink
-    ionicMaterialInk.displayEffect();
-})
-
-
-.controller('ProfileCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
-    // Set Header
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
-    $scope.isExpanded = false;
-    $scope.$parent.setExpanded(false);
-    $scope.$parent.setHeaderFab(false);
-
-    // Set Motion
-    $timeout(function () {
-        ionicMaterialMotion.slideUp({
-            selector: '.slide-up'
-        });
-    }, 300);
-
-    $timeout(function () {
-        ionicMaterialMotion.fadeSlideInRight({
-            startVelocity: 3000
-        });
-    }, 700);
-
-    // Set Ink
-    ionicMaterialInk.displayEffect();
-});

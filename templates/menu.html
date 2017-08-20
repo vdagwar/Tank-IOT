@@ -13,16 +13,18 @@
     </ion-side-menu-content>
 
     <ion-side-menu side="left">
-        <ion-header-bar class="bar-stable" style="padding-top:20%;padding-bottom:30%; background-color:#ebebeb">
-            <!--<div class="">-->
-                    <div class="item item-avatar-left">
-                        <img src="img/sansa.jpg">
-                      
-                    </div>
-            <br/>
-           <h4></h4> 
+        <ion-header-bar class="bar-stable" style="padding-top:20%;padding-bottom:30%; height:31%; width:100%; background-color:#ebebeb">
+            <div>
+                <span class="item item-avatar-left">
+                    <img id="photo-id" class="profile-pic" ng-src="{{UserPhoto}}" ng-click="Edit()" />
+                     <input class="file-upload" type="file" accept="image/*" style="display:none" />
+                 </span>
+               <h5><span class="Name">{{Name}}</span></h5>
+                <h6><span class="Name"> {{address}}</span></h6>
+
+            </div>
            
-        <!--</div>-->
+       
         </ion-header-bar>
         <ion-content style="margin-top:150px;">
             <ul class="list">
@@ -57,4 +59,14 @@
     i{
         font-size:20px;
     }
+    .item {
+        border-color: none!important;
+        border-width: 0px!important;
+  
+    }
+    .Name{
+        margin-left:2%
+    }
+
+  
 </style>

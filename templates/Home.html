@@ -63,7 +63,9 @@
        font-size : 20px;
        margin-left : 40px;
    }
- 
+ .pos{
+     margin-bottom:10px;
+ }
 </style>
 
 <ion-view view-title="" align-title="left">
@@ -92,18 +94,23 @@
                     <ion-slide ng-repeat="item in items" style="float:left">
                         <div class="temprature1 col-xs-4">
                             <div id="tank" class="water1">
-                                <span style="color:darkblue"><i class="ion ion-thermometer" aria-hidden="true"></i>&nbsp;{{tem1}} F </span>
+                                <span style="color:darkblue"  class="PFix"><i class="ion ion-thermometer" aria-hidden="true"></i>&nbsp;{{tem1}} F </span>
                             </div>
                         </div>
                         <h5 style="color:black;margin-right:45%"> &nbsp;<b id="Bell"></b></h5>
                         <div class="temprature2 col-xs-4">
-                            <div id="temp" class="water2">
-                                <span style="color:darkblue" class="PFix"><i class="ion ion-thermometer" aria-hidden="true"></i>&nbsp;{{temperatureValue}} F </span>
+                            <div id="temp" class="water2" ng-click="TankDetail()">
+                                <span style="color:darkblue" class="PFix"><i class="ion ion-thermometer" aria-hidden="true"></i>&nbsp;{{temperatureValue}} F 
+                                  
+                                </span>
                             </div>
                         </div>
                         <div class="temprature3 col-xs-4">
                             <div id="water" class="water3">
-                                <span style="color:darkblue"><i class="ion ion-thermometer" aria-hidden="true"></i>&nbsp;{{tem3}} F </span>
+                               
+                                <span style="color:darkblue; margin-bottom:30px;"><i class="ion ion-thermometer" aria-hidden="true"></i>&nbsp;{{tem3}} F 
+                                <span class="pos">  <i class="icon ion-levels"></i> {{MinLevel}}%</span>
+                                 </span>
                             </div>
                         </div>
                     </ion-slide>
