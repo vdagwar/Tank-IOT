@@ -1,5 +1,5 @@
 /* global angular, document, window */
-'use strict';
+//'use strict';
 angular.module('starter.controllers', ['LocalStorageModule'])
 
 .service('StoreService', function () {
@@ -44,14 +44,11 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 })
 
 .controller('AppCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout, $state, $window, localStorageService, $http) {
-    var alertPopup = $ionicPopup.alert({
-        title: 'Alert...!!!',
-        template: 'AppCtrl..!!!'
-    }).then(function (res) {
-        console.log('Your name is', res);
-    });
-   
+ 
+    $scope.Name = 'Maria Muro';
+    $scope.address = 'Santa Clara';
     var logUser = localStorageService.get('UserData');
+    $scope.Name = logUser.Name;
     console.log("logUser", logUser);
     if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
 
@@ -70,11 +67,11 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     }
     
     
-    $scope.Name = logUser.Name;
+   
     $scope.Edit = function () {
-      //  debugger;
+        //  debugger;
         $(".file-upload").click();
-    }
+    };
     if (localStorageService.get('profilePic'))
         $scope.UserPhoto = localStorageService.get('profilePic');
     else
@@ -91,12 +88,12 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                     $('#photo-id').attr('src', e.target.result);
                     $scope.UserPhoto = e.target.result;
                     console.log($scope.UserPhoto);
-                    localStorageService.set('profilePic', e.target.result)
-                }
+                    localStorageService.set('profilePic', e.target.result);
+                };
                 //Renders Image on Page
                 reader.readAsDataURL(input.files[0]);
             }
-        }
+        };
 
 
         $(".file-upload").on('change', function () {
@@ -129,7 +126,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         //$window.localStorage.clear(logUser);
         $state.go('app.login');
         $window.location.reload(true);
-    }
+    };
 
 
 
@@ -203,12 +200,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 
 .controller('LoginCtrl', function ($scope, $ionicLoading, $timeout, $http, $state, $stateParams, ionicMaterialInk, $ionicPopup, StoreService, localStorageService) {
 
-    var alertPopup = $ionicPopup.alert({
-        title: 'Alert...!!!',
-        template: 'LoginCtrl..!!!'
-    }).then(function (res) {
-        console.log('Your name is login', res);
-    });
+    
     
 
     $scope.hideNavBar = function () {
@@ -320,12 +312,12 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         $ionicLoading.show({
             template: '<ion-spinner></ion-spinner>'
         });
-        if (User != undefined) {
-            if (User.Password != undefined && User.Email != undefined) {
-                if (user != undefined) {
+        if (User !== undefined) {
+            if (User.Password !== undefined && User.Email !== undefined) {
+                if (user !== undefined) {
                     if (User.Email == user.Email) {
                         if (User.Password == user.Password) {
-                            if (User.EmailConfirm == true) {
+                            if (User.EmailConfirm === true) {
                                 var today = new Date();
                                 var regDEate = new Date(user.Reg_Date);
                                 regDEate.setMonth(regDEate.getMonth() + 3);
@@ -361,7 +353,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                                             else {
                                                 user.LoginCount += 1;
                                                 localStorageService.set('UserData', user);
-                                                $state.go('app.settingRelayr')
+                                                $state.go('app.settingRelayr');
                                                 window.location.reload();
                                             }
                                         }
@@ -375,7 +367,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                                 });
                                 alertPopup.then(function (res) {
                                     if (res) {
-                                        $state.go('app.emailverification')
+                                        $state.go('app.emailverification');
                                         //window.location.reload();
                                     }
                                 });
@@ -402,13 +394,13 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                     });
                 }
             }
-            else if (User.Password == undefined && User.Email) {
+            else if (User.Password === undefined && User.Email) {
                 var alertPopup = $ionicPopup.alert({
                     title: 'Alert...!!!',
                     template: 'Please fill Password..!!!'
                 });
             }
-            else if (User.Password && User.Email == undefined) {
+            else if (User.Password && User.Email === undefined) {
                 var alertPopup = $ionicPopup.alert({
                     title: 'Alert...!!!',
                     template: 'Please fill Email..!!!'
@@ -429,19 +421,19 @@ angular.module('starter.controllers', ['LocalStorageModule'])
      
         var userEmail = null;
         var user = localStorageService.get('UserData');
-        console.log("user", User)
+        console.log("user", User);
         if (!user) {
             user = {
                 "Email": null,
                 "Phone": null,
                 "Password": null
-               
-            }
+
+            };
         }
         else
             userEmail = user.Email;
 
-        console.log("registration", User)
+       // console.log("registration", User);
         if (User != undefined) {
             if (User.Email != userEmail) {
                 if (user.Phone)
@@ -456,29 +448,29 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                     "Reg_Date": new Date(),
                     "LoginCount": 0,
                     "EmailConfirm": false
-                }
+                };
                 if (User.Password && User.Email) {
                     userEmail = User.Email;
                     localStorageService.set('UserData', UserData);
                     $state.go('app.registration');
                 }
-                else if (User.Password == undefined || User.Password == "" || User.Password == null) {
+                else if (User.Password === undefined || User.Password === "" || User.Password === null) {
                     var alertPopup = $ionicPopup.alert({
                         title: 'Alert...!!!',
                         template: 'Please fill Password..!!!'
                     });
                 }
-                else if (User.Email == undefined || User.Email == "" || User.Email == null) {
+                else if (User.Email === undefined || User.Email === "" || User.Email === null) {
                     var alertPopup = $ionicPopup.alert({
                         title: 'Alert...!!!',
                         template: 'Please fill Email..!!!'
                     });
                 }
             }
-            else if (User.Email == userEmail && user.Phone == null) {
+            else if (User.Email === userEmail && user.Phone === null) {
                 $state.go('app.registration');
             }
-            else if (User.Email == userEmail && user.Phone && user.EmailConfirm == false) {
+            else if (User.Email === userEmail && user.Phone && user.EmailConfirm === false) {
                 $state.go('app.emailverification');
             }
             else {
@@ -520,12 +512,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 })
 
 .controller('registrationCtrl', function ($scope, $ionicPopup, $state, $http, $timeout, $stateParams, ionicMaterialInk, StoreService, localStorageService) {
-    var alertPopup = $ionicPopup.alert({
-        title: 'Alert...!!!',
-        template: 'registrationCtrl..!!!'
-    }).then(function (res) {
-        console.log('Your name is reg', res);
-    });
+   
     $scope.$parent.clearFabs();
     $timeout(function () {
         $scope.$parent.hideHeader();
@@ -534,10 +521,10 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     ionicMaterialInk.displayEffect();
 
     $scope.RegisterDetail = function (User) {
-        if (User != undefined) {
+        if (User !== undefined) {
             var UserData = localStorageService.get('UserData');
-           // debugger;
-             console.log("getUserData", UserData);
+            // debugger;
+            console.log("getUserData", UserData);
             UserData.Name = User.Name;
             UserData.Phone = User.Phone;
             UserData.Company = User.Company;
@@ -555,16 +542,11 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                 template: 'Please fill Correct information..!!!'
             });
         }
-    }
+    };
 })
 
 .controller('emailverificationCtrl', function ($scope, $ionicPopup, $state, $http, $timeout, $stateParams, ionicMaterialInk, StoreService, localStorageService) {
-    var alertPopup = $ionicPopup.alert({
-        title: 'Alert...!!!',
-        template: 'emailverificationCtrl..!!!'
-    }).then(function (res) {
-        console.log('Your name is email', res);
-    });
+   
     $scope.$parent.clearFabs();
     $timeout(function () {
         $scope.$parent.hideHeader();
@@ -587,16 +569,11 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                 $state.go('app.login');
             }
         });
-    }
+    };
 })
 
 .controller('configCtrl', function ($scope, $ionicPopup, $state, $http, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, localStorageService) {
-    var alertPopup = $ionicPopup.alert({
-        title: 'Alert...!!!',
-        template: 'configCtrl..!!!'
-    }).then(function (res) {
-        console.log('Your name is config', res);
-    });
+  
     template: '<input type = "text" ng-model = "data.model">',
     // Set Header
     $scope.$parent.showHeader();
@@ -607,18 +584,22 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     $scope.data = localStorageService.get("ConfigData");
     console.log("data", $scope.data);
     var today = new Date().getDay();
+   var timeString = time.getHours() + ':' + time.getMinutes() + ':00';
     if ($scope.data == null) {
         $scope.data = {
             minTemp: 20,
             MaxTemp: 80,
             minLevel: 20,
-            timeValue: { }
- 
-        }
+            timeValue: {
+                timeValue1: today.timeString,
+                timeValue2: today.timeString
+            }
+
+        };
     }
     else {
       //  debugger;
-        var today = new Date().getDay();
+        //var today = new Date().getDay();
         if (today == 0) {
             $scope.timeValue1 = $scope.data.timeValue.sunday.timeValue1;
             $scope.timeValue2 = $scope.data.timeValue.sunday.timeValue2;
@@ -671,15 +652,10 @@ angular.module('starter.controllers', ['LocalStorageModule'])
             $state.go('app.hatchshedule');
         }
 
-    }
+    };
 })
 .controller('hatchsheduleCtrl', function ($scope, $ionicPopup, $state, $http, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, localStorageService) {
-    var alertPopup = $ionicPopup.alert({
-        title: 'Alert...!!!',
-        template: 'hatchsheduleCtrl..!!!'
-    }).then(function (res) {
-        console.log('Your name is hatch', res);
-    });
+  
     template: '<input type = "text" ng-model = "data.model">',
     // Set Header
     $scope.$parent.showHeader();
@@ -692,43 +668,43 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     $scope.save = function (data) {
         console.log("data", data);
        // debugger;
-        if (data.Sun == true) {
+        if (data.Sun === true) {
             $scope.data.timeValue.sunday = {
                 timeValue1: data.timeValue1,
                 timeValue2: data.timeValue2,
             }
         }
-        if (data.Mon == true) {
+        if (data.Mon === true) {
             $scope.data.timeValue.monday = {
                 timeValue1: data.timeValue1,
                 timeValue2: data.timeValue2,
             }
         }
-        if (data.Tue == true) {
+        if (data.Tue === true) {
             $scope.data.timeValue.tuesday = {
                 timeValue1: data.timeValue1,
                 timeValue2: data.timeValue2,
             }
         }
-        if (data.Wed == true) {
+        if (data.Wed === true) {
             $scope.data.timeValue.wednesday = {
                 timeValue1: data.timeValue1,
                 timeValue2: data.timeValue2,
             }
         }
-        if (data.Thu == true) {
+        if (data.Thu === true) {
             $scope.data.timeValue.thusday = {
                 timeValue1: data.timeValue1,
                 timeValue2: data.timeValue2,
             }
         }
-        if (data.Fri == true) {
+        if (data.Fri === true) {
             $scope.data.timeValue.friday = {
                 timeValue1: data.timeValue1,
                 timeValue2: data.timeValue2,
             }
         }
-        if (data.Sat == true) {
+        if (data.Sat === true) {
             $scope.data.timeValue.saturday = {
                 timeValue1: data.timeValue1,
                 timeValue2: data.timeValue2,
@@ -740,46 +716,35 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         $state.go('app.config');
     };
 
-    $scope.Cancel = function() {
+    $scope.Cancel = function () {
         $state.go("app.config");
-    }
+    };
 })
 
 .controller('settingsCtrl', function ($scope, $ionicPopup, $ionicLoading, $state, $http, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, localStorageService) {
-    // Set Header
-    var alertPopup = $ionicPopup.alert({
-        title: 'Alert...!!!',
-        template: 'settingsCtrl..!!!'
-    }).then(function (res) {
-        console.log('Your name is setting', res);
-    });
+   
     $scope.$parent.showHeader();
     $scope.AccessToken = function (relayrData) {
-     //   debugger;
+        //   debugger;
         //id = "29204e93-3c0e-414a-a8ef-efc6632c486e";
         localStorageService.set("relayrData", relayrData);
         console.log("relayrData", relayrData);
         $state.go('app.tanks');
-    }
+    };
 
-    $scope.skip = function(){
+    $scope.skip = function () {
         $state.go("app.Home");
-    }
+    };
 })
 
 .controller('tankListController', function ($scope, $state, $ionicLoading, filterFilter, DeviceService, localStorageService) {
-    var alertPopup = $ionicPopup.alert({
-        title: 'Alert...!!!',
-        template: 'tankListController..!!!'
-    }).then(function (res) {
-        console.log('Your name is tank' , res);
-    });
+  
     $(document).ready(function () {
         $(".item-hover").click(function () {
             $(".item-hover").removeClass("item-blue");
             $(this).addClass("item-blue");
         });
-    })
+    });
     $scope.show = function () {
         $ionicLoading.show({
             template: '<ion-spinner></ion-spinner>'
@@ -795,7 +760,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         // Code you want executed every time view is opened
         //$scope.deviceList();
         //console.log('Opened!')
-    })
+    });
 
     $scope.TankDetail = function (tank) {
         var tankdetail = tank;
@@ -809,18 +774,13 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 })
 
 .controller('tankmanagmentCtrl', function ($scope, $state, $ionicLoading, filterFilter, DeviceService, $ionicSlideBoxDelegate) {
-    var alertPopup = $ionicPopup.alert({
-        title: 'Alert...!!!',
-        template: 'tankmanagmentCtrl..!!!'
-    }).then(function (res) {
-        console.log('Your name is tankman', res);
-    });
+   
     $(document).ready(function () {
         $(".item-hover").click(function () {
             $(".item-hover").removeClass("item-blue");
             $(this).addClass("item-blue");
         });
-    })
+    });
     $scope.show = function () {
         $ionicLoading.show({
             template: '<ion-spinner></ion-spinner>'
@@ -832,7 +792,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 
     $scope.$on('$ionicView.enter', function () {
 
-    })
+    });
 
 
     $scope.items = [
@@ -849,12 +809,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     //}
 })
 .controller('HomeCtrl', function ($scope, $state, $ionicLoading, filterFilter, localStorageService, DeviceService) {
-    var alertPopup = $ionicPopup.alert({
-        title: 'Alert...!!!',
-        template: 'HomeCtrl..!!!'
-    }).then(function (res) {
-        console.log('Your name is home', res);
-    });
+   
     $scope.Adress = localStorageService.get("Address");
    
     $scope.show = function () {
@@ -878,31 +833,31 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         $scope.MinLevel = $scope.ConfifDetail.minLevel;
         console.log("MinLevel", $scope.MinLevel);
         $scope.show($ionicLoading);
-         if ($scope.relayrdata != null && $scope.relayrdata != undefined && !$scope.relayrdata) {
-        //debugger;
-        var settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": "https://api.relayr.io/users/" + relayrId + "/devices",
-            "method": "GET",
-            "headers": {
-                "authorization": $scope.accessToken
+        if ($scope.relayrdata !== null && $scope.relayrdata !== undefined && !$scope.relayrdata) {
+            //debugger;
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://api.relayr.io/users/" + relayrId + "/devices",
+                "method": "GET",
+                "headers": {
+                    "authorization": $scope.accessToken
 
-            }
+                }
+            };
         }
-          }
-          else {
-              //debugger;
-          var settings = {
-                  "async": true,
-                  "crossDomain": true,
-                  "url": "https://api.relayr.io/users/cf1cf510-a383-413b-ad53-258aaf34a18a/devices",
-                  "method": "GET",
-                  "headers": {
-                      "authorization": "Bearer gdrlGsuEw3L7HWD8bwtbEWCOJlxDgx5vmTUM0XFFCrG90n9KyUqaZxZWv5xWfCQq"
+        else {
+            //debugger;
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://api.relayr.io/users/cf1cf510-a383-413b-ad53-258aaf34a18a/devices",
+                "method": "GET",
+                "headers": {
+                    "authorization": "Bearer gdrlGsuEw3L7HWD8bwtbEWCOJlxDgx5vmTUM0XFFCrG90n9KyUqaZxZWv5xWfCQq"
 
-                  }
-              }
+                }
+            };
         }
 
         $.ajax(settings).done(function (response) {
@@ -918,7 +873,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
             $scope.TankDetails(tankDetails);
             $scope.hide($ionicLoading);
         });
-    }
+    };
 
     $scope.TankDetails = function (tankDetails) {
         // debugger;
@@ -947,12 +902,12 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                 "authorization": $scope.accessToken,
                 "cache-control": "no-cache"
             }
-        }
+        };
 
         $.ajax(settings).done(function (response) {
-           // console.log("response of tank detail", response);
+            // console.log("response of tank detail", response);
             $scope.tankdata = response.readings;
-           // console.log("tankdata", $scope.tankdata);
+            // console.log("tankdata", $scope.tankdata);
             if ($scope.tankdata.length == 0) {
                 $scope.tem1 = 65;
                 $("#tank").height(($scope.tem1 * 2.4));
@@ -964,7 +919,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                 $("#water").height(($scope.tem3 * 1.8));
                 $(".water3").css("background-color", "rgba(100, 194, 223, 0.34)");
                 $scope.hide($ionicLoading);
-                  }
+            }
             else {
                 for (var s = 0; s < $scope.tankdata.length; s++) {
                     if ($scope.tankdata[s].meaning == "Hatch Open") {
@@ -984,7 +939,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                         if ($scope.HatchDoorVal == false) {
                             $scope.HatchDoorValue = 'Close';
                         }
-                      //  console.log("HatchDoorValue:" + $scope.HatchDoorValue);
+                        //  console.log("HatchDoorValue:" + $scope.HatchDoorValue);
                     }
                     if ($scope.tankdata[s].meaning == "Level Within Threshold") {
                         $scope.level = "Level Within Threshold";
@@ -1003,7 +958,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                         else if ($scope.temperatureValue * 2.8 <= 0)
                             $("#temp").height(0);
                         else
-                        $("#temp").height($scope.temperatureValue * 2.8);
+                            $("#temp").height($scope.temperatureValue * 2.8);
                         if ($scope.temperatureValue >= $scope.ConfifDetail.minTemp && $scope.temperatureValue <= $scope.ConfifDetail.MaxTemp) {
                             $("#temp").css("background-color", "#41a6f4");
                         }
@@ -1020,17 +975,17 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 
         })
         .error(function (errors) {
-          
-        })
 
-    }
+        });
+
+    };
 
     $scope.TankDetail = function () {
         $scope.DetailForTank = localStorageService.get("DetailForTank");
         console.log("deviceID", $scope.DetailForTank);
         DeviceService.set($scope.DetailForTank);
         $state.go('app.tank1');
-    }
+    };
 
 
     $scope.items = [
@@ -1042,22 +997,17 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 
     ];
     $scope.onSlideChanged = function (index) {
-        
+
         var TankList = localStorageService.get("TankList");
         var tankDetails = TankList[index];
         console.log("tank slider", tankDetails);
         $scope.TankDetails(tankDetails);
         //$ionicSlideBoxDelegate.next();
-    }
+    };
 })
 
 .controller('tank1Ctrl', function ($scope, $ionicLoading, DeviceService, localStorageService) {
-    var alertPopup = $ionicPopup.alert({
-        title: 'Alert...!!!',
-        template: 'tank1Ctrl..!!!'
-    }).then(function (res) {
-        console.log('Your name is tank', res);
-    });
+  
     $scope.config = localStorageService.get("ConfigData");
     $scope.MinLevel = $scope.config.minLevel;
     $scope.Adress = localStorageService.get("Address");
@@ -1118,7 +1068,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                     }
                     var HatchArray = [];
                     var hatch = {
-                        "HatchDoorDate":new Date( $scope.HatchDoorDate),
+                        "HatchDoorDate": new Date($scope.HatchDoorDate),
                         "HatchDoorVal": $scope.HatchDoorVal
                     };
                     HatchArray.push(hatch);
@@ -1135,12 +1085,12 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                    );
                     localStorageService.set("arrayOfHatchDoor", arrayOfHatchDoor);
                     var HacthArray = [];
-                     var ArrayOfHatch = localStorageService.get("arrayOfHatchDoor");
-                     for (var i = 0; i < ArrayOfHatch[i].length; i++) {
-                         if (ArrayOfHatch.HatchDoorVal == true) {
-                             HacthArray.push(ArrayOfHatch[i]);
-                         }
-                     }
+                    var ArrayOfHatch = localStorageService.get("arrayOfHatchDoor");
+                    for (var i = 0; i < ArrayOfHatch[i].length; i++) {
+                        if (ArrayOfHatch.HatchDoorVal === true) {
+                            HacthArray.push(ArrayOfHatch[i]);
+                        }
+                    }
                 }
                 else if ($scope.tankdata[s].meaning == "Level Within Threshold") {
                     $scope.levelval = "Level Within Threshold";
@@ -1152,9 +1102,9 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                 }
                 else if ($scope.tankdata[s].meaning == "Temperature") {
                     $scope.temperatureTime = $scope.tankdata[s].received;
-                  
+
                     var TempDate = new Date($scope.temperatureTime);
-                  
+
                     $scope.temperatureValue = $scope.tankdata[s].value;
                     $scope.temperatureValue = Math.round($scope.temperatureValue);
                     console.log("temperatureValue y", TempDate);
@@ -1162,22 +1112,22 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                     var temp = {
                         "temperatureTime": new Date(TempDate),
                         "temperatureValue": $scope.temperatureValue
-                    }
-                           TempArray.push(temp);
-                            localStorageService.set("TemperatureArray", TempArray);
-                            var TemperatureArrayvalues = localStorageService.get("TemperatureArray");
-                          
-                            var arrayOfObjAfter = _.map(
-                        _.uniq(
-                           _.map(TempArray, function (obj) {
-                            return JSON.stringify(obj);
-                             })
-                             ), function (obj) {
-                           return JSON.parse(obj);
-                           }
-                           );
-                            console.log("arrayOfObjAfter", arrayOfObjAfter);
-                            localStorageService.set("TankTempratureArray", arrayOfObjAfter);
+                    };
+                    TempArray.push(temp);
+                    localStorageService.set("TemperatureArray", TempArray);
+                    var TemperatureArrayvalues = localStorageService.get("TemperatureArray");
+
+                    var arrayOfObjAfter = _.map(
+                _.uniq(
+                   _.map(TempArray, function (obj) {
+                       return JSON.stringify(obj);
+                   })
+                     ), function (obj) {
+                         return JSON.parse(obj);
+                     }
+                   );
+                    // console.log("arrayOfObjAfter", arrayOfObjAfter);
+                    localStorageService.set("TankTempratureArray", arrayOfObjAfter);
                     var TankTemprature = $scope.temperatureValue;
                     localStorageService.set("TankTemprature", TankTemprature);
                     $scope.ConfifDetail = localStorageService.get("ConfigData");
@@ -1186,7 +1136,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                     else if ($scope.temperatureValue * 2.8 <= 0)
                         $("#temp").height(0);
                     else
-                      
+
                         $("#temp").height($scope.temperatureValue * 2.8);
                     if ($scope.temperatureValue >= $scope.ConfifDetail.minTemp && $scope.temperatureValue <= $scope.ConfifDetail.MaxTemp) {
                         $("#tank").css("background-color", "rgb(65, 166, 244)");
@@ -1194,15 +1144,15 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                     }
                     else
                         $("#tank").css("background-color", "rgb(226, 133, 138)");
-                         $("#AlarmBell").addClass("fa fa-bell-o");
+                    $("#AlarmBell").addClass("fa fa-bell-o");
                 }
             }
             $scope.hide($ionicLoading);
 
         })
         .error(function (errors) {
-         
-        })
+
+        });
 
     }
 
@@ -1278,12 +1228,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 })
 
 .controller('contactusCtrl', function ($scope, localStorageService, $timeout, $state) {
-    var alertPopup = $ionicPopup.alert({
-        title: 'Alert...!!!',
-        template: 'contactusCtrl..!!!'
-    }).then(function (res) {
-        console.log('Your name is contactusCtrl', res);
-    });
+   
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.PostComment = function (data) {
@@ -1300,12 +1245,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 
 .controller('aboutCtrl', function ($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
     // Set Header
-    var alertPopup = $ionicPopup.alert({
-        title: 'Alert...!!!',
-        template: 'aboutCtrl..!!!'
-    }).then(function (res) {
-        console.log('Your name is about', res);
-    });
+ 
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
 
