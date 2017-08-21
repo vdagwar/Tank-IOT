@@ -53,6 +53,8 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     if (logUser) {
         $scope.Name = logUser.Name
     };
+
+   
     
     if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
 
@@ -66,7 +68,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                 var address = result.data.results[2].formatted_address;
                 $scope.address = address;
                 localStorageService.set("Address", $scope.address);
-                console.log("address", address);
+             //   console.log("address", address);
             });
     }
     
@@ -79,8 +81,6 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     if (localStorageService.get('profilePic'))
         $scope.UserPhoto = localStorageService.get('profilePic');
     else
-       // $scope.UserPhoto = "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";
-   
     $scope.UserPhoto = document.getElementById('photo-id').src = "./img/sansa.jpg";
     $(document).ready(function () {
         var readURL = function (input) {
@@ -204,11 +204,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 })
 
 .controller('LoginCtrl', function ($scope, $ionicLoading, $timeout, $http, $state, $stateParams, ionicMaterialInk, $ionicPopup, StoreService, localStorageService) {
-
-    
-    
-
-    $scope.hideNavBar = function () {
+   $scope.hideNavBar = function () {
         document.getElementsByTagName('ion-nav-bar')[0].style.display = 'none';
     };
 
@@ -589,19 +585,21 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     $scope.data = localStorageService.get("ConfigData");
     console.log("data", $scope.data);
     var today = new Date().getDay();
- 
+    var Today = new Date();
+    var timeValue01 = Today.setHours(06, 0, 0, 0);
+    var timeValue02 = Today.setHours(17, 0, 0, 0);
     if ($scope.data == null) {
         $scope.data = {
             minTemp: 20,
             MaxTemp: 80,
             minLevel: 20,
             timeValue: {
-                timeValue1:'T06:00:00.000Z',
-                timeValue2: 'T10:00:00.000Z'
+                timeValue1:timeValue01,
+                timeValue2:timeValue02
             }
 
         };
-        console.log("timeValue1", timeValue1);
+        console.log("timeValue1", timeValue);
     }
     
     else {
@@ -614,8 +612,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         else if (today == 1) {
             $scope.timeValue1 = $scope.data.timeValue.monday.timeValue1;
             $scope.timeValue2 = $scope.data.timeValue.monday.timeValue2;
-            console.log("timeValue1", $scope.timeValue1);
-            console.log("timeValue2", $scope.timeValue2);
+           
         }
         else if (today == 2) {
             $scope.timeValue1 = $scope.data.timeValue.tuesday.timeValue1;
@@ -852,8 +849,15 @@ angular.module('starter.controllers', ['LocalStorageModule'])
    
     $scope.deviceList = function () {
         $scope.ConfifDetail = localStorageService.get("ConfigData");
-        $scope.MinLevel = $scope.ConfifDetail.minLevel;
-        console.log("MinLevel", $scope.MinLevel);
+        if ($scope.ConfifDetail) {
+            $scope.MinLevel = $scope.ConfifDetail.minLevel;
+        }
+        else 
+            $scope.MinLevel = 20;
+       
+        
+        
+      //  console.log("MinLevel", $scope.MinLevel);
         $scope.show($ionicLoading);
     
             //debugger;
@@ -885,17 +889,15 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     };
 
     $scope.TankDetails = function (tankDetails) {
-         debugger;
+         //debugger;
         localStorageService.set("DetailForTank", tankDetails);
         $scope.ConfifDetail = localStorageService.get("ConfigData");
-        //$scope.MinLevel = $scope.ConfifDetail.minLevel;
-        console.log("ConfifDetail", $scope.ConfifDetail);
+     
         $scope.show($ionicLoading);
         $scope.deviceID = tankDetails.id;
         $scope.deviceName = tankDetails.name;
         localStorageService.set("TankDetail", tankDetails);
-        console.log("TList", $scope.TList);
-        console.log("deviceID", $scope.deviceID, $scope.deviceName);
+      
         $scope.HatchDoorMeaning = "";
         $scope.HatchDoorDate = "";
         $scope.HatchDoorValue = '';
@@ -914,9 +916,9 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         };
 
         $.ajax(settings).done(function (response) {
-            // console.log("response of tank detail", response);
+         
             $scope.tankdata = response.readings;
-            // console.log("tankdata", $scope.tankdata);
+           
             if ($scope.tankdata.length == 0) {
                 $scope.tem1 = 65;
                 $("#tank").height(($scope.tem1 * 2.4));
@@ -948,7 +950,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                         if ($scope.HatchDoorVal == false) {
                             $scope.HatchDoorValue = 'Close';
                         }
-                        //  console.log("HatchDoorValue:" + $scope.HatchDoorValue);
+                       
                     }
                     if ($scope.tankdata[s].meaning == "Level Within Threshold") {
                         $scope.level = "Level Within Threshold";
@@ -991,7 +993,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 
     $scope.TankDetail = function () {
         $scope.DetailForTank = localStorageService.get("DetailForTank");
-        console.log("deviceID", $scope.DetailForTank);
+     //   console.log("deviceID", $scope.DetailForTank);
         DeviceService.set($scope.DetailForTank);
         $state.go('app.tank1');
     };
@@ -1009,7 +1011,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 
         var TankList = localStorageService.get("TankList");
         var tankDetails = TankList[index];
-        console.log("tank slider", tankDetails);
+        //console.log("tank slider", tankDetails);
         $scope.TankDetails(tankDetails);
         //$ionicSlideBoxDelegate.next();
     };
@@ -1073,7 +1075,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                     }
                     if ($scope.HatchDoorVal == false) {
                         $scope.HatchDoorValue = 'Close';
-                        console.log("HatchDoorValue Close:" + $scope.HatchDoorValue);
+                      //  console.log("HatchDoorValue Close:" + $scope.HatchDoorValue);
                     }
                     var HatchArray = [];
                     var hatch = {
@@ -1116,7 +1118,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 
                     $scope.temperatureValue = $scope.tankdata[s].value;
                     $scope.temperatureValue = Math.round($scope.temperatureValue);
-                    console.log("temperatureValue y", TempDate);
+                   // console.log("temperatureValue y", TempDate);
 
                     var temp = {
                         "temperatureTime": new Date(TempDate),
@@ -1182,6 +1184,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
        for (var i = 0; i < TankTemprature.length; i++) {
            var Today = new Date();
            Today.setHours(0, 0, 0, 0);
+           
            var CDate = new Date(TankTemprature[i].temperatureTime);
            CDate.setHours(0, 0, 0, 0);
            if (CDate >= Today) {
@@ -1189,12 +1192,12 @@ angular.module('starter.controllers', ['LocalStorageModule'])
            }
          
        }
-       console.log("TempratureArray inside", ArrayOfTemp);
+      // console.log("TempratureArray inside", ArrayOfTemp);
        var TempArrayValue = [];
        _.map(ArrayOfTemp, function (obj) {
            TempArrayValue.push({ "label": obj.temperatureTime, "y": obj.temperatureValue });
         })
-       console.log("date should be greater ", TempArrayValue);
+      // console.log("date should be greater ", TempArrayValue);
         Highcharts.chart('container', {
             title: {
                 text: 'Temprature'
@@ -1236,18 +1239,22 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 
 })
 
-.controller('contactusCtrl', function ($scope, localStorageService, $timeout, $state) {
+.controller('contactusCtrl', function ($scope, localStorageService, $timeout, $state, $ionicPopup) {
    
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-    $scope.PostComment = function (data) {
-        var ContactData = data;
-        // console.log("ContactData", ContactData);
-        localStorageService.set('key', ContactData);
-        $state.go('app.Home');
-    }
     $scope.data = {};
     $scope.data.subject = 'SKdemoApp';
+    $scope.PostComment = function (data) {
+        localStorageService.set('key', data);
+        // console.log("ContactData", data);
+        var alertPopup = $ionicPopup.alert({
+            title: 'Contact Us...!!!',
+            template: 'Contact Detail Send Successfully.!!!'
+        });
+        $state.go('app.Home');
+    }
+  
 
 
 })
