@@ -47,7 +47,10 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     var alertPopup = $ionicPopup.alert({
         title: 'Alert...!!!',
         template: 'AppCtrl..!!!'
+    }).then(function (res) {
+        console.log('Your name is', res);
     });
+   
     var logUser = localStorageService.get('UserData');
     console.log("logUser", logUser);
     if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
@@ -69,7 +72,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     
     $scope.Name = logUser.Name;
     $scope.Edit = function () {
-        debugger;
+      //  debugger;
         $(".file-upload").click();
     }
     if (localStorageService.get('profilePic'))
@@ -203,6 +206,8 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     var alertPopup = $ionicPopup.alert({
         title: 'Alert...!!!',
         template: 'LoginCtrl..!!!'
+    }).then(function (res) {
+        console.log('Your name is login', res);
     });
     
 
@@ -518,7 +523,9 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     var alertPopup = $ionicPopup.alert({
         title: 'Alert...!!!',
         template: 'registrationCtrl..!!!'
-    })
+    }).then(function (res) {
+        console.log('Your name is reg', res);
+    });
     $scope.$parent.clearFabs();
     $timeout(function () {
         $scope.$parent.hideHeader();
@@ -529,7 +536,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     $scope.RegisterDetail = function (User) {
         if (User != undefined) {
             var UserData = localStorageService.get('UserData');
-            debugger;
+           // debugger;
              console.log("getUserData", UserData);
             UserData.Name = User.Name;
             UserData.Phone = User.Phone;
@@ -555,7 +562,9 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     var alertPopup = $ionicPopup.alert({
         title: 'Alert...!!!',
         template: 'emailverificationCtrl..!!!'
-    })
+    }).then(function (res) {
+        console.log('Your name is email', res);
+    });
     $scope.$parent.clearFabs();
     $timeout(function () {
         $scope.$parent.hideHeader();
@@ -585,7 +594,9 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     var alertPopup = $ionicPopup.alert({
         title: 'Alert...!!!',
         template: 'configCtrl..!!!'
-    })
+    }).then(function (res) {
+        console.log('Your name is config', res);
+    });
     template: '<input type = "text" ng-model = "data.model">',
     // Set Header
     $scope.$parent.showHeader();
@@ -666,7 +677,9 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     var alertPopup = $ionicPopup.alert({
         title: 'Alert...!!!',
         template: 'hatchsheduleCtrl..!!!'
-    })
+    }).then(function (res) {
+        console.log('Your name is hatch', res);
+    });
     template: '<input type = "text" ng-model = "data.model">',
     // Set Header
     $scope.$parent.showHeader();
@@ -678,7 +691,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 
     $scope.save = function (data) {
         console.log("data", data);
-        debugger;
+       // debugger;
         if (data.Sun == true) {
             $scope.data.timeValue.sunday = {
                 timeValue1: data.timeValue1,
@@ -737,10 +750,12 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     var alertPopup = $ionicPopup.alert({
         title: 'Alert...!!!',
         template: 'settingsCtrl..!!!'
-    })
+    }).then(function (res) {
+        console.log('Your name is setting', res);
+    });
     $scope.$parent.showHeader();
     $scope.AccessToken = function (relayrData) {
-        debugger;
+     //   debugger;
         //id = "29204e93-3c0e-414a-a8ef-efc6632c486e";
         localStorageService.set("relayrData", relayrData);
         console.log("relayrData", relayrData);
@@ -756,7 +771,9 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     var alertPopup = $ionicPopup.alert({
         title: 'Alert...!!!',
         template: 'tankListController..!!!'
-    })
+    }).then(function (res) {
+        console.log('Your name is tank' , res);
+    });
     $(document).ready(function () {
         $(".item-hover").click(function () {
             $(".item-hover").removeClass("item-blue");
@@ -795,7 +812,9 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     var alertPopup = $ionicPopup.alert({
         title: 'Alert...!!!',
         template: 'tankmanagmentCtrl..!!!'
-    })
+    }).then(function (res) {
+        console.log('Your name is tankman', res);
+    });
     $(document).ready(function () {
         $(".item-hover").click(function () {
             $(".item-hover").removeClass("item-blue");
@@ -833,7 +852,9 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     var alertPopup = $ionicPopup.alert({
         title: 'Alert...!!!',
         template: 'HomeCtrl..!!!'
-    })
+    }).then(function (res) {
+        console.log('Your name is home', res);
+    });
     $scope.Adress = localStorageService.get("Address");
    
     $scope.show = function () {
@@ -871,7 +892,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         }
           }
           else {
-              debugger;
+              //debugger;
           var settings = {
                   "async": true,
                   "crossDomain": true,
@@ -963,7 +984,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                         if ($scope.HatchDoorVal == false) {
                             $scope.HatchDoorValue = 'Close';
                         }
-                        console.log("HatchDoorValue:" + $scope.HatchDoorValue);
+                      //  console.log("HatchDoorValue:" + $scope.HatchDoorValue);
                     }
                     if ($scope.tankdata[s].meaning == "Level Within Threshold") {
                         $scope.level = "Level Within Threshold";
@@ -1034,7 +1055,9 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     var alertPopup = $ionicPopup.alert({
         title: 'Alert...!!!',
         template: 'tank1Ctrl..!!!'
-    })
+    }).then(function (res) {
+        console.log('Your name is tank', res);
+    });
     $scope.config = localStorageService.get("ConfigData");
     $scope.MinLevel = $scope.config.minLevel;
     $scope.Adress = localStorageService.get("Address");
@@ -1170,7 +1193,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                         $("#AlarmBell").removeClass("fa fa-bell-o");
                     }
                     else
-                        $("#tank").css("background-color","#e2858a");
+                        $("#tank").css("background-color", "rgb(226, 133, 138)");
                          $("#AlarmBell").addClass("fa fa-bell-o");
                 }
             }
@@ -1258,7 +1281,9 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     var alertPopup = $ionicPopup.alert({
         title: 'Alert...!!!',
         template: 'contactusCtrl..!!!'
-    })
+    }).then(function (res) {
+        console.log('Your name is contactusCtrl', res);
+    });
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.PostComment = function (data) {
@@ -1278,7 +1303,9 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     var alertPopup = $ionicPopup.alert({
         title: 'Alert...!!!',
         template: 'aboutCtrl..!!!'
-    })
+    }).then(function (res) {
+        console.log('Your name is about', res);
+    });
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
 
