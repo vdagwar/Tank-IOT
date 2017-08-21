@@ -79,8 +79,9 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     if (localStorageService.get('profilePic'))
         $scope.UserPhoto = localStorageService.get('profilePic');
     else
-        $scope.UserPhoto = "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";
-    
+       // $scope.UserPhoto = "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";
+   
+    $scope.UserPhoto = document.getElementById('photo-id').src = "./img/sansa.jpg";
     $(document).ready(function () {
         var readURL = function (input) {
             if (input.files && input.files[0]) {
@@ -729,7 +730,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     };
 })
 
-.controller('settingsCtrl', function ($scope, $ionicPopup, $ionicLoading, $state, $http, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, localStorageService) {
+.controller('settingsCtrl', function ($scope, $ionicPopup, $ionicLoading, $state, $http, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, localStorageService, $window) {
    
     $scope.$parent.showHeader();
     $scope.AccessToken = function (relayrData) {
@@ -738,6 +739,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         localStorageService.set("relayrData", relayrData);
         console.log("relayrData", relayrData);
         $state.go('app.Home');
+        $window.location.reload(true);
     };
 
     $scope.skip = function () {
@@ -746,6 +748,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         if (relayrData) {
             $state.go("app.Home");
             console.log("relayrData", relayrData);
+            $window.location.reload(true);
         }
         else
             var alertPopup = $ionicPopup.alert({
