@@ -47,9 +47,8 @@ angular.module('starter.controllers', ['LocalStorageModule'])
  
     //$scope.Name = 'Maria Muro';
     //$scope.address = 'Santa Clara';
-    var logUser = localStorageService.get('UserData');
-    //$scope.Name = logUser.Name;
-    console.log("logUser", logUser);
+  
+  
     if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
 
     function onPositionUpdate(position) {
@@ -67,7 +66,10 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     }
     
     
-   
+     function menuData() {
+        var logUser = localStorageService.get('UserData');
+        $scope.Name = logUser.Name;
+    }
     $scope.Edit = function () {
         //  debugger;
         $(".file-upload").click();
