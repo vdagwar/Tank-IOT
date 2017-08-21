@@ -853,7 +853,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         console.log("MinLevel", $scope.MinLevel);
         $scope.show($ionicLoading);
     
-            debugger;
+            //debugger;
             var settings = {
                 "async": true,
                 "crossDomain": true,
