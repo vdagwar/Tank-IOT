@@ -45,10 +45,10 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 
 .controller('AppCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout, $state, $window, localStorageService, $http) {
  
-    $scope.Name = 'Maria Muro';
-    $scope.address = 'Santa Clara';
+    //$scope.Name = 'Maria Muro';
+    //$scope.address = 'Santa Clara';
     var logUser = localStorageService.get('UserData');
-    $scope.Name = logUser.Name;
+    //$scope.Name = logUser.Name;
     console.log("logUser", logUser);
     if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
 
