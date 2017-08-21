@@ -47,8 +47,13 @@ angular.module('starter.controllers', ['LocalStorageModule'])
  
     //$scope.Name = 'Maria Muro';
     //$scope.address = 'Santa Clara';
-  
-  
+    $scope.Name = '';
+
+    var logUser = localStorageService.get('UserData');
+    if (logUser) {
+        $scope.Name = logUser.Name
+    };
+    
     if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
 
     function onPositionUpdate(position) {
@@ -66,10 +71,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     }
     
     
-     function menuData() {
-        var logUser = localStorageService.get('UserData');
-        $scope.Name = logUser.Name;
-    }
+    
     $scope.Edit = function () {
         //  debugger;
         $(".file-upload").click();
@@ -586,19 +588,21 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     $scope.data = localStorageService.get("ConfigData");
     console.log("data", $scope.data);
     var today = new Date().getDay();
-   var timeString = time.getHours() + ':' + time.getMinutes() + ':00';
+ 
     if ($scope.data == null) {
         $scope.data = {
             minTemp: 20,
             MaxTemp: 80,
             minLevel: 20,
             timeValue: {
-                timeValue1: today.timeString,
-                timeValue2: today.timeString
+                timeValue1:'T06:00:00.000Z',
+                timeValue2: 'T10:00:00.000Z'
             }
 
         };
+        console.log("timeValue1", timeValue1);
     }
+    
     else {
       //  debugger;
         //var today = new Date().getDay();
@@ -609,6 +613,8 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         else if (today == 1) {
             $scope.timeValue1 = $scope.data.timeValue.monday.timeValue1;
             $scope.timeValue2 = $scope.data.timeValue.monday.timeValue2;
+            console.log("timeValue1", $scope.timeValue1);
+            console.log("timeValue2", $scope.timeValue2);
         }
         else if (today == 2) {
             $scope.timeValue1 = $scope.data.timeValue.tuesday.timeValue1;
@@ -731,11 +737,22 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         //id = "29204e93-3c0e-414a-a8ef-efc6632c486e";
         localStorageService.set("relayrData", relayrData);
         console.log("relayrData", relayrData);
-        $state.go('app.tanks');
+        $state.go('app.Home');
     };
 
     $scope.skip = function () {
-        $state.go("app.Home");
+        var relayrData = localStorageService.get("relayrData");
+       
+        if (relayrData) {
+            $state.go("app.Home");
+            console.log("relayrData", relayrData);
+        }
+        else
+            var alertPopup = $ionicPopup.alert({
+                title: 'WelCome...!!!',
+                template: 'Please Fill The RelayrId and AccessToken.!!!'
+            });
+       
     };
 })
 
@@ -825,7 +842,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     $scope.deviceID = "";
     $scope.TankList = '';
     $scope.relayrdata = localStorageService.get("relayrData");
-    var relayrId = $scope.relayrdata.relayrId;
+    $scope.relayrId = $scope.relayrdata.relayrId;
     $scope.accessToken = $scope.relayrdata.accessToken;
     //console.log("relayrdata", $scope.relayrdata);
 
@@ -835,32 +852,19 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         $scope.MinLevel = $scope.ConfifDetail.minLevel;
         console.log("MinLevel", $scope.MinLevel);
         $scope.show($ionicLoading);
-        if ($scope.relayrdata !== null && $scope.relayrdata !== undefined && !$scope.relayrdata) {
-            //debugger;
+    
+            debugger;
             var settings = {
                 "async": true,
                 "crossDomain": true,
-                "url": "https://api.relayr.io/users/" + relayrId + "/devices",
+                "url": "https://api.relayr.io/users/"+$scope.relayrId+"/devices",
                 "method": "GET",
                 "headers": {
                     "authorization": $scope.accessToken
 
                 }
             };
-        }
-        else {
-            //debugger;
-            var settings = {
-                "async": true,
-                "crossDomain": true,
-                "url": "https://api.relayr.io/users/cf1cf510-a383-413b-ad53-258aaf34a18a/devices",
-                "method": "GET",
-                "headers": {
-                    "authorization": "Bearer gdrlGsuEw3L7HWD8bwtbEWCOJlxDgx5vmTUM0XFFCrG90n9KyUqaZxZWv5xWfCQq"
-
-                }
-            };
-        }
+     
 
         $.ajax(settings).done(function (response) {
 
@@ -878,7 +882,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     };
 
     $scope.TankDetails = function (tankDetails) {
-        // debugger;
+         debugger;
         localStorageService.set("DetailForTank", tankDetails);
         $scope.ConfifDetail = localStorageService.get("ConfigData");
         //$scope.MinLevel = $scope.ConfifDetail.minLevel;

@@ -9,20 +9,28 @@
         <div class="row login">
             <div class="col-10"></div>
             <div class="col-80">
+                <form name="myForm" novalidate>
                 <div class="list">
                     <label class="item item-input" style="border-bottom:1px solid #808080">
                         <input type="text" class="item-input" placeholder="Relayr Client Id" name="relayrId" ng-model="relayr.relayrId" required>
                     </label>
+                    <span ng-show="myForm.relayrId.$dirty && myForm.relayrId.$invalid">
+                        &nbsp;  <span ng-show="myForm.relayrId.$error.required" style="color:red">relayrId is required.</span>
+                    </span>
                     <br />
                     <label class="item item-input" style="border-bottom:1px solid #808080">
                         <input type="text" class="item-input" placeholder="Relayr Access Token" name="accessToken" ng-model="relayr.accessToken" required>
                     </label>
+                    <span ng-show="myForm.accessToken.$dirty && myForm.accessToken.$invalid">
+                        &nbsp;  <span ng-show="myForm.accessToken.$error.required" style="color:red">accessToken is required.</span>
+                    </span>
                     <br />
                     <div class="padding">
-                        <button class="button button-block button-outline button-calm" ng-click="AccessToken(relayr)">Done</button>
+                        <button class="button button-block button-outline button-calm" ng-click="AccessToken(relayr)" ng-disabled="myForm.$invalid">Done</button>
                         <h6 class="text-center"><span class="skip" ng-click="skip()">Skip</span></h6>
                     </div>
                 </div>
+                    </form>
             </div>
             <div class="col-10">
             </div>
