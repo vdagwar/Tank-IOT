@@ -588,6 +588,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     var Today = new Date();
     var timeValue01 = Today.setHours(06, 0, 0, 0);
     var timeValue02 = Today.setHours(17, 0, 0, 0);
+    
     if ($scope.data == null) {
         $scope.data = {
             minTemp: 20,
@@ -599,12 +600,12 @@ angular.module('starter.controllers', ['LocalStorageModule'])
             }
 
         };
-        console.log("timeValue1", timeValue);
+        
     }
     
     else {
       //  debugger;
-        //var today = new Date().getDay();
+        
         if (today == 0) {
             $scope.timeValue1 = $scope.data.timeValue.sunday.timeValue1;
             $scope.timeValue2 = $scope.data.timeValue.sunday.timeValue2;
@@ -892,7 +893,9 @@ angular.module('starter.controllers', ['LocalStorageModule'])
          //debugger;
         localStorageService.set("DetailForTank", tankDetails);
         $scope.ConfifDetail = localStorageService.get("ConfigData");
-     
+       
+        $scope.MinTemp = $scope.ConfifDetail.minTemp;
+        $scope.MaxTemp = $scope.ConfifDetail.MaxTemp;
         $scope.show($ionicLoading);
         $scope.deviceID = tankDetails.id;
         $scope.deviceName = tankDetails.name;
@@ -969,12 +972,24 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                         else if ($scope.temperatureValue * 2.8 <= 0)
                             $("#temp").height(0);
                         else
+                         
                             $("#temp").height($scope.temperatureValue * 2.8);
-                        if ($scope.temperatureValue >= $scope.ConfifDetail.minTemp && $scope.temperatureValue <= $scope.ConfifDetail.MaxTemp) {
-                            $("#temp").css("background-color", "#41a6f4");
+                        if($scope.MinTemp && $scope.MaxTemp){
+                            if ($scope.temperatureValue >= $scope.MinTemp && $scope.temperatureValue <= $scope.MaxTemp) {
+                                $("#temp").css("background-color", "#41a6f4");
+                            }
+                            else
+                                $("#temp").css("background-color", "#e2858a");
                         }
                         else
-                            $("#temp").css("background-color", "#e2858a");
+                            $scope.MinTemp = 20;
+                           $scope.MaxTemp = 80;
+                            if ($scope.temperatureValue >= $scope.MinTemp && $scope.temperatureValue <= $scope.MaxTemp) {
+                                $("#temp").css("background-color", "#41a6f4");
+                            }
+                            else
+                                $("#temp").css("background-color", "#e2858a");
+                       
                         $scope.tem3 = 55;
                         $("#water").height(($scope.tem3 * 1.8));
                         $("#water").css("background-color", "rgba(100, 194, 223, 0.34)");
