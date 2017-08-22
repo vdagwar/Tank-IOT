@@ -1194,8 +1194,10 @@ angular.module('starter.controllers', ['LocalStorageModule'])
       //$ionicSlideBoxDelegate.next();
     }
     $scope.graph = function () {
-       var TankTemprature = localStorageService.get('TankTempratureArray');
-       var ArrayOfTemp = [];
+        var TankTemprature = [];
+        var ArrayOfTemp = [];
+       TankTemprature = localStorageService.get('TankTempratureArray');
+     
        for (var i = 0; i < TankTemprature.length; i++) {
            var Today = new Date();
            Today.setHours(0, 0, 0, 0);
