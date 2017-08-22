@@ -1048,7 +1048,10 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     if ($scope.config) {
         $scope.MinLevel = $scope.config.minLevel;
     }
-    $scope.MinLevel = 20;
+    else {
+        $scope.MinLevel = 20;
+    }
+   
   
     $scope.Adress = localStorageService.get("Address");
     $scope.show = function () {
