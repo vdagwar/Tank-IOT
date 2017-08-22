@@ -8,9 +8,9 @@
                         <i class="icon ion-clock"></i>&nbsp;<span ui-sref="app.config">Hatch Schedule</span>
                         <ion-list>
                             <h5 class="item">
-                                <span ion-datetime-picker ng-model="data.timeValue1"><i class="icon ion-clock"></i>&nbsp;From : &nbsp;{{data.timeValue1| date: " H:mm:ss"}}</span>
+                                <span ion-datetime-picker ng-model="data1.timeValue1"><i class="icon ion-clock"></i>&nbsp;From : &nbsp;{{data1.timeValue1| data1: " H:mm:ss"}}</span>
 
-                                <span ion-datetime-picker ng-model="data.timeValue2" class="col-offset-10"><i class="icon ion-clock"></i>&nbsp;to : &nbsp;{{data.timeValue2| date: " H:mm:ss"}}</span>
+                                <span ion-datetime-picker ng-model="data1.timeValue2" class="col-offset-10"><i class="icon ion-clock"></i>&nbsp;to : &nbsp;{{data1.timeValue2| data1: " H:mm:ss"}}</span>
                             </h5>
                         </ion-list>
                         <br/>
@@ -20,25 +20,25 @@
                             <div class="col-90">
                                 <ion-list>
                                     <label class="checkbox">
-                                        Sun<input type="checkbox" placeholder="S" value="Sun" ng-model="data.Sun">
+                                        Sun<input type="checkbox" placeholder="S" value="Sun" ng-model="data1.Sun">
                                     </label>
                                     <label class="checkbox">
-                                        Mon<input type="checkbox" placeholder="M"  value="Mon" ng-model="data.Mon">
+                                        Mon<input type="checkbox" placeholder="M"  value="Mon" ng-model="data1.Mon">
                                     </label>
                                     <label class="checkbox">
-                                        Tue <input type="checkbox" placeholder="T"  value="Tue" ng-model="data.Tue">
+                                        Tue <input type="checkbox" placeholder="T"  value="Tue" ng-model="data1.Tue">
                                     </label>
                                     <label class="checkbox">
-                                        Wed <input type="checkbox" placeholder="W"  value="Wed" ng-model="data.Wed">
+                                        Wed <input type="checkbox" placeholder="W"  value="Wed" ng-model="data1.Wed">
                                     </label>
                                     <label class="checkbox">
-                                        Thu<input type="checkbox" placeholder="T"  value="Thu" ng-model="data.Thu">
+                                        Thu<input type="checkbox" placeholder="T"  value="Thu" ng-model="data1.Thu">
                                     </label>
                                     <label class="checkbox">
-                                        Fri <input type="checkbox" placeholder="F"  value="Fri" ng-model="data.Fri">
+                                        Fri <input type="checkbox" placeholder="F"  value="Fri" ng-model="data1.Fri">
                                     </label>
                                     <label class="checkbox">
-                                        Sat <input type="checkbox" placeholder="S"  value="Sat" ng-model="data.Sat">
+                                        Sat <input type="checkbox" placeholder="S"  value="Sat" ng-model="data1.Sat">
                                     </label>
 
                                 </ion-list>
@@ -51,7 +51,7 @@
                                         <button class="button  button-outline button-calm col-offset-10" ng-click="Cancel()">Cancel</button>
                                     </span>
                                     <span class="col-offset-10">
-                                        <button class="button button-calm col-offset-20" ng-click="save(data)">Save</button>
+                                        <button class="button button-calm col-offset-20" ng-click="save(data1)">Save</button>
                                     </span>
 
                                 </div>

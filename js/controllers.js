@@ -500,7 +500,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         try {
             $scope.mailDomain = false;
             var idx = emailAddress.lastIndexOf('@');
-            if (idx > -1 && (emailAddress.slice(idx + 1) === 'gmail.com' || emailAddress.slice(idx + 1) === 'gmail.in' || emailAddress.slice(idx + 1) === 'yahoo.com' || emailAddress.slice(idx + 1) === 'yahoo.in' || emailAddress.slice(idx + 1) === 'hotmail.com' || emailAddress.slice(idx + 1) === 'outlook.com')) {
+            if (idx > -1 && (emailAddress.slice(idx + 1) === 'gmail.com' || emailAddress.slice(idx + 1) === 'gmail.in' || emailAddress.slice(idx + 1) === 'yahoo.com' || emailAddress.slice(idx + 1) === 'yahoo.co.in' || emailAddress.slice(idx + 1) === 'yahoo.in' || emailAddress.slice(idx + 1) === 'hotmail.com' || emailAddress.slice(idx + 1) === 'outlook.com' || emailAddress.slice(idx + 1) === 'outlook.in')) {
 
                 $scope.mailDomain = true;
                 var alertPopup = $ionicPopup.alert({
@@ -577,7 +577,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
   
     template: '<input type = "text" ng-model = "data.model">',
     // Set Header
-    $scope.$parent.showHeader();
+      $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
 
     var tank = localStorageService.get("tank");
@@ -588,52 +588,52 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     var Today = new Date();
     var timeValue01 = Today.setHours(06, 0, 0, 0);
     var timeValue02 = Today.setHours(17, 0, 0, 0);
-    
+
     if ($scope.data == null) {
         $scope.data = {
             minTemp: 20,
             MaxTemp: 80,
             minLevel: 20,
             timeValue: {
-                timeValue1:timeValue01,
-                timeValue2:timeValue02
+                timeValue1: timeValue01,
+                timeValue2: timeValue02
             }
 
         };
-        
+
     }
-    
+
     else {
-      //  debugger;
-        
-        if (today == 0) {
-            $scope.timeValue1 = $scope.data.timeValue.sunday.timeValue1;
-            $scope.timeValue2 = $scope.data.timeValue.sunday.timeValue2;
+        // debugger;
+
+        if (today == 0 && $scope.data.timeValue) {
+            $scope.timeValue1 = $scope.data.timeValue.timeValue1;
+            $scope.timeValue2 = $scope.data.timeValue.timeValue2;
         }
-        else if (today == 1) {
-            $scope.timeValue1 = $scope.data.timeValue.monday.timeValue1;
-            $scope.timeValue2 = $scope.data.timeValue.monday.timeValue2;
-           
+        else if (today == 1 && $scope.data.timeValue) {
+            $scope.timeValue1 = $scope.data.timeValue.timeValue1;
+            $scope.timeValue2 = $scope.data.timeValue.timeValue2;
+
         }
-        else if (today == 2) {
-            $scope.timeValue1 = $scope.data.timeValue.tuesday.timeValue1;
-            $scope.timeValue2 = $scope.data.timeValue.tuesday.timeValue2;
+        else if (today == 2 && $scope.data.timeValue) {
+            $scope.timeValue1 = $scope.data.timeValue.timeValue1;
+            $scope.timeValue2 = $scope.data.timeValue.timeValue2;
         }
-        else if (today == 3) {
-            $scope.timeValue1 = $scope.data.timeValue.wednesday.timeValue1;
-            $scope.timeValue2 = $scope.data.timeValue.wednesday.timeValue2;
+        else if (today == 3 && $scope.data.timeValue) {
+            $scope.timeValue1 = $scope.data.timeValue.timeValue1;
+            $scope.timeValue2 = $scope.data.timeValue.timeValue2;
         }
-        else if (today == 4) {
-            $scope.timeValue1 = $scope.data.timeValue.thusday.timeValue1;
-            $scope.timeValue2 = $scope.data.timeValue.thusday.timeValue2;
+        else if (today == 4 && $scope.data.timeValue) {
+            $scope.timeValue1 = $scope.data.timeValue.timeValue1;
+            $scope.timeValue2 = $scope.data.timeValue.timeValue2;
         }
-        else if (today == 5) {
-            $scope.timeValue1 = $scope.data.timeValue.friday.timeValue1;
-            $scope.timeValue2 = $scope.data.timeValue.friday.timeValue2;
+        else if (today == 5 && $scope.data.timeValue) {
+            $scope.timeValue1 = $scope.data.timeValue.timeValue1;
+            $scope.timeValue2 = $scope.data.timeValue.timeValue2;
         }
-        else if (today == 6) {
-            $scope.timeValue1 = $scope.data.timeValue.saturday.timeValue1;
-            $scope.timeValue2 = $scope.data.timeValue.saturday.timeValue2;
+        else if (today == 6 && $scope.data.timeValue) {
+            $scope.timeValue1 = $scope.data.timeValue.timeValue1;
+            $scope.timeValue2 = $scope.data.timeValue.timeValue2;
         }
     }
     $scope.save = function (data) {
@@ -662,64 +662,81 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     };
 })
 .controller('hatchsheduleCtrl', function ($scope, $ionicPopup, $state, $http, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, localStorageService) {
-  
+
     template: '<input type = "text" ng-model = "data.model">',
     // Set Header
-    $scope.$parent.showHeader();
+   $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
 
     var tank = localStorageService.get("tank");
-    //if (tank) {
-    $scope.data = localStorageService.get("ConfigData");
+    $scope.data1 = localStorageService.get("ConfigData");
+
+    if (!$scope.data1) {
+        var timeValue = [];
+        $scope.data1 = timeValue;
+    }
 
     $scope.save = function (data) {
         console.log("data", data);
-       // debugger;
+        // debugger;
+        var Today = new Date();
+        if (!data.timeValue1)
+            data.timeValue1 = Today.setHours(06, 0, 0, 0);
+        if (!data.timeValue1)
+            data.timeValue2 = Today.setHours(17, 0, 0, 0);
+
         if (data.Sun === true) {
-            $scope.data.timeValue.sunday = {
+            var sunday = {
                 timeValue1: data.timeValue1,
-                timeValue2: data.timeValue2,
+                timeValue2: data.timeValue2
             }
+            $scope.data1.timeValue = sunday;
         }
         if (data.Mon === true) {
-            $scope.data.timeValue.monday = {
+            var monday = {
                 timeValue1: data.timeValue1,
-                timeValue2: data.timeValue2,
+                timeValue2: data.timeValue2
             }
+            $scope.data1.timeValue = monday;
         }
         if (data.Tue === true) {
-            $scope.data.timeValue.tuesday = {
+            var tuesday = {
                 timeValue1: data.timeValue1,
-                timeValue2: data.timeValue2,
+                timeValue2: data.timeValue2
             }
+            $scope.data1.timeValue = tuesday;
         }
         if (data.Wed === true) {
-            $scope.data.timeValue.wednesday = {
+            var wednesday = {
                 timeValue1: data.timeValue1,
-                timeValue2: data.timeValue2,
+                timeValue2: data.timeValue2
             }
+            $scope.data1.timeValue = wednesday;
         }
         if (data.Thu === true) {
-            $scope.data.timeValue.thusday = {
+            var thusday = {
                 timeValue1: data.timeValue1,
-                timeValue2: data.timeValue2,
+                timeValue2: data.timeValue2
             }
+            $scope.data1.timeValue = thusday;
         }
         if (data.Fri === true) {
-            $scope.data.timeValue.friday = {
+            var friday = {
                 timeValue1: data.timeValue1,
-                timeValue2: data.timeValue2,
+                timeValue2: data.timeValue2
             }
+            $scope.data1.timeValue = friday;
         }
         if (data.Sat === true) {
-            $scope.data.timeValue.saturday = {
+            var saturday = {
                 timeValue1: data.timeValue1,
-                timeValue2: data.timeValue2,
+                timeValue2: data.timeValue2
             }
+            $scope.data1.timeValue = saturday;
         }
-        console.log("data inside Hatch", $scope.data);
-        localStorageService.set("ConfigData", $scope.data);
-       // console.log("data", $scope.data);
+      //  console.log("data inside Hatch", $scope.data1);
+        localStorageService.set("ConfigData", $scope.data1);
+        console.log("data yas", $scope.data1);
         $state.go('app.config');
     };
 
@@ -892,10 +909,10 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     $scope.TankDetails = function (tankDetails) {
          //debugger;
         localStorageService.set("DetailForTank", tankDetails);
-        $scope.ConfifDetail = localStorageService.get("ConfigData");
        
-        $scope.MinTemp = $scope.ConfifDetail.minTemp;
-        $scope.MaxTemp = $scope.ConfifDetail.MaxTemp;
+        $scope.ConfifDetail = localStorageService.get("ConfigData");
+        
+      
         $scope.show($ionicLoading);
         $scope.deviceID = tankDetails.id;
         $scope.deviceName = tankDetails.name;
@@ -972,23 +989,16 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                         else if ($scope.temperatureValue * 2.8 <= 0)
                             $("#temp").height(0);
                         else
-                         
                             $("#temp").height($scope.temperatureValue * 2.8);
-                        if($scope.MinTemp && $scope.MaxTemp){
-                            if ($scope.temperatureValue >= $scope.MinTemp && $scope.temperatureValue <= $scope.MaxTemp) {
+                          
+                                if ($scope.ConfifDetail && $scope.temperatureValue >= $scope.ConfifDetail.minTemp && $scope.temperatureValue <= $scope.ConfifDetail.MaxTemp) {
                                 $("#temp").css("background-color", "#41a6f4");
                             }
-                            else
-                                $("#temp").css("background-color", "#e2858a");
-                        }
                         else
-                            $scope.MinTemp = 20;
-                           $scope.MaxTemp = 80;
-                            if ($scope.temperatureValue >= $scope.MinTemp && $scope.temperatureValue <= $scope.MaxTemp) {
-                                $("#temp").css("background-color", "#41a6f4");
-                            }
-                            else
                                 $("#temp").css("background-color", "#e2858a");
+                       
+                           
+                           
                        
                         $scope.tem3 = 55;
                         $("#water").height(($scope.tem3 * 1.8));
@@ -1035,7 +1045,11 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 .controller('tank1Ctrl', function ($scope, $ionicLoading, DeviceService, localStorageService) {
   
     $scope.config = localStorageService.get("ConfigData");
-    $scope.MinLevel = $scope.config.minLevel;
+    if ($scope.config) {
+        $scope.MinLevel = $scope.config.minLevel;
+    }
+    $scope.MinLevel = 20;
+  
     $scope.Adress = localStorageService.get("Address");
     $scope.show = function () {
         $ionicLoading.show({
@@ -1162,15 +1176,16 @@ angular.module('starter.controllers', ['LocalStorageModule'])
                     else if ($scope.temperatureValue * 2.8 <= 0)
                         $("#temp").height(0);
                     else
-
-                        $("#temp").height($scope.temperatureValue * 2.8);
-                    if ($scope.temperatureValue >= $scope.ConfifDetail.minTemp && $scope.temperatureValue <= $scope.ConfifDetail.MaxTemp) {
-                        $("#tank").css("background-color", "rgb(65, 166, 244)");
-                        $("#AlarmBell").removeClass("fa fa-bell-o");
-                    }
+                         $("#temp").height($scope.temperatureValue * 2.8);
+                    if ($scope.ConfifDetail && $scope.temperatureValue >= $scope.ConfifDetail.minTemp && $scope.temperatureValue <= $scope.ConfifDetail.MaxTemp) {
+                            $("#tank").css("background-color", "rgb(65, 166, 244)");
+                            $("#AlarmBell").removeClass("fa fa-bell-o");
+                        }
                     else
-                        $("#tank").css("background-color", "rgb(226, 133, 138)");
-                    $("#AlarmBell").addClass("fa fa-bell-o");
+
+                            $("#tank").css("background-color", "rgb(226, 133, 138)");
+                           $("#AlarmBell").addClass("fa fa-bell-o");
+                    
                 }
             }
             $scope.hide($ionicLoading);
@@ -1194,8 +1209,8 @@ angular.module('starter.controllers', ['LocalStorageModule'])
       //$ionicSlideBoxDelegate.next();
     }
     $scope.graph = function () {
-        var TankTemprature = [];
-        var ArrayOfTemp = [];
+        var TankTemprature=[];
+        var ArrayOfTemp=[];
        TankTemprature = localStorageService.get('TankTempratureArray');
      
        for (var i = 0; i < TankTemprature.length; i++) {
