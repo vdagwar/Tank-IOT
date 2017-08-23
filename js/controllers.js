@@ -499,7 +499,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
         try {
             $scope.mailDomain = false;
             var idx = emailAddress.lastIndexOf('@');
-            if (idx > -1 && (emailAddress.slice(idx + 1) === 'gmail.com' || emailAddress.slice(idx + 1) === 'gmail.in' || emailAddress.slice(idx + 1) === 'yahoo.com' || emailAddress.slice(idx + 1) === 'yahoo.co.in' || emailAddress.slice(idx + 1) === 'yahoo.in' || emailAddress.slice(idx + 1) === 'hotmail.com' || emailAddress.slice(idx + 1) === 'outlook.com' || emailAddress.slice(idx + 1) === 'outlook.in')) {
+            if (idx > -1 && (emailAddress.slice(idx + 1) === 'gmail.com' || emailAddress.slice(idx + 1) === 'gmail.in' || emailAddress.slice(idx + 1) === 'yahoo.com' || emailAddress.slice(idx + 1) === 'yahoo.co.in' || emailAddress.slice(idx + 1) === 'yahoo.in' || emailAddress.slice(idx + 1) === 'hotmail.com' || emailAddress.slice(idx + 1) === 'hotmail.in' || emailAddress.slice(idx + 1) === 'hotmail.co.in' || emailAddress.slice(idx + 1) === 'outlook.com' || emailAddress.slice(idx + 1) === 'outlook.in')) {
 
                 $scope.mailDomain = true;
                 var alertPopup = $ionicPopup.alert({
