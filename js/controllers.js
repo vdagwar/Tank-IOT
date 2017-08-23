@@ -1,4 +1,3 @@
-/* global angular, document, window */
 //'use strict';
 angular.module('starter.controllers', ['LocalStorageModule'])
 
@@ -647,16 +646,16 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 
     $scope.reset = function (data, value) {
         if (value == 1) {
-            $scope.data.minTemp = '';
-            $scope.data.MaxTemp = '';
+            $scope.data.minTemp = 20;
+            $scope.data.MaxTemp = 80;
         }
         if (value == 2) {
-            $scope.data.minLevel = '';
+            $scope.data.minLevel = 20;
         }
         if (value == 3) {
-            $scope.data.timeValue1 = '';
-            $scope.data.timeValue2 = '';
-            $state.go('app.hatchshedule');
+            $scope.data.timeValue1 = timeValue01,
+             $scope.data.timeValue2= timeValue02;
+          
         }
 
     };
