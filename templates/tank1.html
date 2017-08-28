@@ -82,9 +82,9 @@
                                     <div class="col-5"></div>
                                     <div class="col=95">
                                         <h5>&nbsp; &nbsp;<i class="icon ion-thermometer"></i>&nbsp;&nbsp;&nbsp;<b>{{temperatureValue}}&nbsp; F </b>&nbsp;&nbsp;<b id="AlarmBell"></b></h5>
-                                        <h6 class="margin">Standard 50F-70F</h6>
+                                        <h6 class="margin">Standard {{TempMinRang}}F-{{TempMaxRang}}F</h6>
                                         <h5>&nbsp;&nbsp;<i class="fa fa-compass" aria-hidden="true">&nbsp;&nbsp; <b>Last &nbsp;{{HatchDoorValue}} at {{HatchDoorDate| date:"hh:mma"}}</b></i></h5>
-                                        <h6 class="margin">Normal hrs 6am-6pm</h6>
+                                        <h6 class="margin">Normal hrs {{timeValue1|date: "H:mm:ss"}}-{{timeValue2|date: "H:mm:ss"}}</h6>
                                         <h5> &nbsp;&nbsp;<i class="icon ion-levels"></i>&nbsp;&nbsp;<b>&nbsp;&nbsp;{{levelval}}</b></h5>
                                     </div>
                                 </div>

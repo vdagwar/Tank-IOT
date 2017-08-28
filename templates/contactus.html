@@ -1,29 +1,47 @@
 <ion-view view-title="Contact Us" align-title="left">
     <ion-content scroll="true">
-        <div class="list list-inset ll">
-            <label class="item item-input az">
-                <input type="text" placeholder="Name" ng-model="data.name">
-            </label>
-            <br />
-            <label class="item item-input az">
-                <input type="email" placeholder="Email" ng-model="data.email">
-            </label>
-            <br/>
-            <label class="item item-input az">
-                <input type="text" placeholder="Subject" ng-model="data.subject">
-            </label>
-            <br/>
-            <label class="item item-input ar">
-                <textarea id="contact_message" placeholder="Comments" rows="4" col="12" ng-model="data.comments"></textarea>
-            </label>
-        </div>
-         <div class="padding">
-               <button class="button button-block button-outline button-calm" ng-click="PostComment(data)">Submit</button> 
-          </div>
-  
+     
+        <form name="ConForm"  novalidate>
+            <div class="list list-inset ll">
+                <label class="item item-input az">
+                    <input type="text" placeholder="Name" name="name" ng-model="data.name" required />
+                </label>
+                <span ng-show="ConForm.name.$dirty && ConForm.name.$invalid">
+                    &nbsp;  <span ng-show="ConForm.name.$error.required" style="color:red">Name is required.</span>
+                </span>
+                <br />
+                <label class="item item-input az">
+                    <input type="email" placeholder="Email" name="email" ng-model="data.email" required />
+                </label>
+                <span ng-show="ConForm.email.$dirty && ConForm.email.$invalid">
+                    &nbsp;  <span ng-show="ConForm.email.$error.required" style="color:red">Email is required.</span>
+                    &nbsp;  <span ng-show="ConForm.email.$error" style="color:red">Please enter a valid email address!</span>
+                   
+                </span>
+                <br />
+                <label class="item item-input az">
+                    <input type="text" placeholder="Subject" name="subject" ng-model="data.subject" required />
+                </label>
+                <span ng-show="ConForm.subject.$dirty && ConForm.subject.$invalid">
+                    &nbsp;  <span ng-show="ConForm.subject.$error.required" style="color:red">Subject is required.</span>
+                </span>
+                <br />
+                <label class="item item-input ar">
+                    <textarea id="contact_message" name="comments" placeholder="Comments" rows="4" col="12" ng-model="data.comments" required></textarea>
+                </label>
+                <span ng-show="ConForm.comments.$dirty && ConForm.comments.$invalid">
+                    &nbsp;  <span ng-show="ConForm.comments.$error.required" style="color:red">Comments is required.</span>
+                </span>
+
+                <div class="padding">
+                    <button type="submit" class="button button-block button-outline button-calm" ng-disabled="ConForm.$invalid" ng-click="PostComment(data)">Submit</button>
+                </div>
+            </div>
+        </form>
     </ion-content>
 </ion-view>
 <style>
+  
  .ll{
       margin-top: 50px!important;
    border-left:none;

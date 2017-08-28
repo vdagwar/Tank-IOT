@@ -55,21 +55,21 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 
    
     
-    if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
+    //if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
 
-    function onPositionUpdate(position) {
-        var lat = position.coords.latitude;
-        var lng = position.coords.longitude;
+    //function onPositionUpdate(position) {
+    //    var lat = position.coords.latitude;
+    //    var lng = position.coords.longitude;
       
-        var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&sensor=true";
-        $http.get(url)
-            .then(function (result) {
-                var address = result.data.results[2].formatted_address;
-                $scope.address = address;
-                localStorageService.set("Address", $scope.address);
-             //   console.log("address", address);
-            });
-    }
+    //    var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&sensor=true";
+    //    $http.get(url)
+    //        .then(function (result) {
+    //            var address = result.data.results[2].formatted_address;
+    //            $scope.address = address;
+    //            localStorageService.set("Address", $scope.address);
+    //         //   console.log("address", address);
+    //        });
+    //}
     
     
     
@@ -1046,9 +1046,16 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     $scope.config = localStorageService.get("ConfigData");
     if ($scope.config) {
         $scope.MinLevel = $scope.config.minLevel;
+        $scope.TempMinRang = $scope.config.minTemp;
+        $scope.TempMaxRang = $scope.config.MaxTemp;
+        $scope.timeValue1 = $scope.config.timeValue.timeValue1;
+        $scope.timeValue2 = $scope.config.timeValue.timeValue2;
+        
     }
     else {
         $scope.MinLevel = 20;
+        $scope.TempMinRang = 50;
+        $scope.TempMaxRang = 70;
     }
    
   
@@ -1211,8 +1218,9 @@ angular.module('starter.controllers', ['LocalStorageModule'])
       //$ionicSlideBoxDelegate.next();
     }
     $scope.graph = function () {
-        var TankTemprature=[];
-        var ArrayOfTemp=[];
+       
+        var ArrayOfTemp = [];
+        var TankTemprature = [];
        TankTemprature = localStorageService.get('TankTempratureArray');
      
        for (var i = 0; i < TankTemprature.length; i++) {
@@ -1234,7 +1242,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
       // console.log("date should be greater ", TempArrayValue);
         Highcharts.chart('container', {
             title: {
-                text: 'Temprature'
+                text: 'temperature'
             },
             
             yAxis: {
@@ -1278,7 +1286,7 @@ angular.module('starter.controllers', ['LocalStorageModule'])
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.data = {};
-    $scope.data.subject = 'SKdemoApp';
+    $scope.data.subject = 'TankIOTdemoApp';
     $scope.PostComment = function (data) {
         localStorageService.set('key', data);
         // console.log("ContactData", data);
